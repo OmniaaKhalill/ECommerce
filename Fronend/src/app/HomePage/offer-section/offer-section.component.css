@@ -31,13 +31,14 @@
 
 .pink-arrow {
   /* color: #e88eba; */
-  color: var(--dark-color);
+  color: var(--main-color);
 }
 
 .carousel-control-prev {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 .carousel-control-next {
-  opacity: 1;
+  opacity: 0.8;
+  
 }
