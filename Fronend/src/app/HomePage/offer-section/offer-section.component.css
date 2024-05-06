@@ -5,7 +5,7 @@
 }
 
 .offer-section {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url('../../../assets/img/eyeshaows/bg2.png');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url('../../../assets/img/Home/bg2.png');
   background-size: cover;
   background-attachment: fixed;
   background-position: center center;
