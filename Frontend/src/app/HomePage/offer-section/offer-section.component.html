@@ -1,0 +1,65 @@
+<div class="offer-section">
+</div>
+<div class="d-flex align-items-center position-relative">
+  <div class=" container justify-content-center position-absolute translate-middle start-50 top-0">
+    <div class="content bg-white p-4 border rounded-1">
+      <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                <img src="../../../assets/img/offer1.png" class="" alt="">
+              </div>
+              <div class="col-lg-8 text-center d-flex flex-column justify-content-center align-items-center">
+                <div class="fs-3 mb-2">OFFERS</div>
+                <p class="fs-4">Pretty Easy™ Eye Palette</p>
+                <p class="fs-6 w-75">Clinique's Pretty Easy Eye Palette comes with eight shades of long-wearing All
+                  About Shadow in a variety of
+                  finishes. For instant lashline definition.</p>
+                <span>price</span>
+                <button type="button" class="btn my-3 p-3">
+                  Check Similar Items
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-lg-4 d-flex justify-content-center align-items-center">
+                <img src="../../../assets/img/offer2.png" class="" alt="">
+              </div>
+              <div class="col-lg-8 text-center d-flex flex-column justify-content-center align-items-center">
+                <div class="fs-3 mb-2">OFFERS</div>
+                <p class="fs-4">Mini Full Exposure Palette</p>
+                <p class="fs-6 w-75">
+                  We see so many different eyes on set that our L.A. photo studio pros created this must-have range of
+                  neutrals to match any and all of them—yours included.</p>
+                <span>price</span>
+                <button type="button" class="btn my-3 p-3">
+                  Check Similar Items
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <i class="fa fa-square-caret-left pink-arrow fs-1"></i>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <i class="fa fa-square-caret-right pink-arrow fs-1"></i>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Start the carousel
+  const myCarousel = document.querySelector('#carouselExample');
+  const carousel = new bootstrap.Carousel(myCarousel, {
+    interval: 2000, // Change interval time as needed (in milliseconds)
+    pause: false // Set to false to enable autoplay
+  });
+</script>
