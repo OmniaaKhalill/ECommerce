@@ -1,0 +1,12 @@
+.filter {
+  padding: 10px 0 31px 0;
+}
+
+.clear {
+  color: #2d2c2c;
+  transition: all 0.3s ease-in-out;
+}
+
+.clear:hover {
+  color: var(--main-color);
+}

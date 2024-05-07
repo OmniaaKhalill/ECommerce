@@ -1,7 +1,30 @@
-<app-header></app-header>
-<app-navbar></app-navbar>
 <app-page-header></app-page-header>
 <app-breadcrumb></app-breadcrumb>
-<app-page-content></app-page-content>
-<app-footer></app-footer>
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <app-toolbox></app-toolbox>
+        <app-product-section></app-product-section>
+      </div>
+      <aside class="col-lg-3 order-lg-first">
+        <div class="sidebar sidebar-shop">
+          <div class="filter d-flex justify-content-between border-bottom mb-2 px-3">
+            <label class="fw-bold">Filters:</label>
+            <a href="Clear all checked" class="clear">Clean All</a>
+          </div>
+
+          <!-- Category -->
+          <app-category-section></app-category-section>
+          <!-- Brand -->
+          <app-brand-section></app-brand-section>
+          <!-- Tag -->
+          <app-tag-section></app-tag-section>
+          <!-- Price -->
+          <app-price-section></app-price-section>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
 

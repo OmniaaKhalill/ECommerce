@@ -3,8 +3,8 @@ import { HomeComponent } from './HomePage/home/home.component';
 import { ShopComponent } from './ShopPage/shop/shop.component';
 
 export const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "home", component: HomeComponent },
-  // { path: "", redirectTo: "shop", pathMatch: "full" },
-  // { path: "shop", component: ShopComponent },
+  // { path: "", redirectTo: "home", pathMatch: "full" },
+  // { path: "home", component: HomeComponent },
+  { path: "", redirectTo: "shop", pathMatch: "full" },
+  { path: "shop", component: ShopComponent },
 ];
