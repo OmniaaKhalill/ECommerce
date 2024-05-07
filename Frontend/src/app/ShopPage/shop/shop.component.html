@@ -6,14 +6,31 @@
       <div class="col-lg-9">
         <app-toolbox></app-toolbox>
         <app-product-section></app-product-section>
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center align-items-center">
+              <li class="page-item disabled pe-3">
+                  <a class="page-link page-link-prev fw-bold" href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                      <span aria-hidden="true"><i class="fa fa-arrow-left pe-2"></i></span>Prev
+                  </a>
+              </li>
+              <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item-total fw-bold">of 6</li>
+              <li class="page-item ps-3">
+                  <a class="page-link page-link-next fw-bold" href="#" aria-label="Next">
+                      Next <span aria-hidden="true"><i class="ps-2 fa fa-arrow-right"></i></span>
+                  </a>
+              </li>
+          </ul>
+      </nav>
       </div>
       <aside class="col-lg-3 order-lg-first">
         <div class="sidebar sidebar-shop">
           <div class="filter d-flex justify-content-between border-bottom mb-2 px-3">
-            <label class="fw-bold">Filters:</label>
-            <a href="Clear all checked" class="clear">Clean All</a>
+            <label class="fw-bold" style="font-size: var(--small-font);">Filters:</label>
+            <a href="Clear all checked" class="clear" style="font-size: var(--small-font);">Clean All</a>
           </div>
-
           <!-- Category -->
           <app-category-section></app-category-section>
           <!-- Brand -->
