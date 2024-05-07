@@ -1,0 +1,60 @@
+
+.heading{
+    font-weight: 500;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    
+  }
+
+  .carousel-item img {
+    border-radius: 5px;
+  }
+  
+  h5{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    margin: 0;
+    text-transform: capitalize;
+    padding: 6px 0;
+    transition: .3s ease;
+    font-weight: 400;
+    margin-top: 10px;
+  }
+  
+  a{
+    text-decoration: none;
+    color: var(--dark-color)
+  }
+  
+   .product_price {
+    color:  var(--main-color);
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  
+  
+   .button-group {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 55%;
+    margin: 0 auto;
+    text-align: center;
+    transition: all .2s ease-out 0s;
+    transform: scale(0);
+  }
+  
+  .button-group .absbtn {
+    background: var(--light-color);
+    padding: 6px 15px;
+    margin: 0 auto;
+    display: inline-block;
+    border: 1px solid var(--light-color);
+    border-radius: 20px;
+    position: relative;
+    vertical-align: middle;
+  }

@@ -8,6 +8,7 @@ import { ProductsComponent } from '../products/products.component';
 import { BlogsComponent } from '../blogs/blogs.component';
 import { ContactUsComponent } from '../contact-us/contact-us.component';
 import { FooterComponent } from '../../core/footer/footer.component';
+import { SingleProductComponent } from '../../product/single-product/single-product.component';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ import { FooterComponent } from '../../core/footer/footer.component';
     ProductsComponent,
     BlogsComponent,
     ContactUsComponent,
-    FooterComponent
+    FooterComponent,
+    SingleProductComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
