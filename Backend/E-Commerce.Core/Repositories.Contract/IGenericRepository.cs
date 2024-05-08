@@ -12,10 +12,11 @@ namespace E_Commerce.Core.Repositories.Contract
     {
         Task<T?> GetAsync(int id);
         Task<IReadOnlyList<T>> GetAllAsync();
-
         Task<IReadOnlyList<T>> GetAllSpecAsync(ISpecifications<T> spec);
         Task<T?> GetSpecAsync(ISpecifications<T> spec);
-
         Task<int> GetCount(ISpecifications<T> spec);
+        Task<T> AddAsync(T entity);
+        Task UpdateAsync(T entity);
+        Task DeleteAsync(T entity);
     }
 }
