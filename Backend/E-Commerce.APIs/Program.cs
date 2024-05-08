@@ -1,8 +1,10 @@
 
+using E_Commerce.APIs.Controllers;
 using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Repository.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Talabat.APIs.Extensions;
 
 namespace E_Commerce.APIs
 {
@@ -15,7 +17,9 @@ namespace E_Commerce.APIs
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddSwaggerServices();
+
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -26,6 +30,8 @@ namespace E_Commerce.APIs
 
             } ).AddEntityFrameworkStores<ProjectContext>();
 
+
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 
@@ -58,9 +64,11 @@ namespace E_Commerce.APIs
 
                 }
             }
-            
 
-            // Configure the HTTP request pipeline.
+            app.UseMiddleware<ExceptionMiddleware>();
+          
+
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -70,7 +78,7 @@ namespace E_Commerce.APIs
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseStaticFiles();
 
             app.MapControllers();
 
