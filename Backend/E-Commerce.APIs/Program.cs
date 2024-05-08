@@ -1,6 +1,8 @@
 
 using E_Commerce.Core.Entities.Identity;
+using E_Commerce.Core.Services.Contract;
 using E_Commerce.Repository.Data;
+using E_Commerce.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +27,8 @@ namespace E_Commerce.APIs
             {
 
             } ).AddEntityFrameworkStores<ProjectContext>();
+
+            builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
 
 
             var app = builder.Build();
@@ -78,12 +82,6 @@ namespace E_Commerce.APIs
         }
 
 
-        public static async Task AddUser(UserManager<AppUser> userManager)
-        {
-            
-
-           
-
-        }
+      
     }
 }
