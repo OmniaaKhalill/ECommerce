@@ -23,7 +23,7 @@ namespace E_Commerce.Core.Entities
 
         public List<Tag>? tag_list { get; set; }//navigation prop
 
-        public string SellerId {  get; set; }//forignKey (seller)
+        public int SellerId {  get; set; }//forignKey (seller)
         public Seller seller { get; set; }//navigation prop
 
         public virtual ICollection<Review>? Reviews { get; set; }

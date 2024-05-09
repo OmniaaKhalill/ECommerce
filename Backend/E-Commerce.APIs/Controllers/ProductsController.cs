@@ -50,7 +50,7 @@ namespace E_Commerce.APIs.Controllers
             var product = mapper.Map<ProductToCreateDto, Product>(productToCreateDto);
             await productRepo.AddAsync(product);
             var productToReturnDto = mapper.Map<Product, ProductToReturnDto>(product);
-            return CreatedAtAction(nameof(GetProduct), new { id = product.id }, productToReturnDto);
+            return CreatedAtAction("Added", new { id = product.id }, productToReturnDto);
         }
 
         [HttpPut("{id}")]
@@ -66,7 +66,11 @@ namespace E_Commerce.APIs.Controllers
             await productRepo.UpdateAsync(id, product);
 
             return NoContent();
+
+
         }
+
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)

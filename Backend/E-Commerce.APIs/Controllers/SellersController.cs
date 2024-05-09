@@ -28,7 +28,7 @@ namespace E_Commerce.APIs.Controllers
             }
 
             seller.IDImgUrl = idImgUrl;
-            await sellerRepo.UpdateAsync(seller);
+            await sellerRepo.UpdateAsync(sellerId, seller);
 
             return Ok("Uploaded successfully");
         }

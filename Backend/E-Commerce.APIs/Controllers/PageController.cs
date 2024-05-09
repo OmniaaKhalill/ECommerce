@@ -32,7 +32,7 @@ namespace E_Commerce.APIs.Controllers
 
             return Ok(_mapper.Map<Page, PageToReturnDto>(page));
         }
-        [HttpGet("{seller/sellerId}")]
+        [HttpGet("seller/{sellerId}")]
         public async Task<ActionResult<PageToReturnDto>> GetPageBySellerId(int sellerId)
         {
             if (sellerId == null)
