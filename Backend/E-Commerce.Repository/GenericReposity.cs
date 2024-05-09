@@ -47,5 +47,35 @@ namespace E_Commerce.APIs.Controllers
         {
             return await ApplySpecifications(spec).CountAsync();
         }
+
+        public async Task<bool> DeleteAsync(int id)
+        {
+            T entity = await _dbcontext.Set<T>().FindAsync(id);
+            if (entity == null)
+                return false;
+
+            _dbcontext.Set<T>().Remove(entity);
+            await _dbcontext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<T?> UpdateAsync(int id, T entityToUpdate)
+        {
+            T entity = await _dbcontext.Set<T>().FindAsync(id);
+            if (entity != null)
+            {
+                _dbcontext.Entry(entity).CurrentValues.SetValues(entityToUpdate);
+                await _dbcontext.SaveChangesAsync();
+            }
+            return entity;
+        }
+
+        public async Task<T?> AddAsync(T entity)
+        {
+           await _dbcontext.Set<T>().AddAsync(entity);
+            await _dbcontext.SaveChangesAsync();
+            return entity;
+            
+        }
     }
 }

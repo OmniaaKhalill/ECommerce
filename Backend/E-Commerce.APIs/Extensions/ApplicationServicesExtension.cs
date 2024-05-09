@@ -1,4 +1,5 @@
-﻿using E_Commerce.Core.Repositories.Contract;
+﻿using E_Commerce.APIs.Helpers;
+using E_Commerce.Core.Repositories.Contract;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -11,8 +12,8 @@ namespace E_Commerce.APIs.Controllers
           
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+            services.AddAutoMapper(typeof(MappingProfile));
 
-          
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
