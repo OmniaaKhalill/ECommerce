@@ -63,7 +63,7 @@ namespace E_Commerce.APIs.Controllers
             }
 
             mapper.Map(productToUpdateDto, product);
-            await productRepo.UpdateAsync(product);
+            await productRepo.UpdateAsync(id, product);
 
             return NoContent();
         }
@@ -78,7 +78,7 @@ namespace E_Commerce.APIs.Controllers
                 return NotFound();
             }
 
-            await productRepo.DeleteAsync(product);
+            await productRepo.DeleteAsync(id);
 
             return NoContent();
         }
