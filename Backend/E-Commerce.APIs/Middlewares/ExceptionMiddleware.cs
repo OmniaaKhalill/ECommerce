@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.Net;
 using System.Text.Json;
-namespace Talabat.APIs.Extensions
+namespace E_Commerce.APIs.Helpers
 {
     public class ExceptionMiddleware
     {

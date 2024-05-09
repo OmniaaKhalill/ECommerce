@@ -18,7 +18,7 @@ namespace E_Commerce.Core.Entities
         [ForeignKey("Page")]
 
         public int? PageId { get; set; }
-        public Page Page {  get; set; }
+        public Page? Page {  get; set; }
        
         
 

@@ -13,12 +13,14 @@ namespace E_Commerce.APIs.Controllers
     {
 
         private readonly IGenericRepository<Page> _pageRepo;
+        private readonly IGenericRepository<Seller> _sellerRepo;
         private readonly IMapper _mapper;
 
-        public PageController(IGenericRepository<Page> pageRepo, IMapper mapper)
+        public PageController(IGenericRepository<Page> pageRepo, IMapper mapper, IGenericRepository<Seller> sellerRepo)
         {
             _pageRepo = pageRepo;
             _mapper = mapper;
+            _sellerRepo = sellerRepo;
         }
 
         [HttpGet("{id}")]   //get all products list missing because the model of page don't contain list<products>
@@ -59,7 +61,7 @@ namespace E_Commerce.APIs.Controllers
             if (!deleted)
                 return NotFound(new { Message = "Page not found", StatusCode = "404" });
 
-            return NoContent();  
+            return Ok("deleted"); 
         }
         [HttpPatch("{id}")]
         public async Task<ActionResult<PageToReturnDto>> UpdatePage(int id, Page entity)
@@ -67,21 +69,52 @@ namespace E_Commerce.APIs.Controllers
             if (id <= 0)
                 return BadRequest(new { Message = "Invalid page ID", StatusCode = "400" });
 
-            var updatedPage = await _pageRepo.UpdateAsync(id, entity);
-            if (updatedPage == null)
+            var existingPage = await _pageRepo.GetAsync(id);
+
+            if (existingPage == null)
                 return NotFound(new { Message = "Page not found", StatusCode = "404" });
+
+            
+            existingPage.name = entity.name;
+            existingPage.Description = entity.Description;
+
+
+
+            var updatedPage = await _pageRepo.UpdateAsync(id,existingPage);
 
             var updatedDto = _mapper.Map<Page, PageToReturnDto>(updatedPage);
             return updatedDto;
         }
 
 
-        [HttpPost]
 
-        public async Task<ActionResult> AddPage(Page page)
+        [HttpPost("{sellerId}")]
+        public async Task<ActionResult> AddPage(Page page, int sellerId)
         {
-            await _pageRepo.AddAsync(page);
-            return Ok(_mapper.Map<Page, PageToReturnDto>(page));
+            var seller = await _sellerRepo.GetAsync(sellerId);
+
+            if (seller == null)
+            {
+                return NotFound(new { Message = "Seller not found", StatusCode = 404 });
+            }
+            else
+            {
+                page.SellerId = sellerId;
+
+                page.Seller = seller;
+
+                var addedPage = await _pageRepo.AddAsync(page);
+
+             
+                seller.PageId = addedPage.id; 
+                await _sellerRepo.UpdateAsync(sellerId,seller);
+
+                var pageDto = _mapper.Map<Page, PageToReturnDto>(addedPage);
+                return Ok(pageDto);
+            }
         }
+
+
+
     }
 }
