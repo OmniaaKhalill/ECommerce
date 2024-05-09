@@ -14,7 +14,6 @@ namespace E_Commerce.Core.Repositories.Contract
     {
         Task<T?> GetAsync(int id);
         Task<IReadOnlyList<T>> GetAllAsync();
-
         Task<IReadOnlyList<T>> GetAllSpecAsync(ISpecifications<T> spec);
         Task<T?> GetSpecAsync(ISpecifications<T> spec);
 
