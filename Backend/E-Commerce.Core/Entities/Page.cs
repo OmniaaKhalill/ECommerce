@@ -13,8 +13,8 @@ namespace E_Commerce.Core.Entities
         public string Description { get; set; }
 
         //[ForeignKey("Seller")]
-        public string SellerId { get; set; }
-        public Seller Seller { get; set; }
+        public int SellerId { get; set; }
+        public Seller? Seller { get; set; }
 
     
     

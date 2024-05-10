@@ -15,7 +15,7 @@ namespace E_Commerce.Core.Entities
 
         public string image_link {  get; set; }
 
-        public int? CategoryId {  get; set; }//forignKey(Category)
+        public int CategoryId {  get; set; }//forignKey(Category)
 
         public Category Category { get; set; }//navigation prop
         //public int? colourId {  get; set; }//foriggnkey(color table)
@@ -23,17 +23,17 @@ namespace E_Commerce.Core.Entities
 
         public List<Tag>? tag_list { get; set; }//navigation prop
 
-        public string SellerId {  get; set; }//forignKey (seller)
+        public int SellerId {  get; set; }//forignKey (seller)
         public Seller seller { get; set; }//navigation prop
 
-        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Review>? Reviews { get; set; }
 
         public int NumOfProductInStock {  get; set; }
 
-        public  ICollection<OrderItem> OrderItems { get; set; }
-        public  List<Cart> Carts {  get; set; }
+        public  ICollection<OrderItem>? OrderItems { get; set; }
+        public  List<Cart>? Carts {  get; set; }
 
-        public List<WishList> WishLists { get; set; }
+        public List<WishList>? WishLists { get; set; }
 
 
 

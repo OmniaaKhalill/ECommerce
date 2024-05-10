@@ -1,10 +1,17 @@
 
+using E_Commerce.APIs.Controllers;
+using E_Commerce.APIs.Helpers;
 using E_Commerce.Core.Entities.Identity;
+
+using E_Commerce.Core.Repositories.Contract;
+
 using E_Commerce.Core.Services.Contract;
+
 using E_Commerce.Repository.Data;
 using E_Commerce.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Talabat.APIs.Extensions;
 
 namespace E_Commerce.APIs
 {
@@ -17,11 +24,17 @@ namespace E_Commerce.APIs
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+            builder.Services.AddSwaggerServices();
+
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<ProjectContext>(op => op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddDbContext<ProjectContext>(op => 
+            op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
+            ));
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddIdentity<AppUser, IdentityRole>
             (options =>
             {
@@ -30,6 +43,8 @@ namespace E_Commerce.APIs
 
             builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
 
+
+            builder.Services.AddApplicationServices();
 
             var app = builder.Build();
 
@@ -48,6 +63,7 @@ namespace E_Commerce.APIs
 
                     var _userManager = services.GetRequiredService<UserManager<AppUser>>();
                     await AppIdentityDbContextDataSeed.SeedUserAsync(_userManager);
+                    //await ProjectContextSeed.SeedAsync(dbContext);
 
                 }
                 catch (Exception ex)
@@ -62,9 +78,11 @@ namespace E_Commerce.APIs
 
                 }
             }
-            
 
-            // Configure the HTTP request pipeline.
+            app.UseMiddleware<ExceptionMiddleware>();
+          
+
+
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -74,7 +92,7 @@ namespace E_Commerce.APIs
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseStaticFiles();
 
             app.MapControllers();
 

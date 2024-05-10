@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Core.Entities
 {
-    public class Seller
+    public class Seller : BaseEntity
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
    
         public String IDImgUrl {  get; set; }
         public bool IsAccepted {  get; set; }
@@ -19,8 +17,8 @@ namespace E_Commerce.Core.Entities
 
         [ForeignKey("Page")]
 
-        public int PageId { get; set; }
-        public Page Page {  get; set; }
+        public int? PageId { get; set; }
+        public Page? Page {  get; set; }
        
         
 
