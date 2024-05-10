@@ -2,8 +2,13 @@
 using E_Commerce.APIs.Controllers;
 using E_Commerce.APIs.Helpers;
 using E_Commerce.Core.Entities.Identity;
+
 using E_Commerce.Core.Repositories.Contract;
+
+using E_Commerce.Core.Services.Contract;
+
 using E_Commerce.Repository.Data;
+using E_Commerce.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Talabat.APIs.Extensions;
@@ -35,6 +40,8 @@ namespace E_Commerce.APIs
             {
 
             } ).AddEntityFrameworkStores<ProjectContext>();
+
+            builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
 
 
             builder.Services.AddApplicationServices();
@@ -93,12 +100,6 @@ namespace E_Commerce.APIs
         }
 
 
-        public static async Task AddUser(UserManager<AppUser> userManager)
-        {
-            
-
-           
-
-        }
+      
     }
 }

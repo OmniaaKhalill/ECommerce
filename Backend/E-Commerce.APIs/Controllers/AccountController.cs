@@ -1,5 +1,6 @@
 ﻿using E_Commerce.APIs.DTO;
 using E_Commerce.Core.Entities.Identity;
+using E_Commerce.Core.Services.Contract;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,14 @@ namespace E_Commerce.APIs.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly IAuthService _authService;
 
-        public AccountController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager)
+
+        public AccountController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager, IAuthService authServic)
         {
             _userManager = userManager;
            _signInManager = signInManager;
+            _authService=authServic;
         }
 
 
@@ -35,10 +39,13 @@ namespace E_Commerce.APIs.Controllers
             {
                 return Unauthorized();
             }
+
+            var token = await _authService.CreatTokenAsync(user, _userManager);
+
             return Ok(new UserDto() { 
             DisplayName = user.DisplayName,
             Email = Model.Email,
-            Token="first token"
+            Token=token
             });
         }
 
@@ -58,13 +65,15 @@ namespace E_Commerce.APIs.Controllers
             {
                 return BadRequest(400);
             }
+
+            var token = await _authService.CreatTokenAsync(user, _userManager);
             return Ok(new UserDto()
             {
                 DisplayName = user.DisplayName,
                 Email = user.Email,
-                Token = "this will be token"
+                Token = token
 
-            });
+            }); ;
         }
     }
 }
