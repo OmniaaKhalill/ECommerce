@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Core.Entities;
+using E_Commerce.Core.Specifications.ProductSpecs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,10 @@ namespace E_Commerce.Core.Specifications
         //{
         //    AddingIncludes();
         //}       
-        public ProductSpecifications() : base()
+        public ProductSpecifications(ProductSpecParams specParams) : base()
         {
             AddingIncludes();
+            ApplyPagination((specParams.PageIndex - 1) * specParams.PageSize, specParams.PageSize);
         }
 
         public ProductSpecifications(int id) :  base(p => p.id == id)
