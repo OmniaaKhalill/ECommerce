@@ -9,6 +9,7 @@
   --shadow: #e6e6e6;
   /* --font-family: "Poppins", sans-serif; */
   --font-family: "Abel", sans-serif;
+  --small-font: 18px;
 }
 
 body {
