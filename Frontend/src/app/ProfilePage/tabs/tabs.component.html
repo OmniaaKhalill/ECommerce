@@ -1,0 +1,56 @@
+<app-page-header></app-page-header>
+<app-breadcrumb></app-breadcrumb>
+<div class="page-content">
+  <div class="dashboard">
+    <div class="container">
+      <div class="row">
+        <aside class="col-md-4 col-lg-3">
+          <ul class="nav nav-dashboard flex-column mb-3 mb-md-0" role="tablist">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+               
+               
+                routerLink="orders"
+                routerLinkActive="activeLink"
+                aria-controls="tab-dashboard"
+                aria-selected="false"
+                >orders</a
+              >
+              <hr />
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                
+                routerLink="profileDetails"
+                routerLinkActive="activeLink"
+                aria-controls="tab-dashboard"
+                aria-selected="false"
+                >account details</a
+              >
+            </li>
+            <hr />
+          <!-- <li class="nav-item" *ngIf="user.role === 'seller'" >
+              <a
+                class="nav-link"
+           
+                routerLink="sellerprofileDetails"
+                routerLinkActive="activeLink"
+                aria-controls="tab-seller"
+                aria-selected="false"
+                >page</a
+              >
+            </li>
+            <hr /> -->
+          </ul>
+        </aside>
+        <div class="col-md-8 col-lg-9">
+          <div class="tab-content">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
