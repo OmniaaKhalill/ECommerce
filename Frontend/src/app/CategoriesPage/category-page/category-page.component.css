@@ -1,0 +1,66 @@
+.banner {
+  position: relative;
+  overflow: hidden;
+}
+
+.banner a {
+  position: relative;
+}
+
+.img-layer {
+  background-color: rgba(25, 25, 25, 0.3);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.banner:hover .img-layer {
+  opacity: 1;
+}
+
+.banner-title,
+.banner-span {
+  bottom: 25px;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: opacity 0.3s, transform 0.3s;
+  opacity: 1;
+}
+
+.banner-span {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px);
+  background-color: var(--main-color);
+}
+
+.banner:hover .banner-title {
+  opacity: 0;
+}
+
+.banner:hover .banner-span {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.banner-title span,
+.banner-span span {
+  font-size: 20px;
+  color: var(--dark-color);
+  font-weight: 600;
+}
+
+.banner-span span {
+  color: var(--light-color);
+}
+
+/* .row > * {
+  padding-right: 0px;
+  padding-left: 0px;
+} */
+
+
