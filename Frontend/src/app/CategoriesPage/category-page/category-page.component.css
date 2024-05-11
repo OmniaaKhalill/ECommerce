@@ -58,9 +58,18 @@
   color: var(--light-color);
 }
 
-/* .row > * {
-  padding-right: 0px;
-  padding-left: 0px;
-} */
+.categories-page .row > .col-md-6 {
+  padding: 0;
+}
+
+.banner {
+  margin-bottom: 20px; /* Add some space between banners */
+}
+
+.banner-title,
+.banner-span {
+  padding: 10px; /* Add padding to the title and span */
+}
+
 
 
