@@ -1,4 +1,3 @@
-
 <app-page-header  [pagename]="pagename">
 
 </app-page-header>
@@ -7,17 +6,17 @@
 
 
  <div class="tab-pane fade active show" id="tab-account">
- <form  name="Add-Product-form">
+ <form  >
    <div class="row">
      <div class="col-sm-6">
        <label for=" Name"  class="formstylebold">Name *</label>
-       <input id="Name"   type="text"   class="form-control" required />
-     </div>
+       <input id="Name" name="Name" type="text" class="form-control" [(ngModel)]="newproduct.Name" required [ngModelOptions]="{standalone: true}" />
+    </div>
      <!-- End .col-sm-6 -->
 
      <div class="col-sm-6">
-       <label for="Bramd" class="formstylebold">Brand *</label>
-       <input id="Brand"  type="text" class="form-control" required />
+       <label for="Brand" class="formstylebold">Brand *</label>
+       <input id="Brand"  type="text" name="Brand" class="form-control"  [(ngModel)]="newproduct.Brand" required [ngModelOptions]="{standalone: true}" />
      </div>
     
    </div>
@@ -25,7 +24,7 @@
    <div >
 
     <label for="CategoryId" class="formstylebold">category *</label>
-        <select  id="CategoryId"  class=" category form-select form-select-lg form-control"  required>
+        <select  id="CategoryId" name="CategoryId" class=" category form-select form-select-lg form-control"  [(ngModel)]="newproduct.Category"  required>
             <option class="form-control">Select Category</option>
             <option  class="form-control">Select Category</option>
             <option  class="form-control">Select Category</option>
@@ -41,7 +40,7 @@
 <div class="col-6">
 
     <label for="Price" class="formstylebold">Price *</label>
-    <input id="Price"  type="text" class="form-control" required />
+    <input id="Price" name="Price" [(ngModel)]="newproduct.Price" type="text" class="form-control" required  [ngModelOptions]="{standalone: true}"/>
 </div>
 
 </div>
@@ -51,14 +50,22 @@
     
     <div class="col-sm-6">
         <label class="formstylebold">Number Of Colors</label>
-        <input id="number-of-color" class="form-control" name="numOfcolor" [(ngModel)]="numOfColors" (change)=" generateInputs('color')"  />
+        <input id="number-of-color" class="form-control" name="numOfcolor" [(ngModel)]="numOfColors" (change)=" generateInputs('color')" [ngModelOptions]="{standalone: true}" />
     
-        <div class="form-group mt-3" *ngFor="let color of colorInputs; let i = index">
-            <div class="input-group mb-3">
-                <input id="colors"  class="form-control" placeholder="Enter color {{ i + 1 }}" [(ngModel)]="colorInputs[i]" name="color{{i}}">
-                <div class="input-group-append">
-                    <button type="button" class="btn  btnstyle" (click)="removeInput(i,'color')">Remove</button>
+        <div class="form-group mt-3" *ngFor="let color of colorNameInputs; let i = index">
+            <div class="input-group mb-3 row">
+                <div class="col-6">
+                    <input [(colorPicker)]="hexval[i]" name="hexval[i]" [style.background]="hexval[i]" value="hexval[i]" [(ngModel)]="hexval[i] "/>
+
+                    
                 </div>
+                <div class="col-6">
+                    <input id="colors"  class="form-control" placeholder="Enter color {{ i + 1 }}" [(ngModel)]="colorNameInputs[i]" name="color{{i}}" [ngModelOptions]="{standalone: true}">
+                    <div class="input-group-append">
+                        <button type="button" class="btn  btnstyle" (click)="removeInput(i,'color')">Remove</button>
+                    </div>
+                </div>
+                
             </div>
         </div> <!-- Close the div for Number Of Tags section -->
     </div> <!-- Close the div for the second column -->
@@ -66,11 +73,11 @@
 
     <div class="col-sm-6">
         <label class="formstylebold">Number Of Tags</label>
-        <input id="number-of-tags" class="form-control" name="numOfTags" [(ngModel)]="numOfTags" (change)="generateInputs('tag')"  />
+        <input id="number-of-tags" class="form-control" name="numOfTags" [(ngModel)]="numOfTags" (change)="generateInputs('tag')" [ngModelOptions]="{standalone: true}" />
     
         <div class="form-group mt-3" *ngFor="let Tag of TagsInput; let i = index">
             <div class="input-group mb-3">
-                <input id="Tags"   class="form-control " placeholder="Enter Tag {{ i + 1 }}" [(ngModel)]="TagsInput[i]" name="Tag{{i}}">
+                <input id="Tags"   class="form-control " placeholder="Enter Tag {{ i + 1 }}" [(ngModel)]="newproduct.Tags[i]" name="Tag{{i}}" [ngModelOptions]="{standalone: true}">
                 <div class="input-group-append">
                     <button type="button" class="btn  btnstyle" (click)="removeInput(i,'Tag')">Remove</button>
                 </div>
@@ -81,19 +88,26 @@
     
 
         <label for="Description" class="formstylebold">Description</label>
-        <input id="Description"  type="text" class="form-control" />
+        <input id="Description" name="Description" [(ngModel)]="newproduct.Description" type="text" class="form-control" [ngModelOptions]="{standalone: true}"/>
     
  
         <label for="numOfProductInStock" class="formstylebold">Number of Products in Stock *</label>
-        <input id="NumOfProductInStock"  type="text" class="form-control" required />
+        <input id="NumOfProductInStock"  name="NumOfProductInStock" [(ngModel)]="newproduct.NumOfProductInStock" type="text" class="form-control"   [ngModelOptions]="{standalone: true}"    required/>
  
 
         <div class="mb-3">
-            <label for="ImageLink" class="formstylebold">Add Product Image*</label>
-            <input    class="form-control" type="file" id="ImageLink" accept="image/*" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;" required>
-        </div>
+            <label  class="formstylebold">Add Product Image*</label>
+            <input
+            class="form-control"
+            type="file"
+            id="ImageLink"
+            accept="image/*"
+            (change)="UploadImage($event)"
+            style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;"
+            ngModelOptions="{standalone: true}"
+          />        </div>
 
-   <button type="submit" class="btn btnstyle d-block" (click)="Add()"  >
+   <button type="submit" class="btn btnstyle d-block" (click)="Add()"   >
      <span >Add Product</span>
      <i class="fa-solid fa-arrow-right-long"></i>
    </button>

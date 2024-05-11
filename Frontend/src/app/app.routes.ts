@@ -10,7 +10,6 @@ import { SellerPageComponent } from './ProfilePage/content/seller-page/seller-pa
 
 export const routes: Routes = [
   // { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: 'home', component: HomeComponent },
   /*  { path: "", redirectTo: "shop", pathMatch: "full" },
   { path: "shop", component: ShopComponent }, */
 
@@ -26,7 +25,9 @@ export const routes: Routes = [
   },
   { path: "shop", component: ShopComponent },
   { path: "Product", component:ProductsCrudComponent },
-  {path:"Add",component:AddProductComponent}
+  {path:"Add",component:AddProductComponent},
+  { path: 'home', component: HomeComponent },
+
 
 ]
 
