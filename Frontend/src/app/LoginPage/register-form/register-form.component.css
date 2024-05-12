@@ -1,0 +1,54 @@
+.form-control{
+    border-radius: 0%;
+    height: 5vh;
+    background-color: var(--shadow);
+    margin-bottom: 3%;
+
+}
+
+.frm-input{
+
+    width: 50%;
+    height: 10vh;
+}
+.btn-login{
+    border-radius: 0%;
+    width: 70%;
+    height: 50%;
+    color:var(--main-color);
+    border-color:var(  --main-color) ;
+}
+
+.btn-login:hover{
+
+    color:white;
+    background-color: var(--main-color);
+
+}
+
+
+
+ .rmbr{
+     width: 100%;
+     height: 6.5vh;
+     display: flex;
+     flex-direction: row;
+   align-items: center;
+   justify-content: center;
+
+ }
+ 
+label a{
+    width: 40%;
+color: black;
+     text-align: center;
+ }
+
+
+ .err-txt{
+
+color:rgba(176, 94, 0, 0.684);
+
+text-decoration: underline;
+height: 5vh;
+ }

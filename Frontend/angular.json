@@ -95,5 +95,10 @@
         }
       }
     }
+
+  },
+  "cli": {
+    "analytics": false
+
   }
 }
