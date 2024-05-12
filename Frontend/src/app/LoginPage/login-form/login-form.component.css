@@ -41,3 +41,10 @@ height: 10vh ;
 color: black;
     text-align: center;
 }
+.err-txt{
+
+    color:rgba(176, 94, 0, 0.684);
+    
+    text-decoration: underline;
+    height: 5vh;
+     }

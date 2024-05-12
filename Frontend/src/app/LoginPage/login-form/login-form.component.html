@@ -1,13 +1,14 @@
-<form action="#">
+<form action="#" [formGroup]="userloginFrom" (submit)="onSubmit()">
+
 
     <div >
-        <label for="singin-email-2" class="mb-2">Username or email address *</label>
-        <input type="text" class="form-control" id="singin-email-2" name="singin-email" required="">
+        <label for="singin-email-2" class="mb-2"> email address *</label>
+        <input type="text" class="form-control" formControlName="email" id="singin-email-2" name="singin-email" required="">
     </div>
 
     <div >
         <label for="singin-password-2" class="mb-2">Password *</label>
-        <input type="password" class="form-control" id="singin-password-2" name="singin-password" required="">
+        <input type="password" class="form-control" formControlName="password" id="singin-password-2" name="singin-password" required="">
     </div>
 
     <div class="form-footer d-flex flex-row mt-5">
@@ -19,12 +20,11 @@
     </div>
     <div class="frm-input d-flex flex-row  rmbr">
         <div class="custom-control custom-checkbox mx-3  rmbr-me">
-            <input type="checkbox" class="custom-control-input " id="signin-remember-2">
-            <label class="custom-control-label mx-3 " for="signin-remember-2">Remember Me</label>
+            <div class="error-message err-txt" *ngIf="userloginFrom.get('email')?.errors?.['required'] && userloginFrom.get('email')?.touched"> 
+                Email is required.
+              </div>
         </div><!-- End .custom-checkbox -->
-    <div class="rmbr-me">
-        <a href="#" class="forgot-link">Forgot Your Password?</a>
-    </div>
+  
     </div><!-- End .form-footer -->
 </div>
 </form>
