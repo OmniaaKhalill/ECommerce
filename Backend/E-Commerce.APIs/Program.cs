@@ -41,6 +41,16 @@ namespace E_Commerce.APIs
 
             } ).AddEntityFrameworkStores<ProjectContext>();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
 
             builder.Services.AddApplicationServices();
 
@@ -86,6 +96,8 @@ namespace E_Commerce.APIs
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowAllOrigins");
+
 
             app.UseHttpsRedirection();
 
