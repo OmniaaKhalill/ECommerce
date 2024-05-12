@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule,Validators,FormArray } from '@angular/forms';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
 import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import{ImegesService} from '../../Services/imeges.service'
 import { ColorPickerModule } from 'ngx-color-picker';
+import { CategoryService } from '../../Services/category.service';
+import { Category } from '../../models/category';
 
 
 @Component({
@@ -18,8 +20,9 @@ import { ColorPickerModule } from 'ngx-color-picker';
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css'
 })
-export class AddProductComponent implements OnDestroy
+export class AddProductComponent implements OnDestroy,OnInit
  {
+
   pagename:string="Add products"
   numOfColors: number=0;
   colorNameInputs: string[] = [];
@@ -28,20 +31,42 @@ export class AddProductComponent implements OnDestroy
   imageUrl: string="";
   sub:Subscription|null=null;
   hexval:string[]=[];
+  categories:Category[]=[];
+  categoryName:string="blach";
   
 
-  newproduct:Product=new Product("","","Select Category",0,[{name:"jjj",hexVal:"kkk"}],[],0,"","");
-constructor(private productService: ProductService,public router:Router,private imageServece:ImegesService) 
-{
-
-}
-  ngOnDestroy(): void {
-
-this.sub?.unsubscribe;
+  newproduct:Product=new Product("","",0,0,[],0,"","",1);
+constructor(
+  private productService: ProductService,
+  public router:Router ,
+  private imageServece:ImegesService,
+  public CategoryService:CategoryService
+) {}
+  ngOnInit(): void 
+  {
+   this.getAllProducts();
   }
-
-
-
+  ngOnDestroy(): void
+  {
+   this.sub?.unsubscribe;
+   
+  }
+  getAllProducts()
+  {
+    this.CategoryService.GetAll().subscribe(
+      (data: Category[]) =>
+      {
+        console.log(data);
+        this.categories = data;
+        console.log("lvkvf"+this.categories)
+        this.categories.forEach(category => {
+          // Log or perform operations on each category object
+          console.log(category); // Example: Log each category object to the console
+      });
+      console.log(this.categories[0])
+      }
+    );
+  }
   generateInputs(Name:string) 
   {
     
@@ -79,43 +104,52 @@ this.sub?.unsubscribe;
     }
   }
   
-  Add(){
-    this.newproduct.Colors=[];
-    this.newproduct.Tags=[];
-    for (let i = 0; i < this.numOfColors; i++) {
+  Add()
+  {
+    this.newproduct.colors=[];
+  
+    for(let i = 0; i < this.categories.length; i++) {
+      if(this.categories[i].name === this.categoryName) {
+          this.newproduct.categoryId = this.categories[i].id;
+          console.log(this.newproduct.categoryId);
+          console.log(this.categories[i].id);
+          break; 
+      }
+  }
+    for (let i = 0; i < this.numOfColors; i++) 
+      {
       // Create a new color object
       const color = {
-          name: this.colorNameInputs[i], // Assign the name
-          hexVal: this.hexval[i] // Assign the hex value
+        hex_value: this.colorNameInputs[i], // Assign the name
+        colour_name: this.hexval[i] // Assign the hex value
       };
       // Push the color object into the Colors array
-      this.newproduct.Colors.push(color);
-  //  this.sub= this.productService.Add(this.newproduct).subscribe(
-  //     data=>{
-  //       console.log(data);
-  //       this.router.navigateByUrl("/Products");
-  //     }
-  //   );   
-  console.log(this.newproduct.Colors)
-
-  console.log(this.newproduct);
-  console.log(this.hexval)
-  }
+      this.newproduct.colors.push(color);
+      const sellerId=1;
+   this.sub= this.productService.Add(this.newproduct,sellerId).subscribe(
+      data=>{
+        console.log(data);
+        this.router.navigateByUrl("/Product");
+      }
+    );   }
   }
   UploadImage(e:Event){
     console.log("hello fron func")
+    console.log("categories"+this.categories[0]);
     const input=e.target as HTMLInputElement;
     const file=input.files?.[0];
     if(file){
       this.imageServece.uploadImage(file).subscribe(
         (data) => {
           console.log(data);
-          this.newproduct.ImageLink = data.url; // Adjusted to lower case 'url'
+          this.newproduct.image_link = data.url; // Adjusted to lower case 'url'
           console.log(JSON.stringify(data.url));
+          console.log("this is the image url" +this.newproduct.image_link);
         }
       );
 
     }
   }
+
 }
 

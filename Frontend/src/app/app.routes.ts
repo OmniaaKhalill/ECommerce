@@ -7,6 +7,7 @@ import { TabsComponent } from './ProfilePage/tabs/tabs.component';
 import { OrdersComponent } from './ProfilePage/content/orders/orders.component';
 import { ProfileDetailsComponent } from './ProfilePage/content/profile-details/profile-details.component';
 import { SellerPageComponent } from './ProfilePage/content/seller-page/seller-page.component';
+import { EditProductComponent } from './SellerPage/edit-product/edit-product.component';
 
 export const routes: Routes = [
   // { path: "", redirectTo: "home", pathMatch: "full" },
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: "shop", component: ShopComponent },
   { path: "Product", component:ProductsCrudComponent },
   {path:"Add",component:AddProductComponent},
+  {path:"Edite/:id",component:EditProductComponent},
   { path: 'home', component: HomeComponent },
 
 
