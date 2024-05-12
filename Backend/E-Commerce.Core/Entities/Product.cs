@@ -17,14 +17,14 @@ namespace E_Commerce.Core.Entities
 
         public int CategoryId {  get; set; }//forignKey(Category)
 
-        public Category Category { get; set; }//navigation prop
+        public Category? Category { get; set; }//navigation prop
         //public int? colourId {  get; set; }//foriggnkey(color table)
         public List<Coulor>? Colors { get; set; }//MultiValuedAtrribute,//navigation prop
 
         public List<Tag>? tag_list { get; set; }//navigation prop
 
         public int SellerId {  get; set; }//forignKey (seller)
-        public Seller seller { get; set; }//navigation prop
+        public Seller? seller { get; set; }//navigation prop
 
         public virtual ICollection<Review>? Reviews { get; set; }
 
