@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './HomePage/home/home.component';
 import { ShopComponent } from './ShopPage/shop/shop.component';
 import { CategoryPageComponent } from './CategoriesPage/category-page/category-page.component';
+import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
 
 export const routes: Routes = [
   // { path: "", redirectTo: "home", pathMatch: "full" },
@@ -10,4 +11,6 @@ export const routes: Routes = [
   // { path: "shop", component: ShopComponent },
   { path: "", redirectTo: "category", pathMatch: "full" },
   { path: "category", component: CategoryPageComponent },
+  // { path: "", redirectTo: "product", pathMatch: "full" },
+  // { path: "product", component: ProductsPageComponent },
 ];
