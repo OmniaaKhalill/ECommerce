@@ -18,9 +18,7 @@ namespace E_Commerce.Core.Specifications
             : base(p =>
                 (string.IsNullOrEmpty(specParams.brand) || p.brand == specParams.brand)
                 &&
-                (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value)
-                &&
-                (specParams.tag_list == null || p.tag_list == specParams.tag_list))
+                (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
         {
             AddingIncludes();
 
@@ -55,7 +53,6 @@ namespace E_Commerce.Core.Specifications
         private void AddingIncludes()
         {
             Includes.Add(p => p.Category);
-            Includes.Add(p => p.tag_list);
             Includes.Add(p => p.seller);
         }
     }

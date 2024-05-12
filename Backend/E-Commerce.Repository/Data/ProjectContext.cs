@@ -29,7 +29,6 @@ namespace E_Commerce.Repository.Data
         public DbSet<Review> reviews { get; set; }
         public DbSet<Seller> sellers { get; set; }
 
-        public DbSet<Tag> tags { get; set; }
         public DbSet<WishList> wishlist { get; set; }
 
 

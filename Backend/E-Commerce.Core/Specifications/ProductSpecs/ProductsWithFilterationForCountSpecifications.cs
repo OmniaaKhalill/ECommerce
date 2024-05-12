@@ -13,9 +13,7 @@ namespace E_Commerce.Core.Specifications.ProductSpecs
             : base(p =>
                 (string.IsNullOrEmpty(specParams.brand) || p.brand == specParams.brand)
                 &&
-                (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value)
-                &&
-                (specParams.tag_list == null || p.tag_list == specParams.tag_list))
+                (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
         {
         }
     }

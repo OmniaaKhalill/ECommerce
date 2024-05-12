@@ -11,7 +11,6 @@ namespace E_Commerce.APIs.DTO
         public string ImageLink { get; set; }
         public int? CategoryId { get; set; }
         public List<Coulor> Colors { get; set; }
-        public List<Tag> TagList { get; set; }
         public int NumOfProductInStock { get; set; }
     }
 }

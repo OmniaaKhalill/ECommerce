@@ -20,7 +20,6 @@ namespace E_Commerce.APIs.DTO
 
         public List<ColorDto> Colors { get; set; }
 
-        public List<Tag>? TagList { get; set; }
 
         public string SellerId { get; set; }
         public string Seller { get; set; }
