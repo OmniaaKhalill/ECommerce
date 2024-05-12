@@ -63,12 +63,12 @@
 }
 
 .banner {
-  margin-bottom: 20px; /* Add some space between banners */
+  margin-bottom: 20px;
 }
 
 .banner-title,
 .banner-span {
-  padding: 10px; /* Add padding to the title and span */
+  padding: 10px;
 }
 
 
