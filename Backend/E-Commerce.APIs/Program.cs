@@ -29,8 +29,11 @@ namespace E_Commerce.APIs
             builder.Services.AddDbContext<ProjectContext>(op => 
             op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
             ));
+
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+            builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddIdentity<AppUser, IdentityRole>
             (options =>

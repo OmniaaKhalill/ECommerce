@@ -12,14 +12,20 @@ namespace E_Commerce.Repository
     {
         public IGenericRepository<Product> ProductRepo { get; set; }
         public IGenericRepository<Category> CategoryRepo { get; set; }
+        public IGenericRepository<Seller> SellerRepo { get; set; }
+        public IColorRepository ColotRepo { get; set; }
 
         public UnitOfWork(
             IGenericRepository<Product> productRepo,
-            IGenericRepository<Category> categoryRepo
+            IGenericRepository<Category> categoryRepo,
+            IGenericRepository<Seller> sellerRepo,
+            IColorRepository colorRepo
             )
         {
             ProductRepo = productRepo;
             CategoryRepo = categoryRepo;
+            SellerRepo = sellerRepo;
+            ColotRepo = colorRepo;
         }
     }
 }

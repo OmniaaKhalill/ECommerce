@@ -11,5 +11,7 @@ namespace E_Commerce.Core.Repositories.Contract
     {
         IGenericRepository<Product> ProductRepo { get; set; }
         IGenericRepository<Category> CategoryRepo { get; set; }
+        IGenericRepository<Seller> SellerRepo { get; set; }
+        IColorRepository ColotRepo { get; set; }
     }
 }

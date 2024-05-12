@@ -19,13 +19,6 @@ namespace E_Commerce.Core.Entities
 
         public int? PageId { get; set; }
         public Page? Page {  get; set; }
-       
-        
 
-
-
-
-
-    
     }
 }
