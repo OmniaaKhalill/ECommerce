@@ -1,0 +1,91 @@
+<app-header></app-header>
+<app-navbar></app-navbar>
+<section class="product mt-5">
+
+
+    <div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-2 d-none d-md-block">
+                  <div *ngFor="let image of smallerImages">
+
+                    
+                  <a href="#" (click)="preventReload($event)">  <img [src]="image" alt="" class="w-100 mb-4" (click)="changeBigImage(image)"></a>
+                  </div>
+                </div>
+                <div class="col-sm-10 col-12" id="bigImage">
+                  <img [src]="bigImage" alt="productImg">
+                </div>
+              </div>
+              
+        </div>
+         <div class="col-sm-6 mt-5" >
+            <h4 >Beige metal hoop tote bag</h4>
+            <p class="price">$5.65</p>
+            <p class="desc">Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero.</p>
+         
+
+            <div class="details-filter-row details-row-size">
+                <label>Color:</label>
+
+                <div class="product-nav product-nav-dots">
+                    <a href="#" class="active" style="background: var(--main-color);"><span class="sr-only">Color name</span></a>
+                    <a href="#" style="background: var(--dark-color);"><span class="sr-only">Color name</span></a>
+                </div><!-- End .product-nav -->
+            </div>
+
+            <div class="product-details-action">
+                <div class="details-action-col">
+                    <div class="product-details-quantity">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-default btn-number" (click)="decrement()">
+                                <i class="fa fa-minus"></i>
+                              </button>
+                            </span>
+                            <input type="text" id="qty" class="form-control input-number" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                            <span class="input-group-btn">
+                              <button type="button" class="btn btn-default btn-number" (click)="increment()">
+                                <i class="fa fa-plus"></i>
+                              </button>
+                            </span>
+                          </div>
+                          
+                    </div>
+
+                    <a href="#" class="btn-product btn-cart"><span>Add To cart</span></a>
+                    <a href="#" class="btn-product btn-wishlist"><span> Add To Whishlist</span></a>
+                </div>
+
+             
+            </div>
+
+
+          
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-sm-12 ">   
+             <div class="navbar">
+              <ul>
+                <li [class.active]="isActive('description')">
+                  <a (click)="setActive('description')" [routerLink]="['/product']">Description</a> 
+                </li>
+                <li [class.active]="isActive('reviews')">
+                  <a (click)="setActive('reviews')" [routerLink]="['/product/reviews']">Reviews (2)</a> 
+                </li>
+                <li [class.active]="isActive('tags')">
+                  <a (click)="setActive('tags')" [routerLink]="['/product/tags']"> Tags</a> 
+                </li>
+              </ul>
+              
+              
+    </div>
+    <router-outlet></router-outlet>
+   <app-similar-products></app-similar-products>
+</div>
+    </div>
+</div>
+</section>
+<app-footer></app-footer>
