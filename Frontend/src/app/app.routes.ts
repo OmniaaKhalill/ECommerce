@@ -7,6 +7,9 @@ import { TabsComponent } from './ProfilePage/tabs/tabs.component';
 import { OrdersComponent } from './ProfilePage/content/orders/orders.component';
 import { ProfileDetailsComponent } from './ProfilePage/content/profile-details/profile-details.component';
 import { SellerPageComponent } from './ProfilePage/content/seller-page/seller-page.component';
+import { CartProductsComponent } from './CartPage/cart-products/cart-products.component';
+import { CartComponent } from './CartPage/cart/cart.component';
+import { WishListProductsComponent } from './WishListPage/wish-list-products/wish-list-products.component';
 
 export const routes: Routes = [
   // { path: "", redirectTo: "home", pathMatch: "full" },
@@ -26,7 +29,9 @@ export const routes: Routes = [
   },
   { path: "shop", component: ShopComponent },
   { path: "Product", component:ProductsCrudComponent },
-  {path:"Add",component:AddProductComponent}
+  {path:"Add",component:AddProductComponent},
+  {path:"Cart" , component:CartComponent},
+  {path:"WishList" , component:WishListProductsComponent}
 
 ]
 
