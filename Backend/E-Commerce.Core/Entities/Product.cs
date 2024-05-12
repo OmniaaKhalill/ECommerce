@@ -34,14 +34,5 @@ namespace E_Commerce.Core.Entities
         public  List<Cart>? Carts {  get; set; }
 
         public List<WishList>? WishLists { get; set; }
-
-
-
-
-
-
-
-
-
     }
 }

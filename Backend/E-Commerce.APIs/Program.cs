@@ -3,6 +3,7 @@ using E_Commerce.APIs.Controllers;
 using E_Commerce.APIs.Helpers;
 using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Core.Repositories.Contract;
+using E_Commerce.Repository;
 using E_Commerce.Repository.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ namespace E_Commerce.APIs
             op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
             ));
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddIdentity<AppUser, IdentityRole>
             (options =>
