@@ -1,0 +1,44 @@
+.offer-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6),rgba(0, 0, 0, 0.6)), url('../../../assets/img/Home/bg2.png');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  height: 70vh;
+}
+
+.dummy {
+  background-color: red;
+  height: 70vh;
+}
+
+.btn {
+  border: 1px solid var(--dark-color);
+  border-radius: 0px;
+  transition: all ease .3s;
+}
+
+.btn:hover {
+  border: 1px solid var(--main-color);
+  background-color: var(--main-color);
+  color: var(--light-color);
+}
+
+.pink-arrow {
+  /* color: #e88eba; */
+  color: var(--main-color);
+}
+
+.carousel-control-prev {
+  opacity: 0.8;
+}
+
+.carousel-control-next {
+  opacity: 0.8;
+
+}
+
+.product_price {
+  color:  var(--main-color);
+  font-size: 16px;
+  font-weight: 400;
+}

@@ -1,0 +1,133 @@
+/* Product Starts */
+.product {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+  }
+  /* Product Ends */
+  /* Image Starts */
+  img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .product-media {
+    position: relative;
+    display: block;
+    background-color: #d7d7d7;
+    margin-bottom: 0;
+    overflow: hidden;
+  }
+  
+  .product-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Image Ends */
+  /* Cart Starts */
+  .product-action {
+    position: absolute;
+    background-color: var(--light-color);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%);
+  }
+  .product-action a {
+    color: var(--dark-color);
+  }
+  
+  .product-action .cart {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .cart:hover {
+    background-color: var(--main-color);
+  }
+  
+  .cart:hover a {
+    color: var(--light-color);
+  }
+  
+  .product-action .wishlist {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .wishlist:hover {
+    background-color: var(--main-color);
+  }
+  
+  .wishlist:hover a {
+    color: var(--light-color);
+  }
+  
+  .product:hover .product-action,
+  .product:focus .product-action {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .product:hover {
+    box-shadow: 0px 0px 20px #b4b4b4;
+    transform: scale(1.02);
+  }
+  /* Cart Ends */
+  /* Price Starts */
+  .product-price {
+    color: var(--main-color);
+  }
+  /* Price Ends */
+  /* Color Starts */
+  .color {
+    width: 20px;
+    height: 20px;
+    margin: 0 3px 3px 3px;
+    border-radius: 50px;
+  }
+      /* Icon color */
+      .cart i {
+        color: black;
+      }
+    
+      /* Centering the icon */
+      .add-product-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      .Add-product-icon{
+          font-weight: 300;
+    line-height: 1.5;
+    letter-spacing: 0px;
+    text-transform: capitalize;
+    transition: all 0.3s ease-in-out;
+    color:black ;
+    
+      }
+      .add-product-button {
+      border-color: var(--grey-color);
+      border-width: 2px;
+      border-style: solid;
+      transition: all 0.4s;
+       /* Specify the border style */
+      
+  }
+  /* .add-product-word{
+      color:var(--grey-color) ;
+  } */
+  .add-product-button:hover a {
+      color: var(--light-color);
+  
+    }
+    .add-product-button:hover {   
+      border-style: none;
+  
+    }
+  /* Color Ends */
