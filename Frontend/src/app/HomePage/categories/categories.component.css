@@ -1,4 +1,7 @@
 .pink-arrow {
+
+  /* color: #e88eba; */
+
   color: #000;
 }
 
@@ -8,6 +11,9 @@
 
 .carousel-control-next {
   opacity: 1;
+
+}
+
 }
 .heading{
   font-weight: 500;
@@ -25,5 +31,6 @@
   border: 1px var(--main-color) solid;
   color: var(--main-color)
 }
+
 
 

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+
 import { HeaderComponent } from '../../core/header/header.component';
 import { NavbarComponent } from '../../core/navbar/navbar.component';
 import { CategoriesComponent } from '../categories/categories.component';
@@ -9,6 +11,7 @@ import { BlogsComponent } from '../blogs/blogs.component';
 import { ContactUsComponent } from '../contact-us/contact-us.component';
 import { FooterComponent } from '../../core/footer/footer.component';
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -17,11 +20,13 @@ import { FooterComponent } from '../../core/footer/footer.component';
     NavbarComponent,
     LandingComponent,
     CategoriesComponent,
+
     OfferSectionComponent,
     ProductsComponent,
     BlogsComponent,
     ContactUsComponent,
     FooterComponent
+
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
