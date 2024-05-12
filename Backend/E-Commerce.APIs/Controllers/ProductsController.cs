@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using E_Commerce.APIs.DTO;
+using E_Commerce.APIs.Helpers;
 using E_Commerce.Core.Entities;
 using E_Commerce.Core.Repositories.Contract;
 using E_Commerce.Core.Specifications;
 using E_Commerce.Core.Specifications.ProductSpecs;
+using E_Commerce.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -25,13 +27,13 @@ namespace E_Commerce.APIs.Controllers
             this.unit = unit;
             this.mapper = mapper;
         }
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
-        {
-            var spec = new ProductSpecifications(specParams);
-            var products = await unit.ProductRepo.GetAllSpecAsync(spec);
-            return Ok(mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
-        }
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
+        //{
+        //    var spec = new ProductSpecifications(specParams);
+        //    var products = await unit.ProductRepo.GetAllSpecAsync(spec);
+        //    return Ok(mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
+        //}
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
@@ -111,25 +113,40 @@ namespace E_Commerce.APIs.Controllers
             }
         }
 
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, ProductToReturnDto productDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateProduct(int id, ProductToUpdateDto productToUpdateDto)
         {
-            if (id <= 0)
-                return BadRequest(new { Message = "Invalid product ID", StatusCode = "400" });
-
-            var existingProduct = await unit.ProductRepo.GetAsync(id);
-
-            if (existingProduct == null)
+            var product = await unit.ProductRepo.GetAsync(id);
+            if (product == null)
+            {
                 return NotFound(new { Message = "Product not found", StatusCode = "404" });
+            }
 
-            mapper.Map(productDto, existingProduct);
-
-            var updatedProduct = await unit.ProductRepo.UpdateAsync(id, existingProduct);
-
+            mapper.Map(productToUpdateDto, product);
+            var updatedProduct = await unit.ProductRepo.UpdateAsync(id, product);
             var updatedDto = mapper.Map<Product, ProductToReturnDto>(updatedProduct);
-
             return Ok(updatedDto);
         }
+
+        //    [HttpPatch("{id}")]
+        //public async Task<IActionResult> UpdateProduct(int id, ProductToReturnDto productDto)
+        //{
+        //    if (id <= 0)
+        //        return BadRequest(new { Message = "Invalid product ID", StatusCode = "400" });
+
+        //    var existingProduct = await unit.ProductRepo.GetAsync(id);
+
+        //    if (existingProduct == null)
+        //        return NotFound(new { Message = "Product not found", StatusCode = "404" });
+
+        //    mapper.Map(productDto, existingProduct);
+
+        //    var updatedProduct = await unit.ProductRepo.UpdateAsync(id, existingProduct);
+
+        //    var updatedDto = mapper.Map<Product, ProductToReturnDto>(updatedProduct);
+
+        //    return Ok(updatedDto);
+        //}
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
@@ -145,6 +162,19 @@ namespace E_Commerce.APIs.Controllers
 
             return NoContent();
         }
+
+        #region Pagination
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductswithPagination([FromQuery] ProductWithPaginationSpecParams specParams)
+        {
+            var spec = new ProductWithPagination(specParams);
+            var products = await unit.ProductRepo.GetAllSpecAsync(spec);
+            var data = mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+            var countSpec = new ProductsWithFilterationForCountSpecifications(specParams);
+            var count = await unit.ProductRepo.GetCount(countSpec);
+            return Ok(new Pagination<ProductToReturnDto>(specParams.PageIndex, specParams.PageSize, count, data));
+        }
+        #endregion
 
     }
 }

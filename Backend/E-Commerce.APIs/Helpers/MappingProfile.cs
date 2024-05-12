@@ -23,6 +23,11 @@ namespace E_Commerce.APIs.Helpers
                     HexValue = c.hex_value,
                     ColourName = c.colour_name
                 })));
+
+            CreateMap<ProductToUpdateDto, Product>()
+       .ForMember(dest => dest.Category, opt => opt.Ignore()) // Assuming you don't want to map this
+       .ForMember(dest => dest.seller, opt => opt.Ignore()) // Assuming you don't want to map this
+       .ForMember(dest => dest.Colors, opt => opt.Ignore());
         }
 
 
