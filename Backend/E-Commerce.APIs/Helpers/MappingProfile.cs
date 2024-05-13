@@ -24,7 +24,7 @@ namespace E_Commerce.APIs.Helpers
                     ColourName = c.colour_name
                 }))) ;
 
-            CreateMap<CustomerCartDto, CustomerCartDto>();
+            CreateMap<CustomerCartDto,customerCart>();
             CreateMap<CartItemDto, CartItem>();
 
         }
