@@ -30,6 +30,7 @@ namespace E_Commerce.Repository.Data
         public DbSet<Seller> sellers { get; set; }
 
         public DbSet<WishList> wishlist { get; set; }
+        public DbSet<Brand> brands { get; set; }
 
 
 

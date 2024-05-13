@@ -8,8 +8,12 @@ namespace E_Commerce.Core.Entities
 {
     public class Product:BaseEntity
     {
-    
-        public string brand {  get; set; }
+
+        //public string brand {  get; set; }
+
+        public int BrandId { get; set; }//forignKey(Category)
+
+        public Brand? Brand { get; set; }//navigation prop
         public decimal price {  get; set; }
         public string description {  get; set; }
 

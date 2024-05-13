@@ -28,8 +28,11 @@ namespace E_Commerce.APIs.Helpers
        .ForMember(dest => dest.Category, opt => opt.Ignore()) // Assuming you don't want to map this
        .ForMember(dest => dest.seller, opt => opt.Ignore()) // Assuming you don't want to map this
        .ForMember(dest => dest.Colors, opt => opt.Ignore());
+
+
+        CreateMap<Category, CategoriesDto>()
+                .ForMember(d => d.name, o => o.MapFrom(S => S.name));
+
         }
-
-
     }
 }

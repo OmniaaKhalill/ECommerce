@@ -15,7 +15,7 @@ namespace E_Commerce.Core.Specifications.ProductSpecs
         }
         public ProductsWithFilterationForCountSpecifications(ProductSpecParams specParams)
             : base(p =>
-                (string.IsNullOrEmpty(specParams.brand) || p.brand == specParams.brand)
+                (!specParams.BrandId.HasValue || p.BrandId == specParams.BrandId.Value)
                 &&
                 (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
         {

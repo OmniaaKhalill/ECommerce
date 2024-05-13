@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using E_Commerce.APIs.Helpers;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using E_Commerce.Repository;
 
 namespace E_Commerce.APIs.Controllers
 {
@@ -68,5 +69,32 @@ namespace E_Commerce.APIs.Controllers
             return Ok(mapper.Map<List<Product>, List<ProductToReturnDto>>(productList));
         }
 
+        #region Categories
+        [HttpGet("categories")]
+        public async Task<ActionResult<IReadOnlyList<CategoriesDto>>> GetCategories()
+        {
+            var categories = await unitOfWork.CategoryRepo.GetAllAsync();
+            var categoryList = categories.ToList();
+            return Ok(mapper.Map<List<Category>, List<CategoriesDto>>(categoryList));
+        }
+        
+
+        [HttpGet("categories/{categoryId}/products")]
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductsByCategory(int categoryId)
+        {
+            var category = await unitOfWork.CategoryRepo.GetAsync(categoryId);
+
+            if (category == null)
+            {
+                return NotFound(new ApiResponse(404, "Category not found"));
+            }
+
+            var spec = new ProductSpecifications(categoryId);
+            var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
+
+            var productList = products.ToList();
+            return Ok(mapper.Map<List<Product>, List<ProductToReturnDto>>(productList));
+        }
+        #endregion
     }
 }

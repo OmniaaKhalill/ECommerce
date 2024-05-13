@@ -24,7 +24,7 @@ namespace E_Commerce.Core.Specifications
 
         public ProductSpecifications(ProductSpecParams specParams)
             : base(p =>
-                (string.IsNullOrEmpty(specParams.brand) || p.brand == specParams.brand)
+                (!specParams.BrandId.HasValue || p.BrandId == specParams.BrandId.Value)
                 &&
                 (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
         {
@@ -61,6 +61,7 @@ namespace E_Commerce.Core.Specifications
         private void AddingIncludes()
         {
             Includes.Add(p => p.Category);
+            Includes.Add(p => p.Brand);
             Includes.Add(p => p.seller);
             Includes.Add(p => p.Colors);
         
