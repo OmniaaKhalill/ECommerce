@@ -4,13 +4,13 @@ namespace E_Commerce.APIs.DTO
 {
     public class ProductToReturnDto
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Brand { get; set; }
-        public decimal Price { get; set; }
-        public string Description { get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string brand { get; set; }
+        public decimal price { get; set; }
+        public string description { get; set; }
 
-        public string ImageLink { get; set; }
+        public string image_link { get; set; }
 
         public int CategoryId { get; set; }
         public string? Category { get; set; }
@@ -22,7 +22,7 @@ namespace E_Commerce.APIs.DTO
 
 
         public string SellerId { get; set; }
-        public string? Seller { get; set; }
+        public string? seller { get; set; }
 
         public virtual ICollection<Review>? Reviews { get; set; }
 
@@ -32,6 +32,8 @@ namespace E_Commerce.APIs.DTO
         public List<Cart>? Carts { get; set; }
 
         public List<WishList>? WishLists { get; set; }
+
+
     }
 
 }
