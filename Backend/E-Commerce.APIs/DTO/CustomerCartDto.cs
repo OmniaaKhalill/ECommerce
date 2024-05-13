@@ -8,7 +8,8 @@ namespace E_Commerce.APIs.DTO
 
         [Required]
         public string Id { get; set; }
-        
+        public string? PaymentIntentId { get; set; }
+        public string? ClientSecret { get; set; }
         public List<CartItemDto> Items { get; set; }
 
 
