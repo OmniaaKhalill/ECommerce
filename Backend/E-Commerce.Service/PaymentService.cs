@@ -13,7 +13,7 @@ using Product = E_Commerce.Core.Entities.Product;
 
 namespace E_Commerce.Service
 {
-    public class PaymentService : Core.Services.Contract.IPaymentService
+    public class PaymentService : IPaymentService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICartRepositery _cartRepositery;
@@ -73,6 +73,13 @@ namespace E_Commerce.Service
             }
             await _cartRepositery.UpdateCartAsync(cart);
             return cart;
+
+        }
+        public async Task<Order> UpdatePaymentIntentToSuccededOrFailed(string paymentid,bool issucess)
+        {
+            //var spec =new orderwithpaymentintentidspecifications()
+            return new Order { };
+            //neeeed the ordeeeeer 
 
         }
     }
