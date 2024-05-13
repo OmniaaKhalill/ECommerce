@@ -5,8 +5,7 @@ import { ToolboxComponent } from '../toolbox/toolbox.component';
 import { ProductSectionComponent } from '../product-section/product-section.component';
 import { CategorySectionComponent } from '../category-section/category-section.component';
 import { BrandSectionComponent } from '../brand-section/brand-section.component';
-import { TagSectionComponent } from '../tag-section/tag-section.component';
-import { PriceSectionComponent } from '../price-section/price-section.component';
+
 
 @Component({
   selector: 'app-shop',
@@ -18,8 +17,6 @@ import { PriceSectionComponent } from '../price-section/price-section.component'
     ProductSectionComponent,
     CategorySectionComponent,
     BrandSectionComponent,
-    TagSectionComponent,
-    PriceSectionComponent
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
