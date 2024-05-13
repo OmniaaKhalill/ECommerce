@@ -15,9 +15,6 @@ namespace E_Commerce.APIs.DTO
         public int CategoryId { get; set; }
         public string? Category { get; set; }
 
-        //public List<string>? ColorNames { get; set; }
-        //public List<int>? ColorIds { get; set; }
-
         public List<ColorDto>? Colors { get; set; }
 
 
