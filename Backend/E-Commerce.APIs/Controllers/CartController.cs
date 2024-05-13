@@ -13,11 +13,12 @@ namespace E_Commerce.APIs.Controllers
     {
         private readonly ICartRepositery cartRepositery;
         IMapper _mapper;
-        public CartController(ICartRepositery cartRepo,IMapper mapper)
+        IUnitOfWork unit;
+        public CartController(ICartRepositery cartRepo,IMapper mapper, IUnitOfWork unit)
         {
             cartRepositery = cartRepo;
             _mapper = mapper;
-
+            this.unit = unit;
 
         }
         [HttpGet("{id}")]
@@ -50,8 +51,17 @@ namespace E_Commerce.APIs.Controllers
         [HttpPost("AddCartItem")]
         public async Task<ActionResult<customerCart>> AddCartItem(string id,CartItem item)
         {
-            var cart=cartRepositery.AddCartItem(id,item);
-            return Ok(cart);    
+            int productId = int.Parse(id);
+            if (unit.ProductRepo.GetAsync(productId)!=null)
+            {
+                var cart = cartRepositery.AddCartItem(id, item);
+                return Ok(cart);
+            }
+            else
+            {
+                return BadRequest("you cannot add product that doesnot exist");
+            }
+             
         }
 
 
