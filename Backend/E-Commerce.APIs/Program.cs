@@ -7,6 +7,7 @@ using E_Commerce.Repository;
 using E_Commerce.Repository.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using Talabat.APIs.Extensions;
 
 namespace E_Commerce.APIs
@@ -29,11 +30,17 @@ namespace E_Commerce.APIs
             builder.Services.AddDbContext<ProjectContext>(op => 
             op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
             ));
+            builder.Services.AddSingleton<IConnectionMultiplexer>((ServiceProvider) =>
+            {
+                var connection = builder.Configuration.GetConnectionString("Redis");
+                return ConnectionMultiplexer.Connect(connection);
+            });
 
+           
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            builder.Services.AddScoped<ICartRepositery,CartReposetory>();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddIdentity<AppUser, IdentityRole>
             (options =>

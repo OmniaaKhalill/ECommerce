@@ -4,7 +4,7 @@ using E_Commerce.Core.Entities;
 
 namespace E_Commerce.APIs.Helpers
 {
-    public class MappingProfile:Profile
+    public class MappingProfile : Profile
     {
 
         public MappingProfile()
@@ -22,9 +22,11 @@ namespace E_Commerce.APIs.Helpers
                     Id = c.Id,
                     HexValue = c.hex_value,
                     ColourName = c.colour_name
-                })));
+                }))) ;
+
+            CreateMap<CustomerCartDto, CustomerCartDto>();
+            CreateMap<CartItemDto, CartItem>();
+
         }
-
-
-    }
+    } 
 }

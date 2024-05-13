@@ -112,7 +112,7 @@ namespace E_Commerce.APIs.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, ProductToReturnDto productDto)
+        public async Task<IActionResult> UpdateProduct(int id, Product productDto)
         {
             if (id <= 0)
                 return BadRequest(new { Message = "Invalid product ID", StatusCode = "400" });
@@ -122,13 +122,11 @@ namespace E_Commerce.APIs.Controllers
             if (existingProduct == null)
                 return NotFound(new { Message = "Product not found", StatusCode = "404" });
 
-            mapper.Map(productDto, existingProduct);
+            var updatedProduct = await unit.ProductRepo.UpdateAsync(id, productDto);
 
-            var updatedProduct = await unit.ProductRepo.UpdateAsync(id, existingProduct);
+            //var updatedDto = mapper.Map<Product, ProductToReturnDto>(updatedProduct);
 
-            var updatedDto = mapper.Map<Product, ProductToReturnDto>(updatedProduct);
-
-            return Ok(updatedDto);
+            return Ok(updatedProduct);
         }
 
         [HttpDelete("{id}")]
