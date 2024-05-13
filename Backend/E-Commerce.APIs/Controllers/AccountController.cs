@@ -27,7 +27,7 @@ namespace E_Commerce.APIs.Controllers
 
         [HttpPost("Login")]
 
-        public  async Task<ActionResult<UserDto>>Login(LoginDto Model)
+        public  async Task<ActionResult<string>>Login(LoginDto Model)
         {
             var user=await _userManager.FindByEmailAsync(Model.Email);
             if (user is null)
@@ -42,38 +42,30 @@ namespace E_Commerce.APIs.Controllers
 
             var token = await _authService.CreatTokenAsync(user, _userManager);
 
-            return Ok(new UserDto() { 
-            DisplayName = user.DisplayName,
-            Email = Model.Email,
-            Token=token
-            });
+            return Ok(token);
         }
 
 
         [HttpPost("Register")]
-        public async Task<ActionResult<AppUser>> Register(RegisterDto Model)
+        public async Task<ActionResult<string>> Register(RegisterDto Model)
         {
             var user = new AppUser()
             {
                 DisplayName = Model.DisplayName,
                 Email = Model.Email,
-                UserName = Model.Email.Split("@")[0],
-                PhoneNumber = Model.PhoneNumber
+                UserName = Model.DisplayName
+
             };
             var result = await _userManager.CreateAsync(user, Model.Password);
             if (result.Succeeded is false)
             {
-                return BadRequest(400);
+                return BadRequest(440);
             }
 
             var token = await _authService.CreatTokenAsync(user, _userManager);
-            return Ok(new UserDto()
-            {
-                DisplayName = user.DisplayName,
-                Email = user.Email,
-                Token = token
+            return Ok(token);
 
-            }); ;
+           
         }
     }
 }

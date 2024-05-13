@@ -1,20 +1,21 @@
 .form-control{
     border-radius: 0%;
-    height: 5vh;
+    height: 4vh;
     background-color: var(--shadow);
-    margin-bottom: 3%;
+    margin-bottom: 5%;
 
 }
 
 .frm-input{
 
     width: 50%;
-    height: 10vh;
+    height: 7vh;
 }
 .btn-login{
+
     border-radius: 0%;
-    width: 70%;
-    height: 50%;
+    width: 100%;
+    height: 72%;
     color:var(--main-color);
     border-color:var(  --main-color) ;
 }
@@ -28,15 +29,7 @@
 
 
 
- .rmbr{
-     width: 100%;
-     height: 6.5vh;
-     display: flex;
-     flex-direction: row;
-   align-items: center;
-   justify-content: center;
 
- }
  
 label a{
     width: 40%;
@@ -52,3 +45,14 @@ color:rgba(176, 94, 0, 0.684);
 text-decoration: underline;
 height: 5vh;
  }
+.regs-field{
+ height: 8vh;
+
+}
+.footer-section{
+    margin-top: 0px;
+}
+.form-footer{
+    width: 57%;
+ 
+}

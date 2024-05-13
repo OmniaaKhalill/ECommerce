@@ -21,6 +21,8 @@ namespace E_Commerce.APIs
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            string MyAllowSpecificOrigins = "";
+
             // Add services to the container.
 
             builder.Services.AddControllers();
@@ -44,7 +46,22 @@ namespace E_Commerce.APIs
             builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
 
 
+
             builder.Services.AddApplicationServices();
+
+     builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyOrigin();
+
+                });
+
+            });
+
 
             var app = builder.Build();
 
@@ -89,6 +106,7 @@ namespace E_Commerce.APIs
                 app.UseSwaggerUI();
             }
 
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

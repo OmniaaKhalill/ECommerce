@@ -12,7 +12,8 @@
     <Folder Include="Services.Contract\" />
 
     <Folder Include="Repositories.Contract\" />
- AddModels
+  </ItemGroup>
+
 
 
   <ItemGroup>

@@ -18,11 +18,10 @@ namespace E_Commerce.Repository.Data.Config
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
 
-            builder
-                .HasOne(u => u.Seller)
-                .WithOne(s => s.AppUser)
-                .HasForeignKey<Seller>(s => s.UserId);
-
+            //builder
+            //.HasOne(u => u.Seller)
+            //.WithOne(s => s.AppUser)
+            //.HasForeignKey<Seller>(s => s.UserId);
 
 
         }
