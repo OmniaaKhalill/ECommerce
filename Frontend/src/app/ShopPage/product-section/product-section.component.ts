@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-product-section',
@@ -9,4 +10,10 @@ import { Component } from '@angular/core';
 })
 export class ProductSectionComponent {
 
+  constructor(public productService:ProductService) {
+
+  }
+  Load() {
+    this.productService.GetProducts();
+  }
 }

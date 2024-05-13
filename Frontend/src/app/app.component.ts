@@ -8,9 +8,9 @@ import { FooterComponent } from './core/footer/footer.component';
   selector: 'app-root',
   standalone: true,
   imports: [
+    RouterOutlet,
     HeaderComponent,
     NavbarComponent,
-    RouterOutlet,
     FooterComponent
   ],
   templateUrl: './app.component.html',

@@ -13,7 +13,15 @@ namespace E_Commerce.Core.Specifications
         //public ProductSpecifications(int id) : base(p => p.id == id)
         //{
         //    AddingIncludes();
-        //}       
+        //}
+        //
+
+
+        public ProductSpecifications() : base()
+        {
+            AddingIncludes();
+        }
+
         public ProductSpecifications(ProductSpecParams specParams)
             : base(p =>
                 (string.IsNullOrEmpty(specParams.brand) || p.brand == specParams.brand)

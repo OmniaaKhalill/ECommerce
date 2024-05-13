@@ -1,0 +1,49 @@
+
+
+
+.blogs a{
+    text-decoration: none;
+  font-weight: 500;
+  
+  color: var(--dark-color);
+ 
+
+}
+
+.blogs h5{
+    margin-top: 10px;
+    font-size: 16px;
+  text-transform: capitalize;
+  margin-bottom: 0;
+  padding: 10px 0 8px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+.blogs img{
+    width: 100%;
+}
+.heading {font-weight: 500;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+  letter-spacing: .5px;
+}
+.blogs p{
+    margin: 0 0 15px;
+    letter-spacing: .5px;
+  font-size: 13px;
+  color: var(--grey-color);
+  margin-bottom: 0;
+  margin-top: 6px;
+  
+}
+
+
+
+  .comtime .sep {
+    margin: 0 8px;
+  }  
+
+ 

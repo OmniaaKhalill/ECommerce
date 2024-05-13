@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './HomePage/home/home.component';
 import { ShopComponent } from './ShopPage/shop/shop.component';
-import { CategoriesPageComponent } from './CategoriesPage/categories-page/categories-page.component';
+// import { CategoriesPageComponent } from './CategoriesPage/category-page/category-page.component';
 
 export const routes: Routes = [
   // { path: "", redirectTo: "home", pathMatch: "full" },
