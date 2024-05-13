@@ -54,6 +54,8 @@ namespace E_Commerce.Core.Specifications
         {
             Includes.Add(p => p.Category);
             Includes.Add(p => p.seller);
+            Includes.Add(p => p.Colors);
+        
         }
     }
 }

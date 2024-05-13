@@ -15,9 +15,20 @@ namespace E_Commerce.APIs
     {
         public  static async Task Main(string[] args)
         {
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
 
             builder.Services.AddControllers();
             builder.Services.AddSwaggerServices();
@@ -76,6 +87,7 @@ namespace E_Commerce.APIs
 
                 }
             }
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseMiddleware<ExceptionMiddleware>();
           
