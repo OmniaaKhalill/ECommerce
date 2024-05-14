@@ -10,13 +10,8 @@ import { CategoryService } from '../../Services/category.service';
   styleUrl: './category-section.component.css'
 })
 export class CategorySectionComponent implements OnInit {
-
   categories: Category[] = [];
   constructor(public categoryService: CategoryService) {}
-  isBrandsObject(brands: any): boolean {
-    return typeof brands === 'object';
-  }
-
     ngOnInit() {
       this.categoryService.GetCategories().subscribe(data => {
         console.log(data);

@@ -79,7 +79,7 @@ namespace E_Commerce.APIs.Controllers
         }
         
 
-        [HttpGet("categories/{categoryId}/products")]
+        [HttpGet("categories/{categoryId}")]
         public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductsByCategory(int categoryId)
         {
             var category = await unitOfWork.CategoryRepo.GetAsync(categoryId);
@@ -90,6 +90,34 @@ namespace E_Commerce.APIs.Controllers
             }
 
             var spec = new ProductSpecifications(categoryId);
+            var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
+
+            var productList = products.ToList();
+            return Ok(mapper.Map<List<Product>, List<ProductToReturnDto>>(productList));
+        }
+        #endregion
+
+        #region Brands
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<BrandsDto>>> GetBrands()
+        {
+            var brands = await unitOfWork.BrandsRepo.GetAllAsync();
+            var brandList = brands.ToList();
+            return Ok(mapper.Map<List<Brands>, List<BrandsDto>>(brandList));
+        }
+        
+
+        [HttpGet("brands/{brandId}")]
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductsByBrand(int brandId)
+        {
+            var brand = await unitOfWork.BrandsRepo.GetAsync(brandId);
+
+            if (brand == null)
+            {
+                return NotFound(new ApiResponse(404, "Brand not found"));
+            }
+
+            var spec = new ProductSpecifications(brandId);
             var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
 
             var productList = products.ToList();

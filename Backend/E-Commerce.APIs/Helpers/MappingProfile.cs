@@ -33,6 +33,9 @@ namespace E_Commerce.APIs.Helpers
         CreateMap<Category, CategoriesDto>()
                 .ForMember(d => d.name, o => o.MapFrom(S => S.name));
 
+        CreateMap<Brands, BrandsDto>()
+                .ForMember(d => d.name, o => o.MapFrom(S => S.name));
+
         }
     }
 }
