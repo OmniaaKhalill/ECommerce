@@ -61,7 +61,7 @@ namespace E_Commerce.Core.Specifications
         private void AddingIncludes()
         {
             Includes.Add(p => p.Category);
-            Includes.Add(p => p.Brand);
+            Includes.Add(p => p.Brands);
             Includes.Add(p => p.seller);
             Includes.Add(p => p.Colors);
         
