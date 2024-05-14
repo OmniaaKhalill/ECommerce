@@ -113,20 +113,20 @@ namespace E_Commerce.APIs.Controllers
             }
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, ProductToUpdateDto productToUpdateDto)
-        {
-            var product = await unit.ProductRepo.GetAsync(id);
-            if (product == null)
-            {
-                return NotFound(new { Message = "Product not found", StatusCode = "404" });
-            }
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> UpdateProduct(int id, ProductToUpdateDto productToUpdateDto)
+        //{
+        //    var product = await unit.ProductRepo.GetAsync(id);
+        //    if (product == null)
+        //    {
+        //        return NotFound(new { Message = "Product not found", StatusCode = "404" });
+        //    }
 
-            mapper.Map(productToUpdateDto, product);
-            var updatedProduct = await unit.ProductRepo.UpdateAsync(id, product);
-            var updatedDto = mapper.Map<Product, ProductToReturnDto>(updatedProduct);
-            return Ok(updatedDto);
-        }
+        //    mapper.Map(productToUpdateDto, product);
+        //    var updatedProduct = await unit.ProductRepo.UpdateAsync(id, product);
+        //    var updatedDto = mapper.Map<Product, ProductToReturnDto>(updatedProduct);
+        //    return Ok(updatedDto);
+        //}
 
         //    [HttpPatch("{id}")]
         //public async Task<IActionResult> UpdateProduct(int id, ProductToReturnDto productDto)

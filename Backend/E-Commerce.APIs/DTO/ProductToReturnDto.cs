@@ -6,7 +6,8 @@ namespace E_Commerce.APIs.DTO
     {
         public int id { get; set; }
         public string name { get; set; }
-        public string brand { get; set; }
+        public int Brandsid { get; set; }
+        public string? Brands { get; set; }
         public decimal price { get; set; }
         public string description { get; set; }
 

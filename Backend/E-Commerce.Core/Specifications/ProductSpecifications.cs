@@ -24,7 +24,7 @@ namespace E_Commerce.Core.Specifications
 
         public ProductSpecifications(ProductSpecParams specParams)
             : base(p =>
-                (!specParams.BrandId.HasValue || p.BrandId == specParams.BrandId.Value)
+                (!specParams.Brandsid.HasValue || p.Brandsid == specParams.Brandsid.Value)
                 &&
                 (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
         {

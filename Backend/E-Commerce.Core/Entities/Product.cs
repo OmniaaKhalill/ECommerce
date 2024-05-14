@@ -11,7 +11,7 @@ namespace E_Commerce.Core.Entities
 
         //public string brand {  get; set; }
 
-        public int BrandId { get; set; }//forignKey(Category)
+        public int Brandsid { get; set; }//forignKey(Category)
         public Brands? Brands { get; set; }//navigation prop
         public decimal price {  get; set; }
         public string description {  get; set; }

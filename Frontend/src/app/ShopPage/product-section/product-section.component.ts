@@ -15,6 +15,9 @@ export class ProductSectionComponent implements OnInit {
 
   products: Product[] = [];
   constructor(public productService: ProductService) {}
+  isBrandsObject(brands: any): boolean {
+    return typeof brands === 'object';
+  }
 
     ngOnInit() {
       this.productService.GetProducts().subscribe(data => {
