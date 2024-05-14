@@ -11,8 +11,6 @@ import { FooterComponent } from './core/footer/footer.component';
   standalone: true,
   imports: [
     RouterOutlet,
-
-
     HeaderComponent,
     NavbarComponent,
     PageHeaderComponent,

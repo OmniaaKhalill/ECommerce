@@ -2,8 +2,10 @@
 
 namespace E_Commerce.APIs.DTO
 {
-    public class ProductToCreateDto
+    public class ProductSellerDto
     {
+      
+ 
 
         public int id { get; set; }
         public string name { get; set; }
@@ -12,16 +14,8 @@ namespace E_Commerce.APIs.DTO
         public string description { get; set; }
 
         public string image_link { get; set; }
-
-        public int? CategoryId { get; set; }
-
         public string Category { get; set; }
         public List<Coulor>? Colors { get; set; }
-
-        public List<Tag>? tag_list { get; set; }
-
-        public string SellerId { get; set; }
-        public string seller { get; set; }
         public int NumOfProductInStock { get; set; }
     }
 }

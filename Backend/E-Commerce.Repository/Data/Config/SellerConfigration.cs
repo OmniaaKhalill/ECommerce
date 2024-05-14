@@ -15,13 +15,13 @@ namespace E_Commerce.Repository.Data.Config
     public class SellerConfigration
     {
 
-        public void Configure(EntityTypeBuilder<AppUser> builder)
+        public void Configure(EntityTypeBuilder<Seller> builder)
         {
 
-            //builder
-            //.HasOne(u => u.Seller)
-            //.WithOne(s => s.AppUser)
-            //.HasForeignKey<Seller>(s => s.UserId);
+        builder
+       .HasOne(s => s.AppUser)
+       .WithOne(u => u.Seller)
+       .HasForeignKey<Seller>(s => s.UserId);
 
 
         }

@@ -16,7 +16,9 @@ export class RegisterFormComponent implements OnInit {
   userRegisterFrom: FormGroup;
 
   constructor(private fb: FormBuilder,public accountRepo:AccountService,public router :Router) {
+
     this.userRegisterFrom = fb.group({
+
       displayName:['', [Validators.required]],
       email: ['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]],
       password: ['', [Validators.required, Validators.minLength(8)]],
@@ -35,6 +37,7 @@ export class RegisterFormComponent implements OnInit {
 
  
     onSubmit() {
+      
       console.log(this.userRegisterFrom.get('email')?.value,this.userRegisterFrom.get('password')?.value)   ;
 
       this.accountRepo.register(this.userRegisterFrom.get('displayName')?.value,this.userRegisterFrom.get('email')?.value, this.userRegisterFrom.get('password')?.value)

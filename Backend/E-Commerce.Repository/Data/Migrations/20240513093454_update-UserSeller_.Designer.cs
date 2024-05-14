@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Repository.Data.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20240511022350_updateSeller_User")]
-    partial class updateSeller_User
+    [Migration("20240513093454_update-UserSeller_")]
+    partial class updateUserSeller_
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,7 +154,7 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SellerId")
+                    b.Property<int?>("SellerId")
                         .HasColumnType("int");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -175,7 +175,8 @@ namespace E_Commerce.Repository.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.HasIndex("SellerId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SellerId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -394,6 +395,9 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.Property<string>("IDImgUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAccepted")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("PageId")
                         .HasColumnType("int");
@@ -652,9 +656,7 @@ namespace E_Commerce.Repository.Data.Migrations
                 {
                     b.HasOne("E_Commerce.Core.Entities.Seller", "Seller")
                         .WithOne("AppUser")
-                        .HasForeignKey("E_Commerce.Core.Entities.Identity.AppUser", "SellerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("E_Commerce.Core.Entities.Identity.AppUser", "SellerId");
 
                     b.Navigation("Seller");
                 });

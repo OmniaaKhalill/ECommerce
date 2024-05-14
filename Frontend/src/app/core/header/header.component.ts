@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnChanges, SimpleChanges } from '@angular/core';
 import { AccountService } from '../../services/account.service';
 import { Router, RouterLink } from '@angular/router';
 
@@ -9,12 +9,15 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent  {
 
 constructor( public accountSercice:AccountService,public router :Router) {
   
+
   
 }
 
+
+ 
 
 }

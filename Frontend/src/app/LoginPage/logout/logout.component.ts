@@ -20,7 +20,7 @@ export class LogoutComponent implements OnInit {
     
       this.accountSercice.logout()
       this.router.navigateByUrl("/login/Signin")
+      
   }
   
-
 }

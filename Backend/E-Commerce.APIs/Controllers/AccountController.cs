@@ -15,13 +15,14 @@ namespace E_Commerce.APIs.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IAuthService _authService;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-
-        public AccountController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager, IAuthService authServic)
+        public AccountController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager, IAuthService authServic , RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
            _signInManager = signInManager;
             _authService=authServic;
+            _roleManager = roleManager;
         }
 
 
@@ -57,6 +58,20 @@ namespace E_Commerce.APIs.Controllers
 
             };
             var result = await _userManager.CreateAsync(user, Model.Password);
+
+
+
+            if (!await _roleManager.RoleExistsAsync("user"))
+            {
+                var role = new IdentityRole();
+                role.Name = "seller";
+                _roleManager.CreateAsync(role);
+
+            }
+
+           
+            await  _userManager.AddToRoleAsync(user, "user");
+
             if (result.Succeeded is false)
             {
                 return BadRequest(440);

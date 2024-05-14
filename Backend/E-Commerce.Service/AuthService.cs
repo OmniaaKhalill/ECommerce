@@ -2,6 +2,7 @@
 using E_Commerce.Core.Services.Contract;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Http.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -21,36 +22,45 @@ namespace E_Commerce.Service
         public AuthService(IConfiguration configuration)
         {
             _configuration = configuration;
-    
-
         }
+
         public async Task<string> CreatTokenAsync(AppUser user, UserManager<AppUser> userManager)
         {
         
             var authClaims = new List<Claim>()
             {
-                new Claim (ClaimTypes.GivenName,user.DisplayName),
-                new Claim (ClaimTypes.Email,user.Email)
+                new Claim ("Name",user.DisplayName),
+                new Claim ("Email",user.Email),
+                new Claim ("UserId",user.Id),
 
             };
 
             var userRols = await userManager.GetRolesAsync(user);
 
-            foreach (var role in userRols)
-            {
-                authClaims.Add(new Claim (ClaimTypes.Role, role));
+            if (userRols.Count > 1)
+            { 
+                authClaims.Add(new Claim("IsSeller", "true"));
             }
+
+            else
+            {
+                authClaims.Add(new Claim("IsSeller", "false"));
+            }
+
+            authClaims.Add(new Claim("Role", "user"));
+
+
             var authKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
 
             var token = new JwtSecurityToken(
+
                 audience: _configuration["JWT:ValidAudiance"],
                 issuer: _configuration["JWT:ValidIssuer"],
                 expires: DateTime.UtcNow.AddDays(1),
                 claims:authClaims,
+
                 signingCredentials: new SigningCredentials(authKey,SecurityAlgorithms.HmacSha256Signature)
                 );
-
-
 
 
             return new JwtSecurityTokenHandler().WriteToken(token);
