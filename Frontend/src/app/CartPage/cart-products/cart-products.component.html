@@ -1,0 +1,48 @@
+
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col" class="text-center" >Price</th>
+            <th scope="col"  class="text-center">Quantity</th>
+            <th scope="col"  class="text-center">Total</th>
+            <th scope="col"  class="text-center">Remove</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr >
+            <th scope="row"><img src="../../../assets/img/Shop/Blushers/open-uri20171224-4-11ndp61.jpeg" class="w-25 d-inline" alt="product"><p class="d-inline">Beige knitted elastic runner shoes</p></th>
+            <td class="align-middle">${{ProductPrice}}</td>
+            <td class="align-middle">
+                
+                <div class="product-details-action">
+                    <div class="details-action-col">
+                        <div class="product-details-quantity">
+                            <div class="input-group">
+                                <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default btn-number" (click)="decrement()">
+                                    <i class="fa fa-minus"></i>
+                                  </button>
+                                </span>
+                                <input type="text" id="qty" class="form-control input-number" value="1" min="1" max="10" step="1" data-decimals="0" >
+                                <span class="input-group-btn">
+                                  <button type="button" class="btn btn-default btn-number" (click)="increment()">
+                                    <i class="fa fa-plus"></i>
+                                  </button>
+                                </span>
+                              </div>
+                              
+                        </div>
+                    </div>
+                    </div>
+
+            </td>
+            <td class="align-middle">${{Total}}</td>
+            <td class="align-middle"><i class="fa-solid fa-trash"></i></td>
+          </tr>
+         
+          
+        </tbody>
+      </table>
+      <a href="#" class="btn btn-outline-dark"><span>UPDATE CART <i class="fa-solid fa-arrows-rotate"></i></span><i class="icon-refresh"></i></a>

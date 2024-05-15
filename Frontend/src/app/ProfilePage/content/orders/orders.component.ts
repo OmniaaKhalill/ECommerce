@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PageHeaderComponent } from '../../../ShopPage/page-header/page-header.component';
 
 @Component({
   selector: 'app-orders',
@@ -8,5 +9,4 @@ import { Component } from '@angular/core';
   styleUrl: './orders.component.css'
 })
 export class OrdersComponent {
-
 }
