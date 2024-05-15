@@ -10,7 +10,8 @@ namespace E_Commerce.Core.Entities
     {
     
         public int Id { get; set; }
-        public int Quentity {  get; set; }
+        public int Quantity {  get; set; }
+        public decimal price { get; set; }
 
     
     
