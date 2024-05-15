@@ -20,6 +20,7 @@ namespace E_Commerce.Core.Entities
         public int? PageId { get; set; }
         public Page? Page {  get; set; }
 
+
         [ForeignKey("AppUser")]
         public string UserId { get; set; }
         public AppUser AppUser { get; set; }

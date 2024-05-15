@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Core.Entities
 {
-    public class Tag:BaseEntity
+    public class CartItem
     {
-        public List<Product> Products { get; set; }
+    
+        public int Id { get; set; }
+        public int Quantity {  get; set; }
+        public decimal price { get; set; }
+
+    
+    
+    
     }
 }

@@ -2,15 +2,14 @@
 using E_Commerce.APIs.Controllers;
 using E_Commerce.APIs.Helpers;
 using E_Commerce.Core.Entities.Identity;
-
 using E_Commerce.Core.Repositories.Contract;
-
 using E_Commerce.Core.Services.Contract;
 using E_Commerce.Repository;
 using E_Commerce.Repository.Data;
 using E_Commerce.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using Talabat.APIs.Extensions;
 
 namespace E_Commerce.APIs
@@ -35,8 +34,21 @@ namespace E_Commerce.APIs
             builder.Services.AddDbContext<ProjectContext>(op => 
             op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
             ));
+            builder.Services.AddSingleton<IConnectionMultiplexer>((ServiceProvider) =>
+            {
+                var connection = builder.Configuration.GetConnectionString("Redis");
+                return ConnectionMultiplexer.Connect(connection);
+            });
+
+           
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+
+            builder.Services.AddScoped<IColorRepository, ColorRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<ICartRepositery,CartReposetory>();
+
             builder.Services.AddScoped<ISellerRepository, SellerRepository>();
+
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
@@ -46,7 +58,20 @@ namespace E_Commerce.APIs
 
             } ).AddEntityFrameworkStores<ProjectContext>();
 
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
+
             builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
+
 
 
 
@@ -108,6 +133,8 @@ namespace E_Commerce.APIs
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowAllOrigins");
+
 
             app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();

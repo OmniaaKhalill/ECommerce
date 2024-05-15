@@ -14,25 +14,22 @@ namespace E_Commerce.APIs.Controllers
     [ApiController]
     public class ProductsController : BaseApiController
     {
-        private readonly IGenericRepository<Product> productRepo;
-        private readonly IGenericRepository<Seller> sellerRepo;
+        private readonly IUnitOfWork unit;
         private readonly IMapper mapper;
 
         public ProductsController(
-            IGenericRepository<Product> productRepo,
-            IGenericRepository<Seller> sellerRepo,
+            IUnitOfWork unit,
             IMapper mapper
             )
         {
-            this.productRepo = productRepo;
-            this.sellerRepo = sellerRepo;
+            this.unit = unit;
             this.mapper = mapper;
         }
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
         {
             var spec = new ProductSpecifications(specParams);
-            var products = await productRepo.GetAllSpecAsync(spec);
+            var products = await unit.ProductRepo.GetAllSpecAsync(spec);
             return Ok(mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products));
         }
 
@@ -40,7 +37,7 @@ namespace E_Commerce.APIs.Controllers
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductSpecifications(id);
-            var product = await productRepo.GetSpecAsync(spec);
+            var product = await unit.ProductRepo.GetSpecAsync(spec);
             if (product == null)
             {
                 return NotFound(new ApiResponse(404));
@@ -48,10 +45,53 @@ namespace E_Commerce.APIs.Controllers
             return Ok(mapper.Map<Product, ProductToReturnDto>(product));
         }
 
+        //[HttpPost]
+        //public async Task<ActionResult<ProductToReturnDto>> CreateProduct([FromBody] Product product, int sellerId, [FromQuery] List<string> colorNames)
+        //{
+        //    var seller = await unit.SellerRepo.GetAsync(sellerId);
+        //    if (seller == null)
+        //    {
+        //        return NotFound(new { Message = "Seller not found", StatusCode = 404 });
+        //    }
+        //    else
+        //    {
+        //        product.SellerId = sellerId;
+        //        product.seller = seller;
+
+        //        // Retrieve or create color entities based on the provided color names
+        //        var colors = new List<Coulor>();
+        //        foreach (var colorName in colorNames)
+        //        {
+        //            var existingColor = await unit.ColotRepo.GetByNameAsync(colorName);
+        //            if (existingColor != null)
+        //            {
+        //                colors.Add(existingColor);
+        //            }
+        //            else
+        //            {
+        //                var newColor = new Coulor { colour_name = colorName };
+        //                await unit.ColotRepo.AddAsync(newColor);
+        //                colors.Add(newColor);
+        //            }
+        //        }
+
+        //        product.Colors = colors;
+
+        //        var addedProduct = await unit.ProductRepo.AddAsync(product);
+
+        //        seller.ProductList ??= new List<Product>();
+        //        seller.ProductList.Add(addedProduct);
+        //        await unit.SellerRepo.UpdateAsync(sellerId, seller);
+
+        //        var productToReturnDto = mapper.Map<Product, ProductToReturnDto>(addedProduct);
+        //        return Ok(productToReturnDto);
+        //    }
+        //}
+
         [HttpPost]
         public async Task<ActionResult<ProductToReturnDto>> CreateProduct(Product product, int sellerId)
         {
-            var seller = await sellerRepo.GetAsync(sellerId);
+            var seller = await unit.SellerRepo.GetAsync(sellerId);
             if (seller == null)
             {
                 return NotFound(new { Message = "Seller not found", StatusCode = 404 });
@@ -60,49 +100,46 @@ namespace E_Commerce.APIs.Controllers
             {
                 product.SellerId = sellerId;
                 product.seller = seller;
-                var addedProduct = await productRepo.AddAsync(product);
+                var addedProduct = await unit.ProductRepo.AddAsync(product);
 
                 seller.ProductList ??= new List<Product>();
                 seller.ProductList.Add(addedProduct);
-                await sellerRepo.UpdateAsync(sellerId, seller);
+                await unit.SellerRepo.UpdateAsync(sellerId, seller);
 
                 var productToReturnDto = mapper.Map<Product, ProductToReturnDto>(addedProduct);
                 return Ok(productToReturnDto);
             }
         }
 
-
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, ProductToReturnDto productDto)
+        public async Task<IActionResult> UpdateProduct(int id, Product productDto)
         {
             if (id <= 0)
                 return BadRequest(new { Message = "Invalid product ID", StatusCode = "400" });
-
-            var existingProduct = await productRepo.GetAsync(id);
+            productDto.id = id;
+            var existingProduct = await unit.ProductRepo.GetAsync(id);
 
             if (existingProduct == null)
                 return NotFound(new { Message = "Product not found", StatusCode = "404" });
 
-            mapper.Map(productDto, existingProduct);
+            var updatedProduct = await unit.ProductRepo.UpdateAsync(id, productDto);
 
-            var updatedProduct = await productRepo.UpdateAsync(id, existingProduct);
+            //var updatedDto = mapper.Map<Product, ProductToReturnDto>(updatedProduct);
 
-            var updatedDto = mapper.Map<Product, ProductToReturnDto>(updatedProduct);
-
-            return Ok(updatedDto);
+            return Ok(updatedProduct);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var spec = new ProductSpecifications(id);
-            var product = await productRepo.GetSpecAsync(spec);
+            var product = await unit.ProductRepo.GetSpecAsync(spec);
             if (product == null)
             {
                 return NotFound();
             }
 
-            await productRepo.DeleteAsync(id);
+            await unit.ProductRepo.DeleteAsync(id);
 
             return NoContent();
         }
