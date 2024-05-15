@@ -6,7 +6,7 @@ export class Product {
       public categoryId: number,
       public category: string,
       public price: number,
-      public colors: { colour_name: string, hex_value: string }[],
+      public colors: { id: number, hexValue: string, colourName: string }[],
       public numOfProductInStock: number,
       public image_link:string,
       public description:string,

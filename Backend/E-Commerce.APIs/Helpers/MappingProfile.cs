@@ -15,6 +15,7 @@ namespace E_Commerce.APIs.Helpers
 
             CreateMap<Product, ProductToReturnDto>()
                 .ForMember(p => p.Category, o => o.MapFrom(s => s.Category.name))
+                .ForMember(p => p.Brands, o => o.MapFrom(s => s.Brands.name))
                 .ForMember(p => p.seller, o => o.MapFrom(s => s.seller.name))
                 .ForMember(p => p.image_link, o => o.MapFrom<ProductPictureUrlResolver>())
                 .ForMember(p => p.Colors, o => o.MapFrom(s => s.Colors.Select(c => new ColorDto

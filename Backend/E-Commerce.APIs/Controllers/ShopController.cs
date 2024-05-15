@@ -29,16 +29,16 @@ namespace E_Commerce.APIs.Controllers
         }
 
         #region Get All Products
-        //[HttpGet]
-        //public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
-        //{
-        //    var spec = new ProductSpecifications(specParams);
-        //    var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
-        //    var data = mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
-        //    var countSpec = new ProductsWithFilterationForCountSpecifications(specParams);
-        //    var count = await unitOfWork.ProductRepo.GetCount(countSpec);
-        //    return Ok(new Pagination<ProductToReturnDto>(specParams.PageIndex, specParams.PageSize, count, data));
-        //}
+        [HttpGet]
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
+        {
+            var spec = new ProductSpecifications(specParams);
+            var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
+            var data = mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
+            var countSpec = new ProductsWithFilterationForCountSpecifications(specParams);
+            var count = await unitOfWork.ProductRepo.GetCount(countSpec);
+            return Ok(new Pagination<ProductToReturnDto>(specParams.PageIndex, specParams.PageSize, count, data));
+        }
         #endregion
 
         #region Get Product By Id
@@ -60,12 +60,12 @@ namespace E_Commerce.APIs.Controllers
         }
         #endregion
 
-        [HttpGet]
+        [HttpGet("products")]
         public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts()
         {
             var spec = new ProductSpecifications();
             var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
-            var productList = products.ToList(); // Convert IReadOnlyList to List
+            var productList = products.ToList();
             return Ok(mapper.Map<List<Product>, List<ProductToReturnDto>>(productList));
         }
 

@@ -42,8 +42,7 @@
               ${{item.price}}
             </div>
             <div class="colour_section d-flex flex-wrap">
-              <div class="color" *ngFor="let color of item.colors" [style.background-color]="color.hex_value">
-                {{ color.colour_name }}
+              <div class="color" *ngFor="let color of item.colors" [style.background]="color.hexValue">
               </div>
             </div>
           </div>
