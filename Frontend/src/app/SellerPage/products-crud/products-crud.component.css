@@ -21,8 +21,9 @@
   
   .product-image {
     display: block;
-    width: 100%;
-    height: auto;
+    width: 100%; /* Set the width to fill the container */
+    height: 100%; /* Set the height to fill the container */
+    object-fit: contain; /* Ensure the image covers the entire container */
   }
   
   /* Image Ends */
@@ -131,3 +132,23 @@
   
     }
   /* Color Ends */
+  .has-text-centered {
+    text-align: center;
+}
+
+/* Ensure that the pagination controls are not affected by hover styles */
+.pagination-controls a {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.pagination-controls a:hover {
+    text-decoration: underline;
+}
+
+/* Ensure the active page is styled correctly */
+.pagination-controls .active {
+    font-weight: bold;
+    text-decoration: underline;
+}

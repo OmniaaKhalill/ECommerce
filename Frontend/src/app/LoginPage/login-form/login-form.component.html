@@ -1,0 +1,30 @@
+<form action="#" [formGroup]="userloginFrom" (submit)="onSubmit()">
+
+
+    <div >
+        <label for="singin-email-2" class="mb-2"> email address *</label>
+        <input type="text" class="form-control" formControlName="email" id="singin-email-2" name="singin-email" required="">
+    </div>
+
+    <div >
+        <label for="singin-password-2" class="mb-2">Password *</label>
+        <input type="password" class="form-control" formControlName="password" id="singin-password-2" name="singin-password" required="">
+    </div>
+
+    <div class="form-footer d-flex flex-row mt-5">
+        <div class="frm-input">
+        <button type="submit" class="btn btn-login">
+            <span>LOG IN</span>
+            <i class="icon-long-arrow-right"></i>
+        </button>
+    </div>
+    <div class="frm-input d-flex flex-row  rmbr">
+        <div class="custom-control custom-checkbox mx-3  rmbr-me">
+            <div class="error-message err-txt" *ngIf="userloginFrom.get('email')?.errors?.['required'] && userloginFrom.get('email')?.touched"> 
+                Email is required.
+              </div>
+        </div><!-- End .custom-checkbox -->
+  
+    </div><!-- End .form-footer -->
+</div>
+</form>
