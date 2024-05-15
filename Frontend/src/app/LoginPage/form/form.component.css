@@ -1,0 +1,36 @@
+.container{
+
+    height: 85%;
+    width: 80%;
+    background-color:white;
+}
+.login-tab{
+    align-items: center;
+    width: 50%;
+    height: 6vh;
+    background-color: white;
+    border-bottom: 1.5px solid var(  --shadow);
+    
+}
+
+.active-link{
+
+    border-bottom: 3px solid var(  --main-color);;
+}
+
+.login-txt{
+    height: 100%;
+    width: 100%;
+    color: var( --main-color);
+    text-align: center;
+    font-size: 1.6rem;
+    text-decoration:none ;
+}
+
+.login-form{
+    height: 80%;
+    width: 100%;
+    margin-top: 4%;
+
+}
+
