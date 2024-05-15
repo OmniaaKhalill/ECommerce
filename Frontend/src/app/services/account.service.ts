@@ -7,11 +7,9 @@ import * as jwtDecode from 'jwt-decode'
 })
 export class AccountService {
 
-  isAuthenticated =false;
+  isAuthenticated =false; 
+
   claims:{Name:string, Email:string, IsSeller:string , UserId:string }|undefined
-
-
-
  
   private baseUrl="https://localhost:7191/api/Account"
 
