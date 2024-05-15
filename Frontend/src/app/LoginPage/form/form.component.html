@@ -1,0 +1,16 @@
+<div class="container ">
+<div class="d-flex flex-row justify-content-evenly">
+    <div class="login-tab d-flex  justify-content-evenly">
+        <a class="login-txt" [routerLink]="['/login','Signin']" routerLinkActive="active-link" >Sign in </a>
+    </div>
+    <div class="login-tab d-flex justify-content-evenly ">
+        <a class="login-txt" [routerLink]="['/login','Register']" routerLinkActive="active-link"> Register</a>
+    </div>
+</div>
+
+<div class="login-form">
+<router-outlet></router-outlet>
+
+
+
+</div>

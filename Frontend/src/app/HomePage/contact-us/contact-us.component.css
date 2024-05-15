@@ -1,0 +1,45 @@
+
+
+
+input,
+textarea {
+    border-radius: 0 !important;
+}
+
+#contact label {
+    font-size: .8125rem;
+    color: var(--dark-color);
+    font-weight: 200;
+    margin-top: 1.25rem;
+    margin-bottom: 0.7rem;
+}
+
+
+#contact h2{
+    font-weight: 400;
+    margin-top: 10px;
+}
+.btn4 {
+    letter-spacing: -0.04em;
+    margin-top: 1.5625rem;
+    padding: 0 1.875rem;
+    
+    line-height: 3.125rem;
+    border-radius: .25rem;
+
+    color:var(--main-color);
+    transition: all .4s ease;
+    border: .0625rem solid var(--light-color);;
+  
+    border: .0625rem solid var(--main-color);
+    background-color: var(--light-color);
+
+    transition: .5s all;
+}
+
+.btn4:hover {
+    background-color:var(--main-color);
+    color: var(--light-color);
+  
+}
+
