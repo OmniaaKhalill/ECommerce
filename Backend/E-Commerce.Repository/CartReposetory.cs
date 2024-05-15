@@ -3,7 +3,7 @@ using E_Commerce.Core.Repositories.Contract;
 using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;  
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -83,7 +83,7 @@ namespace E_Commerce.Repository
             // Update the quantity if item is found
             if (itemToUpdate != null)
             {
-                itemToUpdate.Quentity = cartItem.Quentity;
+                itemToUpdate.Quantity = cartItem.Quantity;
                 return await UpdateCartAsync(cart);
             }
 

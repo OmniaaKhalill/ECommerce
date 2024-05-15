@@ -46,6 +46,7 @@ namespace E_Commerce.APIs
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICartRepositery,CartReposetory>();
+            builder.Services.AddScoped<IWishlistRepository,WishlistRepository>();
 
             builder.Services.AddScoped<ISellerRepository, SellerRepository>();
 

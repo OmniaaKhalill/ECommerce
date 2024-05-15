@@ -20,7 +20,8 @@ namespace E_Commerce.APIs.Helpers
             CreateMap<CustomerCartDto,customerCart>();
             CreateMap<CartItemDto, CartItem>();
 
-
+            CreateMap<CustomerWishlistDto, customerWishlist>();
+            CreateMap<WishlistItemDto, WishlistItem>();
 
 
             CreateMap<Product, ProductSellerDto>().ForMember(p => p.Category, o => o.MapFrom(s => s.Category.name));
