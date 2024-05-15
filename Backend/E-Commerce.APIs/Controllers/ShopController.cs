@@ -30,7 +30,7 @@ namespace E_Commerce.APIs.Controllers
 
         #region Get All Products
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts([FromQuery] ProductSpecParams specParams)
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetAll([FromQuery] ProductSpecParams specParams)
         {
             var spec = new ProductSpecifications(specParams);
             var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
