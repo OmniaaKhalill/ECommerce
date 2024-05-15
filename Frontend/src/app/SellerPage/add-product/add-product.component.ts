@@ -104,35 +104,38 @@ constructor(
     }
   }
   
-  Add()
-  {
-    this.newproduct.colors=[];
+  Add() {
+    this.newproduct.colors = [];
   
-    for(let i = 0; i < this.categories.length; i++) {
-      if(this.categories[i].name === this.categoryName) {
-          this.newproduct.categoryId = this.categories[i].id;
-          console.log(this.newproduct.categoryId);
-          console.log(this.categories[i].id);
-          break; 
+    for (let i = 0; i < this.categories.length; i++) {
+      if (this.categories[i].name === this.categoryName) {
+        this.newproduct.categoryId = this.categories[i].id;
+        console.log(this.newproduct.categoryId);
+        console.log(this.categories[i].id);
+        break;
       }
-  }
-    for (let i = 0; i < this.numOfColors; i++) 
-      {
-      // Create a new color object
+    }
+  
+    for (let i = 0; i < this.numOfColors; i++) {
       const color = {
-        hex_value: this.colorNameInputs[i], // Assign the name
-        colour_name: this.hexval[i] // Assign the hex value
+        hex_value: this.colorNameInputs[i],
+        colour_name: this.hexval[i]
       };
-      // Push the color object into the Colors array
       this.newproduct.colors.push(color);
-      const sellerId=1;
-   this.sub= this.productService.Add(this.newproduct,sellerId).subscribe(
-      data=>{
+    }
+  
+    const sellerId = 1;
+    this.sub = this.productService.Add(this.newproduct, sellerId).subscribe({
+      next: (data) => {
         console.log(data);
         this.router.navigateByUrl("/Product");
+      },
+      error: (error) => {
+        console.log(error);
       }
-    );   }
+    });
   }
+  
   UploadImage(e:Event){
     console.log("hello fron func")
     console.log("categories"+this.categories[0]);
