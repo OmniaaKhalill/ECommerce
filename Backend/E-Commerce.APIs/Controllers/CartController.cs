@@ -48,21 +48,7 @@ namespace E_Commerce.APIs.Controllers
         {
             await cartRepositery.deleteCartAsync(id);
         }
-        [HttpPost("AddCartItem")]
-        public async Task<ActionResult<customerCart>> AddCartItem(string id,CartItem item)
-        {
-            int productId = int.Parse(id);
-            if (unit.ProductRepo.GetAsync(productId)!=null)
-            {
-                var cart = cartRepositery.AddCartItem(id, item);
-                return Ok(cart);
-            }
-            else
-            {
-                return BadRequest("you cannot add product that doesnot exist");
-            }
-             
-        }
+        
 
 
 

@@ -116,7 +116,7 @@ namespace E_Commerce.APIs.Controllers
         {
             if (id <= 0)
                 return BadRequest(new { Message = "Invalid product ID", StatusCode = "400" });
-
+            productDto.id = id;
             var existingProduct = await unit.ProductRepo.GetAsync(id);
 
             if (existingProduct == null)

@@ -35,7 +35,7 @@ namespace E_Commerce.Repository
 
         public async Task<customerCart?> UpdateCartAsync(customerCart cart)
         {
-           var createdOrUpdated= await _db.StringSetAsync(cart.Id, JsonSerializer.Serialize<customerCart>(cart), TimeSpan.FromDays(30));
+            var createdOrUpdated= await _db.StringSetAsync(cart.Id, JsonSerializer.Serialize<customerCart>(cart), TimeSpan.FromDays(30));
             if(!createdOrUpdated)
                 return null;
             return await getCartAsync(cart.Id);
@@ -51,12 +51,66 @@ namespace E_Commerce.Repository
                 await AddCartItem(cartId, item);
 
             }
+            foreach(var Item in cart.Items)
+            {
+                if (Item.Id == item.Id)
+                {
+                   await UpdateCartItemAsync(cartId, item);
+                }
+            }
             cart.Items.Add(item);
 
             return await UpdateCartAsync(cart);
             
 
 
+
+        }
+
+        public async Task<customerCart?> UpdateCartItemAsync(string cartId, CartItem cartItem)
+        {
+            var cart = await getCartAsync(cartId);
+
+            // Exit early if cart is null
+            if (cart == null)
+            {
+                return null;
+            }
+
+            // Find the item in the cart
+            var itemToUpdate = cart.Items.FirstOrDefault(item => item.Id == cartItem.Id);
+
+            // Update the quantity if item is found
+            if (itemToUpdate != null)
+            {
+                itemToUpdate.Quentity = cartItem.Quentity;
+                return await UpdateCartAsync(cart);
+            }
+
+            // Return null if item is not found
+            return null;
+        }
+
+        public async Task<customerCart?> DeleteCartItemAsync(string cartId, CartItem cartItem)
+        {
+            var cart = await getCartAsync(cartId);
+
+            // Exit early if cart is null
+            if (cart == null)
+            {
+                return null;
+            }
+            foreach(var item in cart.Items)
+            {
+                if (item.Id == cartItem.Id)
+                {
+                    cart.Items.Remove(item);
+                    return await UpdateCartAsync(cart);
+
+
+                }
+            }
+            return null;
 
         }
     }
