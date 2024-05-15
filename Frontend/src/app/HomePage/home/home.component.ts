@@ -7,7 +7,7 @@ import { LandingComponent } from '../landing/landing.component';
 import { ProductsComponent } from '../products/products.component';
 import { BlogsComponent } from '../blogs/blogs.component';
 import { ContactUsComponent } from '../contact-us/contact-us.component';
-
+import { FooterComponent } from '../../core/footer/footer.component';  // Assuming this is the correct path to FooterComponent
 
 @Component({
   selector: 'app-home',
@@ -15,7 +15,6 @@ import { ContactUsComponent } from '../contact-us/contact-us.component';
   imports: [
     LandingComponent,
     CategoriesComponent,
-
     OfferSectionComponent,
     ProductsComponent,
     BlogsComponent,
@@ -23,7 +22,7 @@ import { ContactUsComponent } from '../contact-us/contact-us.component';
     FooterComponent
   ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
 

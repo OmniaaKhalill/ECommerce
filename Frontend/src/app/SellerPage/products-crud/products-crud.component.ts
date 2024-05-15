@@ -8,6 +8,7 @@ import { ProductRead } from '../../models/product-read';
 import { SellerProductsService } from '../../Services/seller-products.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CommonModule } from '@angular/common';
+import { AccountService } from '../../Services/account.service';
 
 @Component({
   selector: 'app-products-crud',
@@ -23,7 +24,7 @@ countPerPage=6;
 totalCount=1;
 CurrentPageNum=1;
 items:ProductRead[]=[]
-constructor(private sellerProduct:SellerProductsService){
+constructor(private sellerProduct:SellerProductsService,public accountService:AccountService){
 
 }
 ngOnInit(): void {
@@ -31,6 +32,8 @@ ngOnInit(): void {
 }
 getAllProducts( CurrentPageNum:number)
 {
+  var user=this.accountService.claims;
+  console.log(user);
   this.sellerProduct.getSellerProducts("d27583dc-4c5c-45b6-9f3b-e759ac95b13d",CurrentPageNum,this.countPerPage).subscribe(
     data=>{
 
