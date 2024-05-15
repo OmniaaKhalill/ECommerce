@@ -12,13 +12,20 @@ namespace E_Commerce.Core.Entities
     {
    
         public String IDImgUrl {  get; set; }
-        public bool IsAccepted {  get; set; }
+    
         public List<Product>? ProductList {  get; set; }//navigation
 
         [ForeignKey("Page")]
 
         public int? PageId { get; set; }
         public Page? Page {  get; set; }
+
+
+        [ForeignKey("AppUser")]
+        public string UserId { get; set; }
+        public AppUser AppUser { get; set; }
+
+
 
     }
 }

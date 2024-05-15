@@ -1,0 +1,48 @@
+<form action="#" [formGroup]="userRegisterFrom" (submit)="onSubmit()">
+
+    <div class="d-flex flex-column">
+    <div class=" regs-field">
+        <label for="register-email-2" class="mb-1">User Name</label>
+        <input type="email" class="form-control " formControlName="displayName" id="register-name-2" name="register-email" required="">
+    </div>
+    
+    <div class=" regs-field">
+        <label for="register-email-2" class="mb-1">Your email address *</label>
+        <input type="email" class="form-control" formControlName="email" id="register-email-2" name="register-email" required="">
+    </div><!-- End .form-group -->
+
+    <div class=" regs-field">
+        <label for="register-password-2" class="mb-1 ">Password *</label>
+        <input type="password" class="form-control" formControlName="password" id="register-password-2" name="register-password" required="">
+    </div><!-- End .form-group -->
+
+    <div class=" regs-field">
+        <label for="register-confirm-password-2" class="mb-1"> Confirm Password *</label>
+        <input type="password" class="form-control" formControlName="ConfirmPassword" id="register-confirm-password-2" name="register-confirm-password" required="">
+    
+    </div><!-- End .form-group -->
+</div >
+<div class="d-flex flex-row  footer-section ">
+    <div class=" form-footer d-flex flex-row mt-2">
+        <div class="frm-input">
+            <button type="submit" class="btn btn-login"  type="submit" [disabled]="userRegisterFrom.invalid">
+                <span>SIGN UP</span>
+                <i class="icon-long-arrow-right"></i>
+            </button>
+        </div>
+    </div>    
+  <div class="  d-flex flex-column">
+        <div class="error-message err-txt" *ngIf="userRegisterFrom.get('email')?.errors?.['required'] && userRegisterFrom.get('email')?.touched"> 
+            Email is required.
+          </div>
+
+        <div class="error-message err-txt" *ngIf="userRegisterFrom?.errors?.['PasswordNoMatch']&& userRegisterFrom?.touched"> 
+            Passwords do not match.
+        </div>
+
+    </div>
+   <!-- End .form-footer -->
+
+    </div>
+</form>
+

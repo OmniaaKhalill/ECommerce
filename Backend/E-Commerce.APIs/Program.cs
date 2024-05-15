@@ -3,8 +3,10 @@ using E_Commerce.APIs.Controllers;
 using E_Commerce.APIs.Helpers;
 using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Core.Repositories.Contract;
+using E_Commerce.Core.Services.Contract;
 using E_Commerce.Repository;
 using E_Commerce.Repository.Data;
+using E_Commerce.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
@@ -17,6 +19,8 @@ namespace E_Commerce.APIs
         public  static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            string MyAllowSpecificOrigins = "";
 
             // Add services to the container.
 
@@ -38,15 +42,22 @@ namespace E_Commerce.APIs
 
            
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICartRepositery,CartReposetory>();
+
+            builder.Services.AddScoped<ISellerRepository, SellerRepository>();
+
+
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             builder.Services.AddIdentity<AppUser, IdentityRole>
             (options =>
             {
 
             } ).AddEntityFrameworkStores<ProjectContext>();
+
 
             builder.Services.AddCors(options =>
             {
@@ -59,7 +70,26 @@ namespace E_Commerce.APIs
                     });
             });
 
+            builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
+
+
+
+
             builder.Services.AddApplicationServices();
+
+     builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyOrigin();
+
+                });
+
+            });
+
 
             var app = builder.Build();
 
@@ -106,6 +136,7 @@ namespace E_Commerce.APIs
             app.UseCors("AllowAllOrigins");
 
 
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
@@ -117,12 +148,6 @@ namespace E_Commerce.APIs
         }
 
 
-        public static async Task AddUser(UserManager<AppUser> userManager)
-        {
-            
-
-           
-
-        }
+      
     }
 }

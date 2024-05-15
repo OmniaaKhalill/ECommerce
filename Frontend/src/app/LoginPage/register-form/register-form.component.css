@@ -1,0 +1,58 @@
+.form-control{
+    border-radius: 0%;
+    height: 4vh;
+    background-color: var(--shadow);
+    margin-bottom: 5%;
+
+}
+
+.frm-input{
+
+    width: 50%;
+    height: 7vh;
+}
+.btn-login{
+
+    border-radius: 0%;
+    width: 100%;
+    height: 72%;
+    color:var(--main-color);
+    border-color:var(  --main-color) ;
+}
+
+.btn-login:hover{
+
+    color:white;
+    background-color: var(--main-color);
+
+}
+
+
+
+
+ 
+label a{
+    width: 40%;
+color: black;
+     text-align: center;
+ }
+
+
+ .err-txt{
+
+color:rgba(176, 94, 0, 0.684);
+
+text-decoration: underline;
+height: 5vh;
+ }
+.regs-field{
+ height: 8vh;
+
+}
+.footer-section{
+    margin-top: 0px;
+}
+.form-footer{
+    width: 57%;
+ 
+}

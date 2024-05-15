@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Core.Repositories.Contract
 {
-    public interface IGenericRepositoryUser<T> where T : IdentityUser
+    public interface IGenericRepositoryUser<T> where T : IdentityUser  
     {
 
         Task<T?> UpdateAsync(int id, T entityToUpdate);
