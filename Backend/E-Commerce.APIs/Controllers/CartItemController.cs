@@ -35,7 +35,7 @@ namespace E_Commerce.APIs.Controllers
 
         }
         [HttpDelete("{cartId}")]
-        public async Task<ActionResult<customerCart>> DeleteCartItem(string cartId, CartItem item)
+        public async Task<ActionResult<customerCart>> DeleteCartItem(string cartId, [FromBody] CartItem item)
         {
             var cart = await cartRepositery.DeleteCartItemAsync(cartId, item);
             if (cart != null)
