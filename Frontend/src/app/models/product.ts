@@ -1,5 +1,6 @@
 export class Product {
     constructor(
+        public id:number,
         public name: string,
         public brand: string,
         public categoryId: number,
@@ -8,7 +9,8 @@ export class Product {
         public numOfProductInStock: number,
         public image_link:string,
         public description:string,
-        public sellerId:number
+        public sellerId:number,
+        public reviews:{content:string , rating:number ,datePosted:Date,userId:string ,displayName:string}[]
         
     ) {}
 }
