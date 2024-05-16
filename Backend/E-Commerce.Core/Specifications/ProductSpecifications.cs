@@ -58,6 +58,22 @@ namespace E_Commerce.Core.Specifications
             AddingIncludes();
         }
 
+        public ProductSpecifications(int categoryId, bool includeRelated = true) :  base(p => p.CategoryId == categoryId)
+        {
+            if (includeRelated)
+            {
+                AddingIncludes();
+            }
+        }
+
+        public ProductSpecifications(int brandsId, bool includeRelated = true, bool includeBrand = true) :  base(p => p.Brandsid == brandsId)
+        {
+            if (includeRelated | includeBrand)
+            {
+                AddingIncludes();
+            }
+        }
+
         private void AddingIncludes()
         {
             Includes.Add(p => p.Category);
