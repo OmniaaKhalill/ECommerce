@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Core.Entities
 {
-    public class Category:BaseEntity
+    public class Brands : BaseEntity
     {
-
         public string name { get; set; }
-
         public List<Product> Products { get; set; }
     }
 }

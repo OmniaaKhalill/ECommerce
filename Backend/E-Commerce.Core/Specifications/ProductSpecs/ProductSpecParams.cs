@@ -33,9 +33,10 @@ namespace E_Commerce.Core.Specifications.ProductSpecs
         }
 
         public string? Sort { get; set; }
-        public string? brand { get; set; }
+        public int? Brandsid { get; set; }
         public int? CategoryId { get; set; }
     }
+
 
 
 

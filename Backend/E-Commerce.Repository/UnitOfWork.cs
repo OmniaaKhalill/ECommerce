@@ -18,14 +18,16 @@ namespace E_Commerce.Repository
 
         public IReviewRepository<Review> ReviewRepo { get; set; }
         public IColorRepository ColotRepo { get; set; }
+        public IGenericRepository<Brands> BrandsRepo { get; set; }
 
+       
         public UnitOfWork(
             IGenericRepository<Product> productRepo,
             IGenericRepository<Category> categoryRepo,
             IGenericRepository<Seller> sellerRepo,
             IGenericRepositoryUser<AppUser> userRepo,
             IReviewRepository<Review> reviewRepo,
-
+             IGenericRepository<Brands> brandsRepo,
             IColorRepository colorRepo
             )
         {
@@ -35,6 +37,7 @@ namespace E_Commerce.Repository
             ColotRepo = colorRepo;
             UserRepo = userRepo;
             ReviewRepo = reviewRepo;
+            BrandsRepo = brandsRepo;
         }
     }
 }

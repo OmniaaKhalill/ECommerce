@@ -17,6 +17,8 @@ namespace E_Commerce.Core.Repositories.Contract
 
         IGenericRepositoryUser<AppUser> UserRepo { get; set; }
 
+        IGenericRepository<Brands> BrandsRepo { get; set; }
+
         IColorRepository ColotRepo { get; set; }
     }
 }

@@ -51,28 +51,29 @@ namespace E_Commerce.APIs.Helpers
                 .ForMember(d => d.PageName, o => o.MapFrom(S => S.name));
 
             CreateMap<Product, ProductToReturnDto>()
+                 .ForMember(p => p.Brands, o => o.MapFrom(s => s.Brands.name))
                     .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.name))
                        .ForMember(dest => dest.seller, opt => opt.MapFrom(src => src.seller.name))
-                       .ForMember(dest => dest.Colors, opt => opt.MapFrom(src => src.Colors.Select(c => new ColorDto { Id = c.Id, HexValue = c.hex_value, ColourName=c.colour_name })));
-                .ForMember(p => p.Category, o => o.MapFrom(s => s.Category.name))
-                .ForMember(p => p.seller, o => o.MapFrom(s => s.seller.name))
-                .ForMember(p => p.image_link, o => o.MapFrom<ProductPictureUrlResolver>())
-                .ForMember(p=>p.Reviews, o => o.MapFrom(s=>s.Reviews.Select(c=> new ReviewsDto
-                {
-                        Content = c.Content,
-                        Rating = c.Rating,
-                        DatePosted = c.DatePosted,
-                        UserId = c.UserId,
+                       .ForMember(dest => dest.Colors, opt => opt.MapFrom(src => src.Colors.Select(c => new ColorDto { Id = c.Id, hex_value = c.hex_value, colour_name=c.colour_name })))
+                        .ForMember(p => p.Category, o => o.MapFrom(s => s.Category.name))
+                        .ForMember(p => p.seller, o => o.MapFrom(s => s.seller.name))
+                        .ForMember(p => p.image_link, o => o.MapFrom<ProductPictureUrlResolver>())
+                        .ForMember(p=>p.Reviews, o => o.MapFrom(s=>s.Reviews.Select(c=> new ReviewsDto
+                        {
+                                Content = c.Content,
+                                Rating = c.Rating,
+                                DatePosted = c.DatePosted,
+                                UserId = c.UserId,
 
 
 
-                })))
-                .ForMember(p => p.Colors, o => o.MapFrom(s => s.Colors.Select(c => new ColorDto
-                {
-                    Id = c.Id,
-                    hex_value = c.hex_value,
-                    colour_name = c.colour_name
-                })));
+                        })))
+                        .ForMember(p => p.Colors, o => o.MapFrom(s => s.Colors.Select(c => new ColorDto
+                        {
+                            Id = c.Id,
+                            hex_value = c.hex_value,
+                            colour_name = c.colour_name
+                        })));
            
 
             CreateMap<ProductToUpdateDto, Product>()
@@ -99,13 +100,18 @@ namespace E_Commerce.APIs.Helpers
              .ForMember(d => d.PasswordHash, o => o.MapFrom(S => S.Password))
             .ForMember(d => d.Address, o => o.MapFrom(S => S.Address))
             ;
-        }
+        
 
                       
                    
             CreateMap<CustomerCartDto,customerCart>();
             CreateMap<CartItemDto, CartItem>();
+            CreateMap<Category, CategoriesDto>()
+                .ForMember(d => d.name, o => o.MapFrom(S => S.name))
+                .ForMember(d => d.id, o => o.MapFrom(S => S.id));
 
+            CreateMap<Brands, BrandsDto>()
+                    .ForMember(d => d.name, o => o.MapFrom(S => S.name));
 
 
 

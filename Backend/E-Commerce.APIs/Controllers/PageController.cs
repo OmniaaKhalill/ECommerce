@@ -102,7 +102,7 @@ namespace E_Commerce.APIs.Controllers
             {
                 page.SellerId = sellerId;
 
-                page.Seller = seller;
+                page.seller = seller;
 
                 var addedPage = await _pageRepo.AddAsync(page);
                 seller.PageId = addedPage.id; 

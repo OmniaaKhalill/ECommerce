@@ -16,10 +16,10 @@ namespace E_Commerce.Core.Entities
         Delivered,
         Cancelled
     }
-    public class Order
+    public class Order :BaseEntity
     {
 
-        public int Id { get; set; }
+      
         public DateTime orderDate{ get; set; }
 
         public int cartId {  get; set; }

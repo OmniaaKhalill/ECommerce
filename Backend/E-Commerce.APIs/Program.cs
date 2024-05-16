@@ -22,7 +22,7 @@ namespace E_Commerce.APIs
             var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
             var builder = WebApplication.CreateBuilder(args);
 
-            string MyAllowSpecificOrigins = "";
+           
 
             // Add services to the container.
             builder.Services.AddCors(options =>

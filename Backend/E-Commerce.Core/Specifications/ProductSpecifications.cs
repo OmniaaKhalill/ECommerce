@@ -10,13 +10,13 @@ namespace E_Commerce.Core.Specifications
 {
     public class ProductSpecifications : BaseSpecifications<Product>
     {
-     
+
         public ProductSpecifications(ProductSpecParams specParams)
-            : base(p =>
-                (string.IsNullOrEmpty(specParams.brand) || p.brand == specParams.brand)
-                &&
-                (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
-        {
+          : base(p =>
+              (!specParams.Brandsid.HasValue || p.Brandsid == specParams.Brandsid.Value)
+              &&
+              (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
+        { 
             AddingIncludes();
 
             if (!string.IsNullOrEmpty(specParams.Sort))
@@ -59,11 +59,19 @@ namespace E_Commerce.Core.Specifications
                 AddingIncludes();
             }
         }
+        public ProductSpecifications(int brandsId, bool includeRelated = true, bool includeBrand = true) : base(p => p.Brandsid == brandsId)
+        {
+            if (includeRelated | includeBrand)
+            {
+                AddingIncludes();
+            }
+        }
 
         private void AddingIncludes()
         {
             Includes.Add(p => p.Category);
             Includes.Add(p => p.seller);
+            Includes.Add(p => p.Brands);
             Includes.Add(p => p.Colors);
 
             Includes.Add(p => p.Reviews);

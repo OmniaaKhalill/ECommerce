@@ -5,6 +5,9 @@ namespace E_Commerce.APIs.DTO
     public class ProductToReturnDto
     {
         public int id { get; set; }
+
+        public int Brandsid { get; set; }
+        public string? Brands { get; set; }
         public string name { get; set; }
         public string brand { get; set; }
         public decimal price { get; set; }
@@ -18,7 +21,7 @@ namespace E_Commerce.APIs.DTO
         public List<ColorDto>? Colors { get; set; }
 
 
-        public string SellerId { get; set; }
+        public int SellerId { get; set; }
         public string? seller { get; set; }
 
 
