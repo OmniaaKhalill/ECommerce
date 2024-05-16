@@ -1,3 +1,4 @@
+import { Category } from './../../models/category';
 import { Component } from '@angular/core';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
 import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
@@ -5,7 +6,9 @@ import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../Services/category.service';
-import { Category } from '../../models/category';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-category-page',
@@ -37,11 +40,20 @@ export class CategoryPageComponent {
     { src: '../../../assets/img/Category/col2/5.png', title: 'Eyebrow Pencil' }
   ];
   categories: Category[] = [];
+  product: Product[] = [];
+  // category = new Category(2, "Blusher");
+  // category: Category;
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private activatedRoute: ActivatedRoute,) { }
+
   ngOnInit(): void {
     this.categoryService.GetCategories().subscribe(data => {
       this.categories = data;
     });
+    // this.categoryService.GetProductsByCategory(this.category.id).subscribe(data =>{
+    //   console.log(data);
+    //   this.product = data;
+    // });
+
   }
 }

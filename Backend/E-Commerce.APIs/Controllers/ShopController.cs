@@ -78,40 +78,6 @@ namespace E_Commerce.APIs.Controllers
             return Ok(mapper.Map<List<Category>, List<CategoriesDto>>(categoryList));
         }
 
-
-        //[HttpGet("categories/{categoryId}")]
-        //public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductsByCategory(int categoryId)
-        //{
-        //    var category = await unitOfWork.CategoryRepo.GetAsync(categoryId);
-
-        //    if (category == null)
-        //    {
-        //        return NotFound(new ApiResponse(404, "Category not found"));
-        //    }
-
-        //    var spec = new ProductSpecifications(categoryId);
-        //    var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
-
-        //    var productList = products.ToList();
-        //    return Ok(mapper.Map<List<Product>, List<ProductToReturnDto>>(productList));
-        //}
-
-        //[HttpGet("categories/{categoryId}/products")]
-        //public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductsByCategory(int categoryId)
-        //{
-        //    var category = await unitOfWork.CategoryRepo.GetAsync(categoryId);
-
-        //    if (category == null)
-        //    {
-        //        return NotFound(new ApiResponse(404, "Category not found"));
-        //    }
-
-        //    var spec = new ProductSpecifications(categoryId);
-        //    var products = await unitOfWork.ProductRepo.GetAllSpecAsync(spec);
-
-        //    var productList = products.ToList();
-        //    return Ok(mapper.Map<List<Product>, List<ProductToReturnDto>>(productList));
-        //}
         #endregion
         [HttpGet("categories/{categoryId}")]
         public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductsByCategory(int categoryId, bool includeRelated = true)
