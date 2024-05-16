@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Brands } from '../../models/brands';
+import { BrandService } from '../../services/brand.service';
+
 
 @Component({
   selector: 'app-brand-section',
@@ -7,6 +10,13 @@ import { Component } from '@angular/core';
   templateUrl: './brand-section.component.html',
   styleUrl: './brand-section.component.css'
 })
-export class BrandSectionComponent {
-
+export class BrandSectionComponent implements OnInit {
+  brand: Brands[] = [];
+  constructor(public brandService: BrandService) {}
+    ngOnInit() {
+      this.brandService.GetBrands().subscribe(data => {
+        console.log(data);
+        this.brand = data;
+      });
+    }
 }

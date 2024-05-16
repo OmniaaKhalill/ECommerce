@@ -14,7 +14,6 @@ img {
 .product-media {
   position: relative;
   display: block;
-  background-color: #d7d7d7;
   margin-bottom: 0;
   overflow: hidden;
 }
@@ -40,6 +39,9 @@ img {
   transform: translateY(100%);
 }
 .product-action a {
+  color: var(--dark-color);
+}
+a {
   color: var(--dark-color);
 }
 

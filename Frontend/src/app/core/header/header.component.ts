@@ -8,7 +8,7 @@ import { AccountService } from '../../services/account.service';
   standalone: true,
   imports: [RouterLink],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+styleUrl: './header.component.css'
 })
 export class HeaderComponent  {
 

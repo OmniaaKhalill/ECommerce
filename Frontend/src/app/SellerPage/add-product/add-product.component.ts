@@ -1,16 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule,Validators,FormArray } from '@angular/forms';
-import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
-import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
+
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import{ImegesService} from '../../services/imeges.service'
 import { ColorPickerModule } from 'ngx-color-picker';
-import { CategoryService } from '../../services/category.service';
+
 import { Category } from '../../models/category';
+import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
+import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
+import { CategoryService } from '../../services/category.service';
+
+
 
 
 @Component({
@@ -35,12 +39,12 @@ export class AddProductComponent implements OnDestroy,OnInit
   categoryName:string="blach";
   
 
-  newproduct:Product=new Product(0,"","",0,0,[],0,"","",1,[]);
+  newproduct:any;
 constructor(
   private productService: ProductService,
   public router:Router ,
   private imageServece:ImegesService,
-  public CategoryService:CategoryService
+  public categoryService:CategoryService
 ) {}
   ngOnInit(): void 
   {
@@ -53,7 +57,7 @@ constructor(
   }
   getAllProducts()
   {
-    this.CategoryService.GetAll().subscribe(
+    this.categoryService.GetAll().subscribe(
       (data: Category[]) =>
       {
         console.log(data);

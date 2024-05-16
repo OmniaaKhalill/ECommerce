@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './HomePage/home/home.component';
 
-import { ShopComponent } from './ShopPage/shop/shop.component';
 import { ProductsCrudComponent } from './SellerPage/products-crud/products-crud.component';
 import { AddProductComponent } from './SellerPage/add-product/add-product.component';
 import { TabsComponent } from './ProfilePage/tabs/tabs.component';
@@ -22,6 +21,9 @@ import { LoginFormComponent } from './LoginPage/login-form/login-form.component'
 import { CanLoginGuard } from './guard/can-login.guard';
 import { LogoutComponent } from './LoginPage/logout/logout.component';
 import { ProductsComponent } from './HomePage/products/products.component';
+import { ShopComponent } from './ShopPage/shop/shop.component';
+import { CategoryPageComponent } from './CategoriesPage/category-page/category-page.component';
+import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
 
 
 export const routes: Routes = [
@@ -63,4 +65,11 @@ export const routes: Routes = [
     { path: 'description/:id', component: DescriptionComponent },
     
 ]
-}]
+},
+{ path: "shop", component: ShopComponent },
+  { path: "", redirectTo: "category", pathMatch: "full" },
+  { path: "category", component: CategoryPageComponent },
+  { path: "products-category/:categoryId", component: ProductsPageComponent },
+
+
+]
