@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './HomePage/home/home.component';
+
 import { ShopComponent } from './ShopPage/shop/shop.component';
 import { ProductsCrudComponent } from './SellerPage/products-crud/products-crud.component';
 import { AddProductComponent } from './SellerPage/add-product/add-product.component';
@@ -14,11 +15,14 @@ import { EditProductComponent } from './SellerPage/edit-product/edit-product.com
 import { SingleProductComponent } from './SingleProductPage/single-product/single-product.component';
 import { DescriptionComponent } from './SingleProductPage/description/description.component';
 import { ReviewsComponent } from './SingleProductPage/reviews/reviews.component';
+
 import { LoginComponent } from './LoginPage/login/login.component';
 import { RegisterFormComponent } from './LoginPage/register-form/register-form.component';
 import { LoginFormComponent } from './LoginPage/login-form/login-form.component';
 import { CanLoginGuard } from './guard/can-login.guard';
 import { LogoutComponent } from './LoginPage/logout/logout.component';
+import { ProductsComponent } from './HomePage/products/products.component';
+
 
 export const routes: Routes = [
   
@@ -56,8 +60,7 @@ export const routes: Routes = [
 ]
 }]
   {path:"Cart" , component:CartComponent},
-  {path:"WishList" , component:WishListProductsComponent}
-
-];
-
-
+  {path:"WishList" , component:WishListProductsComponent},
+     { path: "logout", component: LogoutComponent},
+  { path: "product", component: ProductsComponent}
+]

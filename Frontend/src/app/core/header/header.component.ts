@@ -11,11 +11,14 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderComponent  {
 
-constructor( public accountSercice:AccountService,public router :Router) {
+constructor( public router :Router,public accountSercice:AccountService) {
   
 
   
 }
+
+
+
 
 
  

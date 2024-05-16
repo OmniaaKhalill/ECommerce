@@ -33,7 +33,6 @@ export class LoginFormComponent implements OnInit {
 
 
   onSubmit() {
-   console.log(this.userloginFrom.get('email')?.value,this.userloginFrom.get('password')?.value)
     
     this.acountRepo.login(this.userloginFrom.get('email')?.value, this.userloginFrom.get('password')?.value).then((success) => {
       if (success) {
