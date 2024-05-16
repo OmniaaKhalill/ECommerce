@@ -7,7 +7,7 @@ export const routes: Routes = [
   // { path: "", redirectTo: "home", pathMatch: "full" },
   // { path: "home", component: HomeComponent },
   // { path: "", redirectTo: "shop", pathMatch: "full" },
-  // { path: "shop", component: ShopComponent },
+  { path: "shop", component: ShopComponent },
   { path: "", redirectTo: "category", pathMatch: "full" },
   { path: "category", component: CategoryPageComponent },
 ];

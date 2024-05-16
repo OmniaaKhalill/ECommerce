@@ -4,6 +4,8 @@ import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.compon
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CategoryService } from '../../Services/category.service';
+import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-category-page',
@@ -34,4 +36,12 @@ export class CategoryPageComponent {
     { src: '../../../assets/img/Category/col1/2.png', title: 'Nail Polish' },
     { src: '../../../assets/img/Category/col2/5.png', title: 'Eyebrow Pencil' }
   ];
+  categories: Category[] = [];
+
+  constructor(private categoryService: CategoryService) { }
+  ngOnInit(): void {
+    this.categoryService.GetCategories().subscribe(data => {
+      this.categories = data;
+    });
+  }
 }

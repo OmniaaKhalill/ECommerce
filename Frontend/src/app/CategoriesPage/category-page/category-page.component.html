@@ -5,34 +5,38 @@
     <div class="container">
       <div class="row" style="padding-top: 20px;">
         <div class="col-lg-6">
-          <div *ngFor="let banner of bannersOne" class="banner banner-cat banner-badge position-relative d-flex justify-content-center align-items-center">
-            <a href="Single Product Page" class="overflow-hidden">
-              <img [src]="banner.src" alt="Banner">
-              <div class="img-layer position-absolute"></div>
-            </a>
-            <a href="Shop To Products Like this Category" class="banner-title py-4 px-5 position-absolute text-center z-2">
-              <span>{{ banner.title }}</span>
-            </a>
-            <a href="Shop To Products Like this Category" class="banner-span py-4 px-5 position-absolute text-center z-2">
-              <span>Shop Now</span>
-            </a>
+          <div *ngFor="let item of bannersOne; let i = index;">
+            <div class="banner banner-cat banner-badge position-relative d-flex justify-content-center align-items-center">
+              <a href="Single Product Page" class="overflow-hidden">
+                <img [src]="item.src" alt="Banner">
+                <div class="img-layer position-absolute"></div>
+              </a>
+              <a href="Shop To Products Like this Category" class="banner-title py-4 px-5 position-absolute text-center z-2">
+                <span>{{categories[i]?.name}}</span>
+              </a>
+              <a [routerLink]="['/shop']" class="banner-span py-4 px-5 position-absolute text-center z-2">
+                <span>Shop Now</span>
+              </a>
+            </div>
           </div>
         </div>
 
         <div class="col-lg-6">
-          <div *ngFor="let banner of bannersTwo" class="banner banner-cat banner-badge position-relative d-flex justify-content-center align-items-center">
-            <a href="Single Product Page" class="overflow-hidden">
-              <img [src]="banner.src" alt="Banner">
-              <div class="img-layer position-absolute"></div>
-            </a>
-            <a href="Shop To Products Like this Category" class="banner-title py-4 px-5 position-absolute text-center z-2">
-              <span>{{ banner.title }}</span>
-            </a>
-            <a href="Shop To Products Like this Category" class="banner-span py-4 px-5 position-absolute text-center z-2">
-              <span>Shop Now</span>
-            </a>
-          </div>
 
+          <div *ngFor="let item of bannersTwo; let i = index;">
+            <div class="banner banner-cat banner-badge position-relative d-flex justify-content-center align-items-center">
+              <a href="Single Product Page" class="overflow-hidden">
+                <img [src]="item.src" alt="Banner">
+                <div class="img-layer position-absolute"></div>
+              </a>
+              <a href="Shop To Products Like this Category" class="banner-title py-4 px-5 position-absolute text-center z-2">
+                <span>{{categories[i + 5]?.name}}</span>
+              </a>
+              <a [routerLink]="['/shop']" class="banner-span py-4 px-5 position-absolute text-center z-2">
+                <span>Shop Now</span>
+              </a>
+            </div>
+          </div>
           <div class="banner banner-cat banner-badge position-relative d-flex justify-content-center align-items-center">
             <a href="Single Product Page" class="overflow-hidden  border border-black">
               <img src="../../../assets/img/Category/col2/1.png" alt="Banner">

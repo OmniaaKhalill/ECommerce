@@ -113,7 +113,7 @@ namespace E_Commerce.APIs.Controllers
         //    return Ok(mapper.Map<List<Product>, List<ProductToReturnDto>>(productList));
         //}
         #endregion
-        [HttpGet("categories/{categoryId}/products")]
+        [HttpGet("categories/{categoryId}")]
         public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductsByCategory(int categoryId, bool includeRelated = true)
         {
             var category = await unitOfWork.CategoryRepo.GetAsync(categoryId);
