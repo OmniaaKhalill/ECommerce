@@ -1,5 +1,5 @@
 import { Component, OnChanges, SimpleChanges } from '@angular/core';
-import { AccountService } from '../../services/account.service';
+import { AccountService } from '../../Services/account.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({

@@ -1,0 +1,29 @@
+
+
+  img{
+    width: 15%;
+  }
+  .checked {
+    color: #fcb941;
+  }
+
+  button{
+ 
+    border-radius: 0;
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+button:hover{
+    background-color:var(--main-color);
+    border-radius: 0;
+    border-color: var(--main-color);
+    color:   #fff 
+}
+textarea{
+     margin-right: 20px;
+   
+   
+        resize: none;
+     
+}
