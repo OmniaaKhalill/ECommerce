@@ -151,6 +151,9 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SellerId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -167,6 +170,10 @@ namespace E_Commerce.Repository.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("SellerId")
+                        .IsUnique()
+                        .HasFilter("[SellerId] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
                 });
@@ -392,6 +399,10 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.Property<int?>("PageId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -399,7 +410,10 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.HasKey("id");
 
                     b.ToTable("sellers");
+
                 });
+
+    
 
             modelBuilder.Entity("E_Commerce.Core.Entities.WishList", b =>
                 {
@@ -604,6 +618,15 @@ namespace E_Commerce.Repository.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("E_Commerce.Core.Entities.Identity.AppUser", b =>
+                {
+                    b.HasOne("E_Commerce.Core.Entities.Seller", "Seller")
+                        .WithOne("AppUser")
+                        .HasForeignKey("E_Commerce.Core.Entities.Identity.AppUser", "SellerId");
+
+                    b.Navigation("Seller");
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Order", b =>
@@ -822,6 +845,10 @@ namespace E_Commerce.Repository.Data.Migrations
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Seller", b =>
                 {
+
+                    b.Navigation("AppUser")
+                        .IsRequired();
+
                     b.Navigation("Page");
 
                     b.Navigation("ProductList");

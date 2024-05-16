@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Core.Repositories.Contract
 {
+
     public interface IGenericRepositoryUser<T> where T : AppUser
+
     {
 
         Task<T?> UpdateAsync(string id, T entityToUpdate);

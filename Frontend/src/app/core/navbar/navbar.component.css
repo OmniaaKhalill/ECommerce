@@ -1,0 +1,25 @@
+:root {
+  --main-color: #e88eba;
+  --light-color: #fff;
+  --dark-color: #000;
+}
+
+ul li a {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.navbar-toggler {
+  background-color: var(--main-color);
+  border: none;
+  border-radius: 50px;
+  padding-block: 0.75rem;
+}
+
+.nav-link {
+  color: var(--dark-color);
+}
+
+.nav-link:hover {
+  color: var(--main-color);
+}

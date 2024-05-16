@@ -29,5 +29,11 @@ namespace E_Commerce.Core.Repositories.Contract
 
         Task<T?> AddAsync(T entity);
 
+
+       // Task<IReadOnlyList<T>> GetAllPrpductByUserIdAsync(string UserId);
+
+
+
+
     }
 }

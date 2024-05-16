@@ -5,7 +5,7 @@ using E_Commerce.Core.Entities.Identity;
 
 namespace E_Commerce.APIs.Helpers
 {
-    public class MappingProfile:Profile
+    public class MappingProfile : Profile
     {
 
         public MappingProfile()
@@ -51,6 +51,9 @@ namespace E_Commerce.APIs.Helpers
                 .ForMember(d => d.PageName, o => o.MapFrom(S => S.name));
 
             CreateMap<Product, ProductToReturnDto>()
+                    .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.name))
+                       .ForMember(dest => dest.seller, opt => opt.MapFrom(src => src.seller.name))
+                       .ForMember(dest => dest.Colors, opt => opt.MapFrom(src => src.Colors.Select(c => new ColorDto { Id = c.Id, HexValue = c.hex_value, ColourName=c.colour_name })));
                 .ForMember(p => p.Category, o => o.MapFrom(s => s.Category.name))
                 .ForMember(p => p.seller, o => o.MapFrom(s => s.seller.name))
                 .ForMember(p => p.image_link, o => o.MapFrom<ProductPictureUrlResolver>())
@@ -98,7 +101,20 @@ namespace E_Commerce.APIs.Helpers
             ;
         }
 
-        
+                      
+                   
+            CreateMap<CustomerCartDto,customerCart>();
+            CreateMap<CartItemDto, CartItem>();
 
-    }
+
+
+
+            CreateMap<Product, ProductSellerDto>().ForMember(p => p.Category, o => o.MapFrom(s => s.Category.name));
+
+
+
+
+
+        }
+    } 
 }

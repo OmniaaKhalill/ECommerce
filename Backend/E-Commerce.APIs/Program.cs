@@ -4,10 +4,13 @@ using E_Commerce.APIs.Helpers;
 using E_Commerce.Core.Entities;
 using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Core.Repositories.Contract;
+using E_Commerce.Core.Services.Contract;
 using E_Commerce.Repository;
 using E_Commerce.Repository.Data;
+using E_Commerce.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using Talabat.APIs.Extensions;
 
 namespace E_Commerce.APIs
@@ -18,6 +21,8 @@ namespace E_Commerce.APIs
         {
             var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
             var builder = WebApplication.CreateBuilder(args);
+
+            string MyAllowSpecificOrigins = "";
 
             // Add services to the container.
             builder.Services.AddCors(options =>
@@ -41,14 +46,27 @@ namespace E_Commerce.APIs
             builder.Services.AddDbContext<ProjectContext>(op => 
             op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
             ));
+            builder.Services.AddSingleton<IConnectionMultiplexer>((ServiceProvider) =>
+            {
+                var connection = builder.Configuration.GetConnectionString("Redis");
+                return ConnectionMultiplexer.Connect(connection);
+            });
 
+           
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+
             builder.Services.AddScoped(typeof(IReviewRepository<>), typeof(ReviewRepository<>));
             builder.Services.AddScoped(typeof(IGenericRepositoryUser<>), typeof(GenericRepoUser<>));
+
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<ICartRepositery,CartReposetory>();
+
+            builder.Services.AddScoped<ISellerRepository, SellerRepository>();
+
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             builder.Services.AddIdentity<AppUser, IdentityRole>
             (options =>
             {
@@ -56,7 +74,37 @@ namespace E_Commerce.APIs
             } ).AddEntityFrameworkStores<ProjectContext>();
 
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin()
+                               .AllowAnyMethod()
+                               .AllowAnyHeader();
+                    });
+            });
+
+            builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
+
+
+
+
             builder.Services.AddApplicationServices();
+
+     builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyHeader();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyOrigin();
+
+                });
+
+            });
+
 
             var app = builder.Build();
 
@@ -101,7 +149,10 @@ namespace E_Commerce.APIs
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseCors("AllowAllOrigins");
 
+
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
@@ -113,12 +164,6 @@ namespace E_Commerce.APIs
         }
 
 
-        public static async Task AddUser(UserManager<AppUser> userManager)
-        {
-            
-
-           
-
-        }
+      
     }
 }
