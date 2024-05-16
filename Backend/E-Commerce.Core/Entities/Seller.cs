@@ -10,7 +10,9 @@ namespace E_Commerce.Core.Entities
 {
     public class Seller : BaseEntity
     {
-   
+
+
+        public string name { get; set; }
         public String IDImgUrl {  get; set; }
     
         public List<Product>? ProductList {  get; set; }//navigation

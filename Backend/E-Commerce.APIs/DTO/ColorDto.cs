@@ -3,8 +3,8 @@
     public class ColorDto
     {
         public int Id { get; set; }
-        public string HexValue { get; set; }
-        public string ColourName { get; set; }
+        public string hex_value { get; set; }
+        public string colour_name { get; set; }
     }
 
 }

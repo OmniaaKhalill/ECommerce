@@ -9,7 +9,8 @@ namespace E_Commerce.Core.Entities
 {
     public  class Page:BaseEntity
     {
-  
+
+        public string name { get; set; }
         public string Description { get; set; }
 
         //[ForeignKey("Seller")]

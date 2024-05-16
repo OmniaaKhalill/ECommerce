@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Core.Entities;
+using E_Commerce.Core.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,10 @@ namespace E_Commerce.Core.Repositories.Contract
         IGenericRepository<Product> ProductRepo { get; set; }
         IGenericRepository<Category> CategoryRepo { get; set; }
         IGenericRepository<Seller> SellerRepo { get; set; }
+        IReviewRepository<Review> ReviewRepo { get; set; }
+
+        IGenericRepositoryUser<AppUser> UserRepo { get; set; }
+
         IColorRepository ColotRepo { get; set; }
     }
 }

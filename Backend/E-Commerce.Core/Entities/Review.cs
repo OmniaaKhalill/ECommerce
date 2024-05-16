@@ -7,9 +7,9 @@ using E_Commerce.Core.Entities.Identity;
 
 namespace E_Commerce.Core.Entities
 {
-    public class Review
+    public class Review :BaseEntity
     {
-        public int Id { get; set; }
+       
         public string Content { get; set; }
         public int Rating { get; set; }
         public string UserId { get; set; } //forignKey

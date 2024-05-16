@@ -1,6 +1,7 @@
 
 using E_Commerce.APIs.Controllers;
 using E_Commerce.APIs.Helpers;
+using E_Commerce.Core.Entities;
 using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Core.Repositories.Contract;
 using E_Commerce.Core.Services.Contract;
@@ -18,11 +19,22 @@ namespace E_Commerce.APIs
     {
         public  static async Task Main(string[] args)
         {
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
             var builder = WebApplication.CreateBuilder(args);
 
             string MyAllowSpecificOrigins = "";
 
             // Add services to the container.
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
 
             builder.Services.AddControllers();
             builder.Services.AddSwaggerServices();
@@ -42,6 +54,9 @@ namespace E_Commerce.APIs
 
            
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+
+            builder.Services.AddScoped(typeof(IReviewRepository<>), typeof(ReviewRepository<>));
+            builder.Services.AddScoped(typeof(IGenericRepositoryUser<>), typeof(GenericRepoUser<>));
 
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -123,6 +138,7 @@ namespace E_Commerce.APIs
 
                 }
             }
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseMiddleware<ExceptionMiddleware>();
           
