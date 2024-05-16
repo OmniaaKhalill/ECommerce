@@ -32,7 +32,7 @@ export class EditProductComponent {
   hexval:string[]=[];
   categories:Category[]=[];
   categoryName:string="blach";
-  Editedproduct:Product=new Product("","",0,0,[],0,"","",1);
+  Editedproduct:Product=new Product(0,"","",0,0,[],0,"","",1,[]);
    id:number= Number(this.route.snapshot.paramMap.get('id'));
 constructor(
   private route: ActivatedRoute,
