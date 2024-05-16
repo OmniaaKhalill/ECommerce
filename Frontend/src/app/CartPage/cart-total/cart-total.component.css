@@ -1,0 +1,30 @@
+.greyBack{
+    background-color: #f8f8f8;
+    width: 75%;
+    margin-left: 50px;
+}
+
+a{
+    color: var(--main-color);
+    text-decoration: underline;
+}
+
+
+.total{
+    color: var(--main-color); 
+}
+button{
+    margin-top: 20px;
+    background-color:#f8f8f8 ;
+    border-radius: 0;
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+button:hover{
+    margin-top: 20px;
+    background-color:var(--main-color);
+    border-radius: 0;
+    border-color: var(--main-color);
+    color:   #fff 
+}

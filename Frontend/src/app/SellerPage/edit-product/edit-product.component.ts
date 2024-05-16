@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule,Validators,FormArray } from '@angular/forms';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
@@ -44,8 +44,7 @@ constructor(
   ngOnInit(): void 
   {
    this.getAllCategories();
-   this.getProductByID();
-   
+   this.getProductByID();  
   }
   ngOnDestroy(): void
   {
@@ -73,7 +72,16 @@ constructor(
 
     this.productService.GetById(productId).subscribe(
       (product)=>{
-        this.Editedproduct=product;
+this.Editedproduct.brand=product.brand;
+this.Editedproduct.categoryId=product.categoryId;
+this.Editedproduct.colors=product.colors;
+this.Editedproduct.description=product.description;
+this.Editedproduct.image_link=product.image_link;
+this.Editedproduct.name=product.name;
+this.Editedproduct.numOfProductInStock=product.numOfProductInStock;
+this.Editedproduct.price=product.price;
+this.Editedproduct.sellerId=product.sellerId;
+console.log("the object editeproduct"+JSON.stringify(this.Editedproduct));
         console.log(product);
       }
     )
@@ -123,15 +131,16 @@ constructor(
     }
   }
 
-  update() {
-    this.productService.update(this.Editedproduct, this.id).subscribe(
-      () => {
+  update() 
+  {
+    this.sub = this.productService.update(this.Editedproduct, this.id).subscribe({
+      next: (value: Product) => {
         console.log("The product updated successfully");
       },
-      (error) => {
+      error: (error: any) => {
         console.log(error);
       }
-    );
+    });
   }
 
 }

@@ -29,61 +29,67 @@
           </div>
         </div>
       </div>
-    <div class="products mb-5">
+      <div class="products mb-5">
         <div class="row">
-          <div class="col-6 col-md-4 col-lg-4 p-1">
-            <div class="product ">
-              <figure class="product-media">
-                <a href="#">
-                  <img src="../../../assets/img/Shop/Blushers/open-uri20171224-4-7p4zdp.jpeg" alt="Product image"
-                    class="product-image">
-                </a>
-                <div class="product-action text-center">
-                  <div class="row g-0">
-                    <a href="" class="col-6">
-                        <div class="col-12">
-                          <div class="cart border-end p-2">
-                            <a href="edit" class="">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                          </div>
-                        </div>
-                    </a>
-                        <a class="col-6">
-                        <div class="col-12">
-                          <div class="wishlist p-2">
-                            <a href="delete" class="">
-                             <i class="fa fa-trash" aria-hidden="true"></i>
-    
-                            </a>
-                          </div>
-                        </div>
-                    </a>
-                      </div>
-                    </div>
-              </figure>
+      <div class="col-6 col-md-3 col-lg-3 p-1" *ngFor="let product of items | paginate: { id:'product-pagination',itemsPerPage:countPerPage , currentPage:CurrentPageNum,totalItems:totalCount  }">
       
-              <div class="product-body p-3">
-                <h5 class="fw-bold text-capitalize">rejuva minerals</h5>
-                <h5 class="fw-bold my-3">Multi Purpose Powder - Blush &amp; Eye</h5>
-                <p class="d-inline">
-                  <span class="fw-bold fs-5">Category: </span>
-                  <a href="Category" class="fs-5 text-dark-emphasis">powder</a>
-                </p>
-                <div class="product-price fs-5 my-2">
-                  $60.00
-                </div>
-                <div class="colour_section d-flex flex-wrap">
-                  <div class="color" style="background-color: #D7A7A3;">
+            <div >
+              <div class="product ">
+                <figure class="product-media">
+                  <a href="#">
+                    <img src={{product.image_link}} alt="Product image"
+                      class="product-image">
+                  </a>
+                  <div class="product-action text-center">
+                    <div class="row g-0">
+                      <a href="" class="col-6">
+                          <div class="col-12">
+                            <div class="cart border-end p-2">
+                              <a href="edit" class="">
+                                  <i class="fas fa-edit"></i>
+                              </a>
+                            </div>
+                          </div>
+                      </a>
+                          <a class="col-6">
+                          <div class="col-12">
+                            <div class="wishlist p-2">
+                              <a href="delete" class="">
+                               <i class="fa fa-trash" aria-hidden="true"></i>
+      
+                              </a>
+                            </div>
+                          </div>
+                      </a>
+                        </div>
+                      </div>
+                </figure>
+                <div class="product-body p-3">
+                  <h5 class="fw-bold text-capitalize">{{product.name}}</h5>
+                  <h5 class="fw-bold my-3">{{product.brand}}</h5>
+                  <p class="d-inline">
+                    <span class="fw-bold fs-5">Category: </span>
+                    <a href="Category" class="fs-5 text-dark-emphasis">{{product.category}}</a>
+                  </p>
+                  <div class="product-price fs-5 my-2">
+                    {{product.price}}
                   </div>
-                  <div class="color" style="background-color: #E1BFC0;">
-                  </div>
-                  <div class="color" style="background-color: #E6C3CB;">
+                  <div class="colour_section d-flex flex-wrap" *ngFor="let color of product.colors">
+                    <div class="color" [style.background-color]="color.hex_value">
+                    </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+      </div>
+        </div>
+        
+        <div class="has-text-centered">
+          <pagination-controls (pageChange)="getAllProducts($event)" id="product-pagination"></pagination-controls>
+      </div>
+<!--       
+             
           <div class="col-6 col-md-4 col-lg-4 p-1">
             <div class="product">
               <figure class="product-media">
@@ -350,7 +356,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       
-</div>
-<app-pagination></app-pagination>
+<!-- </div> -->
+<!-- <app-pagination></app-pagination> -->
