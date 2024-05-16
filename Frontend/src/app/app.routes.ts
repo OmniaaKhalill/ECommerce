@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './HomePage/home/home.component';
-import { ShopComponent } from './ShopPage/shop/shop.component';
+//import { ShopComponent } from './ShopPage/shop/shop.component';
 
 // import { CategoriesPageComponent } from './CategoriesPage/categories-page/categories-page.component';
 
@@ -17,6 +17,8 @@ import { RegisterFormComponent } from './LoginPage/register-form/register-form.c
 import { LoginFormComponent } from './LoginPage/login-form/login-form.component';
 import { CanLoginGuard } from './guard/can-login.guard';
 import { LogoutComponent } from './LoginPage/logout/logout.component';
+import { ProductsComponent } from './HomePage/products/products.component';
+
 
 export const routes: Routes = [
   { path: "home", component: HomeComponent },     //canActivate:[CanLoginGuard],
@@ -28,5 +30,7 @@ export const routes: Routes = [
     { path: "Signin", component: LoginFormComponent}
   ]},
 
-  { path: "logout", component: LogoutComponent}
+  { path: "logout", component: LogoutComponent},
+  { path: "product", component: ProductsComponent}
 ];
+
