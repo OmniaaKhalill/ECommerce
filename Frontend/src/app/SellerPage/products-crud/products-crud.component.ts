@@ -5,10 +5,10 @@ import { RouterLink } from '@angular/router';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
 import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
 import { ProductRead } from '../../models/product-read';
-import { SellerProductsService } from '../../Services/seller-products.service';
+import { SellerProductsService } from '../../services/seller-products.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CommonModule } from '@angular/common';
-import { AccountService } from '../../Services/account.service';
+import { AccountService } from '../../services/account.service'
 
 @Component({
   selector: 'app-products-crud',

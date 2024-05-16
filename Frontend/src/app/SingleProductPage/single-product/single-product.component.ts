@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 
 import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { SimilarProductsComponent } from '../similar-products/similar-products.component';
-import { ProductService } from '../../Services/product.service';
+import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 
 @Component({

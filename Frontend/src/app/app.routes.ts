@@ -53,14 +53,14 @@ export const routes: Routes = [
   {path:"Add",component:AddProductComponent},
   {path:"Edite/:id",component:EditProductComponent},
   { path: 'home', component: HomeComponent },
+  {path:"Cart" , component:CartComponent},
+  {path:"WishList" , component:WishListProductsComponent},
+     { path: "logout", component: LogoutComponent},
+  { path: "product", component: ProductsComponent},
   
   { path: 'product/:id', component: SingleProductComponent,children: [
       { path: 'reviews/:id', component: ReviewsComponent },
     { path: 'description/:id', component: DescriptionComponent },
+    
 ]
 }]
-  {path:"Cart" , component:CartComponent},
-  {path:"WishList" , component:WishListProductsComponent},
-     { path: "logout", component: LogoutComponent},
-  { path: "product", component: ProductsComponent}
-]

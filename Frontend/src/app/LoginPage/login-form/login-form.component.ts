@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AccountService } from '../../Services/account.service';
+
 import { Router, RouterModule } from '@angular/router';
+import { AccountService } from '../../services/account.service';
 
 
 @Component({

@@ -18,4 +18,7 @@ export class CategoryService {
    {
     return this.http.get<Category[]>("https://localhost:7191/api/Category");
    }
+
+
+
 }

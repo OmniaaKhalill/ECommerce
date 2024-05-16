@@ -3,13 +3,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule,Validators,FormArray } from '@angular/forms';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
 import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
-import { ProductService } from '../../Services/product.service';
+import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import{ImegesService} from '../../Services/imeges.service'
+import{ImegesService} from '../../services/imeges.service'
 import { ColorPickerModule } from 'ngx-color-picker';
-import { CategoryService } from '../../Services/category.service';
+import { CategoryService } from '../../services/category.service';
 import { Category } from '../../models/category';
 
 

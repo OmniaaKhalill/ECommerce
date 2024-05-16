@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../../Services/product.service';
+import { ProductService } from '../../services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
 import { TimeAgoPipe } from '../../pipes/time-ago.pipe';
-import { UserService } from '../../Services/user.service';
+import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
 
 @Component({
