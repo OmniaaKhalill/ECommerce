@@ -17,6 +17,7 @@ namespace E_Commerce.Core.Repositories.Contract
         Task<customerCart?> AddCartItem(string cartId,CartItem item);
         Task<customerCart?> UpdateCartItemAsync(string cartId,CartItem cartItem);
         Task<customerCart?> DeleteCartItemAsync(string cartId, CartItem cartItem);
+        Task<customerCart?> updateItemQuentity(string cartId,CartItem cartItem);
         
     
     }

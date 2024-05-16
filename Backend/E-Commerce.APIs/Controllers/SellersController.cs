@@ -94,7 +94,7 @@ namespace E_Commerce.APIs.Controllers
 
         public async Task<ActionResult<IEnumerable<Product>>> GetProductsBySeller(string UserId)
         {
-             var products = await sellerRepo.GetAllPrpductByUserIdAsync(UserId);
+            var products = await sellerRepo.GetAllPrpductByUserIdAsync(UserId); 
 
             if (products == null)
             {
@@ -107,11 +107,31 @@ namespace E_Commerce.APIs.Controllers
 
             return  Ok(mappedProducts);
         }
-    
+
+        //using pagination
+        [HttpGet("/GetProductsPagenation/{UserId}/{page}/{countPerPage}")]
+
+        public async Task<ActionResult<ProductPaginationDto>> GetProductsBySellerPagination(string UserId, int page, int countPerPage)
+        {
+            var products = await sellerRepo.PaginationAsync(UserId,page, countPerPage);
+            var count=await sellerRepo.GetProductCount(UserId);
+
+            if (products == null)
+            {
+                return NotFound(new { Message = "products Not Found", StatusCode = 404 });
 
 
-            
-       
+            }
+            var mappedProducts = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductSellerDto>>(products);
+
+            var ProductPagination = new ProductPaginationDto
+            {
+                Items = mappedProducts,
+                TotalCount = count
+            };
+            return Ok(ProductPagination);
+        }
+
 
     }  
 }

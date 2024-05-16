@@ -27,7 +27,10 @@ namespace E_Commerce.APIs.Controllers
             var cart=await cartRepositery.getCartAsync(id);
             if(cart == null)
             {
-              return Ok(  cart=new customerCart(id));
+                cart = new customerCart(id);
+                var sevedCart=await cartRepositery.UpdateCartAsync(cart);
+                return Ok (sevedCart);
+             
             }
             return Ok(cart);
         }
