@@ -24,7 +24,7 @@ namespace E_Commerce.APIs.DTO
         public string SellerId { get; set; }
         public string? seller { get; set; }
 
-        public virtual ICollection<Review>? Reviews { get; set; }
+        public virtual ICollection<ReviewsDto>? Reviews { get; set; }
 
         public int NumOfProductInStock { get; set; }
 

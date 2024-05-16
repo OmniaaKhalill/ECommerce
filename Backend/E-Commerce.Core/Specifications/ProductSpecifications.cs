@@ -45,9 +45,22 @@ namespace E_Commerce.Core.Specifications
             ApplyPagination((specParams.PageIndex - 1) * specParams.PageSize, specParams.PageSize);
         }
 
+        public ProductSpecifications() : base()
+        {
+            AddingIncludes();
+        }
         public ProductSpecifications(int id) :  base(p => p.id == id)
         {
             AddingIncludes();
+        }
+
+        public ProductSpecifications(int categoryId, bool includeRelated = true)
+         : base(p => p.CategoryId == categoryId)
+        {
+            if (includeRelated)
+            {
+                AddingIncludes();
+            }
         }
 
         private void AddingIncludes()
@@ -55,7 +68,8 @@ namespace E_Commerce.Core.Specifications
             Includes.Add(p => p.Category);
             Includes.Add(p => p.seller);
             Includes.Add(p => p.Colors);
-        
+            Includes.Add(p => p.Reviews);
+
         }
     }
 }

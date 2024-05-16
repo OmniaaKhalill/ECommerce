@@ -13,6 +13,8 @@ namespace E_Commerce.Core.Repositories.Contract
     public interface IGenericRepository<T> where T :BaseEntity
     {
         Task<T?> GetAsync(int id);
+
+      
         Task<IReadOnlyList<T>> GetAllAsync();
         Task<IReadOnlyList<T>> GetAllSpecAsync(ISpecifications<T> spec);
         Task<T?> GetSpecAsync(ISpecifications<T> spec);

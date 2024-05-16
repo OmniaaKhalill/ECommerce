@@ -37,7 +37,8 @@ namespace E_Commerce.APIs.Controllers
         [HttpGet("seller/{sellerId}")]
         public async Task<ActionResult<PageToReturnDto>> GetPageBySellerId(int sellerId)
         {
-            if (sellerId == null)
+            var category = await _pageRepo.GetAsync(sellerId);
+            if (category == null)
                 return NotFound(new { Message = "not found seller", StatusCode = "404" });
             else
             {
@@ -104,8 +105,6 @@ namespace E_Commerce.APIs.Controllers
                 page.Seller = seller;
 
                 var addedPage = await _pageRepo.AddAsync(page);
-
-             
                 seller.PageId = addedPage.id; 
                 await _sellerRepo.UpdateAsync(sellerId,seller);
 

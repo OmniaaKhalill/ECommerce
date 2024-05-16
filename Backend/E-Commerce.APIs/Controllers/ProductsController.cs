@@ -4,11 +4,13 @@ using E_Commerce.APIs.Helpers;
 using E_Commerce.Core.Entities;
 using E_Commerce.Core.Repositories.Contract;
 using E_Commerce.Core.Specifications;
+using E_Commerce.Core.Specifications.PageSpecifications;
 using E_Commerce.Core.Specifications.ProductSpecs;
 using E_Commerce.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.APIs.Controllers
 {
@@ -40,6 +42,7 @@ namespace E_Commerce.APIs.Controllers
         {
             var spec = new ProductSpecifications(id);
             var product = await unit.ProductRepo.GetSpecAsync(spec);
+            
             if (product == null)
             {
                 return NotFound(new ApiResponse(404));
@@ -176,5 +179,38 @@ namespace E_Commerce.APIs.Controllers
         }
         #endregion
 
+
+        [HttpGet("categories/{categoryId}")]
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProductsByCategory(int categoryId)
+        {
+           
+            var category = await unit.CategoryRepo.GetAsync(categoryId);
+            if (category == null)
+            {
+                return NotFound(new { Message = "Category not found", StatusCode = 404 });
+            }
+
+            var spec = new ProductSpecifications(categoryId, true);
+
+            var products = await unit.ProductRepo.GetAllSpecAsync(spec);
+
+         
+            var productsToReturn = mapper.Map<List<Product>, List<ProductToReturnDto>>(products.ToList());
+
+      
+            return Ok(productsToReturn);
+        }
+
+        [HttpGet("getAll")]
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetRandomProducts()
+        {
+            var spec = new ProductSpecifications();
+            var products = await unit.ProductRepo.GetAllSpecAsync(spec);
+
+            var productsToReturn = mapper.Map<List<Product>, List<ProductToReturnDto>>(products.ToList());
+            return Ok(productsToReturn);
+        }
+
     }
-}
+    }
+

@@ -1,6 +1,7 @@
 
 using E_Commerce.APIs.Controllers;
 using E_Commerce.APIs.Helpers;
+using E_Commerce.Core.Entities;
 using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Core.Repositories.Contract;
 using E_Commerce.Repository;
@@ -42,6 +43,8 @@ namespace E_Commerce.APIs
             ));
 
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+            builder.Services.AddScoped(typeof(IReviewRepository<>), typeof(ReviewRepository<>));
+            builder.Services.AddScoped(typeof(IGenericRepositoryUser<>), typeof(GenericRepoUser<>));
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
