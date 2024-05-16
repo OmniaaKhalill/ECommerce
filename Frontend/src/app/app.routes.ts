@@ -54,9 +54,10 @@ export const routes: Routes = [
       { path: 'reviews/:id', component: ReviewsComponent },
     { path: 'description/:id', component: DescriptionComponent },
 ]
-}]
-  {path:"Cart" , component:CartComponent},
-  {path:"WishList" , component:WishListProductsComponent}
+  },
+
+{ path: "Cart", component: CartComponent },
+{ path: "WishList", component: WishListProductsComponent }
 
 ];
 

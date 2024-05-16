@@ -59,7 +59,7 @@ getcartItems(){
             name: data.name,
             price: data.price,
             image_link:data.image_link,
-            quantity:this.cart.items[i].quantity
+            quantity:this.cart.items[i].quantity,
           });    
           });
     promises.push(promise);
@@ -98,7 +98,7 @@ increment(item: ProductCart) {
     let qtyInput = <HTMLInputElement>document.getElementById('qty');
     let currentValue = parseInt(qtyInput.value);
     let newValue = currentValue - 1;
-  
+  item.quantity=newValue;
     // Ensure the new value is greater than or equal to 1 (minimum allowed quantity)
     if (newValue >= 1) {
       qtyInput.value = newValue.toString(); // Update input field
