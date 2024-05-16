@@ -32,20 +32,7 @@ ngOnInit(): void
   this.getCart();
   
 }
-// getCart()
-// {
 
-//   this.cartService.getCartById("d27583dc-4c5c-45b6-9f3b-e759ac95b13d").subscribe(
-//     (data)=>{
-
-//       this.cart=data;
-//       console.log(data);
-//       console.log(this.cart);
-//       this.getcartItems()
-//       this.print()
-//     }
-//   )
-// }
 
 async getCart()
 {
@@ -79,62 +66,58 @@ getcartItems(){
   }
   return Promise.all(promises);}
     
-  
-// }
-// getcartItems(){
-//   for(let i=0;i<this.cart.items.length;i++)
-//   {
 
-//     this.productService.GetProductCartById(this.cart.items[i].id).subscribe(
-//      (data)=>{
-//       console.log("hellllllo"+JSON.stringify(data));
-//       this.ProductList.push(data);
-      
-//      } 
-//     )
-//   }
-// }
   
-  
-  increment(item:ProductCart) {
-    let qtyInput = <HTMLInputElement>document.getElementById('qty');
-    let currentValue = parseInt(qtyInput.value);
-    let newValue = currentValue + 1;
-    item.quantity=newValue;
-  
-    this.cartItem.id=item.id;
-    this.cartItem.price=item.price;
-    this.cartItem.quantity=item.quantity;
-    this.cartService.update(this.cartItem,"d27583dc-4c5c-45b6-9f3b-e759ac95b13d").subscribe(
-      (data)=>{
-        console.log("updated cart item"+JSON.stringify(data));
+increment(item: ProductCart) {
+  let qtyInput = <HTMLInputElement>document.getElementById('qty');
+  let currentValue = parseInt(qtyInput.value);
+  let newValue = currentValue + 1;
+
+  if (newValue <= 10) {
+    // Update quantity only if it's less than or equal to 10
+    item.quantity = newValue;
+    qtyInput.value = newValue.toString(); // Update input field
+
+    // Update the cart item on the server
+    this.cartItem.id = item.id;
+    this.cartItem.price = item.price;
+    this.cartItem.quantity = item.quantity;
+    this.cartService.update(this.cartItem, "d27583dc-4c5c-45b6-9f3b-e759ac95b13d").subscribe(
+      (data) => {
+        console.log("updated cart item" + JSON.stringify(data));
       }
-    )
-  
-    if (newValue <= 10) {
-      qtyInput.value = newValue.toString();
-      // this.Total = this.ProductPrice * newValue; // Update total
-    }
+    );
+  } else {
+    // Handle the case where the quantity exceeds the maximum allowed
+    console.log("Maximum quantity reached.");
   }
-  
-  decrement(item:ProductCart) {
+}
+
+
+  decrement(item: ProductCart) {
     let qtyInput = <HTMLInputElement>document.getElementById('qty');
     let currentValue = parseInt(qtyInput.value);
     let newValue = currentValue - 1;
-    item.quantity=newValue;
-    this.cartItem.id=item.id;
-    this.cartItem.price=item.price;
-    this.cartItem.quantity=item.quantity;
-    this.cartService.update(this.cartItem,"d27583dc-4c5c-45b6-9f3b-e759ac95b13d").subscribe(
-      (data)=>{
-        console.log("updated cart item"+JSON.stringify(data));
-      })
-
-    if (newValue >= 10) {
-      qtyInput.value = newValue.toString();
-      // this.Total = this.ProductPrice * newValue; // Update total
+  
+    // Ensure the new value is greater than or equal to 1 (minimum allowed quantity)
+    if (newValue >= 1) {
+      qtyInput.value = newValue.toString(); // Update input field
+  
+      // Update the cart item on the server
+      this.cartItem.id = item.id;
+      this.cartItem.price = item.price;
+      this.cartItem.quantity = item.quantity;
+      this.cartService.update(this.cartItem, "d27583dc-4c5c-45b6-9f3b-e759ac95b13d").subscribe(
+        (data) => {
+          console.log("Updated cart item: " + JSON.stringify(data));
+        }
+      );
+    } else {
+      // Handle the case where the quantity becomes less than 1
+      console.log("Minimum quantity reached.");
     }
   }
+  
   
   print(){
     for(let i=0;i<this.ProductList.length;i++){
@@ -143,17 +126,21 @@ getcartItems(){
   }
   getTotal(item:ProductCart){
 
-    return (item.price*item.quantity)
+    const totalPrice = item.price * item.quantity;
+    return totalPrice.toFixed(2);
   }
 
   delete(item:ProductCart){
-    console.log("deleeeeeeeeeeet")
     this.cartItem.id=item.id;
     this.cartItem.price=item.price;
     this.cartItem.quantity=item.quantity;
     this.cartService.delete(this.cartItem,"d27583dc-4c5c-45b6-9f3b-e759ac95b13d").subscribe(
-      (data)=>{
-        console.log("helllo from delete"+data);
+      () => {
+        // Remove the deleted item from the ProductList array
+        this.ProductList = this.ProductList.filter(product => product.id !== item.id);
+      },
+      error => {
+        console.error("Error deleting item:", error);
       }
     );
   }
