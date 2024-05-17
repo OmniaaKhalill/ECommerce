@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using E_Commerce.APIs.DTO;
 using E_Commerce.Core.Entities;
+using E_Commerce.Core.Entities.Oreder_Agrigate;
 
 namespace E_Commerce.APIs.Helpers
 {
@@ -26,7 +27,9 @@ namespace E_Commerce.APIs.Helpers
 
             CreateMap<Product, ProductSellerDto>().ForMember(p => p.Category, o => o.MapFrom(s => s.Category.name));
 
+            CreateMap<AddressDto, Address>();
 
+            CreateMap<Order, OrderDto>();
 
 
         }

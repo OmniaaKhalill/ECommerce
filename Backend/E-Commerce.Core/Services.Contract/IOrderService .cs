@@ -9,10 +9,10 @@ namespace E_Commerce.Core.Services.Contract
 {
     public interface IOrderService
     {
-        Task<Order> CreateAsync(string buyerEmail, string basketId, int DeliveryMethodId, Address shippingAddress);
+        Task<Order?> CreateAsync(string buyerEmail, string CartId, int DeliveryMethodId, Address shippingAddress);
 
-        Task<IReadOnlyList<Order>> GetOrderForUserAsync (string buyerEmail);
+        Task<IReadOnlyList<Order?>> GetOrdersForUserAsync (string buyerEmail);
 
-       Task<Order> GetOrderByIdForUserAsync(int orderId, string buyerEmail);
+       Task<Order?> GetOrderByIdForUserAsync(int orderId, string buyerEmail);
     }
 }

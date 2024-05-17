@@ -59,12 +59,14 @@ namespace E_Commerce.APIs
 
 
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
+            builder.Services.AddScoped(typeof(IUnitOfWork), typeof(UnitOfWork));
+            builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
+            builder.Services.AddScoped(typeof(IOrderService), typeof(OrderService));
 
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICartRepositery,CartReposetory>();
             builder.Services.AddScoped<IWishlistRepository,WishlistRepository>();
-
+            builder.Services.AddScoped<IOrderRepo, OrderRepo>();
             builder.Services.AddScoped<ISellerRepository, SellerRepository>();
 
 
@@ -88,7 +90,7 @@ namespace E_Commerce.APIs
                     });
             });
 
-            builder.Services.AddScoped(typeof(IAuthService), typeof(AuthService));
+          
 
 
 

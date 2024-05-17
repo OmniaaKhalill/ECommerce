@@ -13,11 +13,10 @@ namespace E_Commerce.Core.Entities.Oreder_Agrigate
         {
             
         }
-        public Order(string buyerEmail, DateTimeOffset orderDate, OrderStatus status, Address shippingAddress, DeliveryMethod deliveryMethod, ICollection<OrderItem> items, decimal subTotal)
+        public Order(string buyerEmail, Address shippingAddress, DeliveryMethod deliveryMethod, ICollection<OrderItem> items, decimal subTotal)
         {
             BuyerEmail = buyerEmail;
-            OrderDate = orderDate;
-            Status = status;
+        
             ShippingAddress = shippingAddress;
             DeliveryMethod = deliveryMethod;
             Items = items;
