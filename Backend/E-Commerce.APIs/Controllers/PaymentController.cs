@@ -46,17 +46,17 @@ namespace E_Commerce.APIs.Controllers
                 var paymentIntent = (PaymentIntent)stripeEvent.Data.Object;
 
                 // Handle the event
-                switch (stripeEvent.Type)
-                {
-                    case Events.PaymentIntentSucceeded:
-                        await _paymentService.UpdatePaymentIntentToSuccededOrFailed(paymentIntent.Id, true);
-                        break;
+                //switch (stripeEvent.Type)
+                //{
+                //    case Events.PaymentIntentSucceeded:
+                //        await _paymentService.UpdatePaymentIntentToSuccededOrFailed(paymentIntent.Id, true);
+                //        break;
 
-                     case Events.PaymentIntentPaymentFailed:
-                        await _paymentService.UpdatePaymentIntentToSuccededOrFailed(paymentIntent.Id, false);
-                        break;
+                //     case Events.PaymentIntentPaymentFailed:
+                //        await _paymentService.UpdatePaymentIntentToSuccededOrFailed(paymentIntent.Id, false);
+                //        break;
 
-                }
+                //}
 
                 return Ok();
             }

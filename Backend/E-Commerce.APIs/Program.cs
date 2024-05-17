@@ -34,13 +34,30 @@ namespace E_Commerce.APIs
             builder.Services.AddDbContext<ProjectContext>(op => 
             op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")
             ));
-            builder.Services.AddSingleton<IConnectionMultiplexer>((ServiceProvider) =>
+
+
+            //builder.Services.AddSingleton<IConnectionMultiplexer>((ServiceProvider) =>
+            //{
+            //    var connection = builder.Configuration.GetConnectionString("Redis");
+            //    return ConnectionMultiplexer.Connect(connection);
+            //});
+
+            // Configure StackExchange.Redis
+            builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
-                var connection = builder.Configuration.GetConnectionString("Redis");
-                return ConnectionMultiplexer.Connect(connection);
+                var configuration = ConfigurationOptions.Parse(builder.Configuration.GetConnectionString("Redis"));
+                return ConnectionMultiplexer.Connect(configuration);
             });
 
-           
+            // Register IDatabase from IConnectionMultiplexer
+            builder.Services.AddScoped(sp =>
+            {
+                var connectionMultiplexer = sp.GetRequiredService<IConnectionMultiplexer>();
+                return connectionMultiplexer.GetDatabase();
+            });
+
+
+
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericReposity<>));
 
             builder.Services.AddScoped<IColorRepository, ColorRepository>();

@@ -34,7 +34,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("productsid");
 
-                    b.ToTable("CartProduct");
+                    b.ToTable("CartProduct", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Cart", b =>
@@ -53,7 +53,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("cart");
+                    b.ToTable("cart", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Category", b =>
@@ -70,7 +70,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("categories");
+                    b.ToTable("categories", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Coulor", b =>
@@ -96,7 +96,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("colors");
+                    b.ToTable("colors", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Identity.AppUser", b =>
@@ -212,7 +212,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("cartId");
 
-                    b.ToTable("orders");
+                    b.ToTable("orders", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.OrderItem", b =>
@@ -238,7 +238,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Orderitems");
+                    b.ToTable("Orderitems", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Page", b =>
@@ -265,7 +265,7 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.HasIndex("SellerId")
                         .IsUnique();
 
-                    b.ToTable("Pages");
+                    b.ToTable("Pages", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Payment", b =>
@@ -298,7 +298,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("Payments");
+                    b.ToTable("Payments", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Product", b =>
@@ -344,7 +344,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("SellerId");
 
-                    b.ToTable("products");
+                    b.ToTable("products", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Review", b =>
@@ -378,7 +378,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("reviews");
+                    b.ToTable("reviews", (string)null);
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Seller", b =>
@@ -409,11 +409,25 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("sellers");
-
+                    b.ToTable("sellers", (string)null);
                 });
 
-    
+            modelBuilder.Entity("E_Commerce.Core.Entities.Tag", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("tags", (string)null);
+                });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.WishList", b =>
                 {
@@ -432,7 +446,7 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.HasIndex("userId")
                         .IsUnique();
 
-                    b.ToTable("wishlist");
+                    b.ToTable("wishlist", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -568,6 +582,21 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ProductTag", b =>
+                {
+                    b.Property<int>("Productsid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("tag_listid")
+                        .HasColumnType("int");
+
+                    b.HasKey("Productsid", "tag_listid");
+
+                    b.HasIndex("tag_listid");
+
+                    b.ToTable("ProductTag", (string)null);
+                });
+
             modelBuilder.Entity("ProductWishList", b =>
                 {
                     b.Property<int>("WishListsId")
@@ -580,7 +609,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasIndex("productsid");
 
-                    b.ToTable("ProductWishList");
+                    b.ToTable("ProductWishList", (string)null);
                 });
 
             modelBuilder.Entity("CartProduct", b =>
@@ -797,6 +826,21 @@ namespace E_Commerce.Repository.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("ProductTag", b =>
+                {
+                    b.HasOne("E_Commerce.Core.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("Productsid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("E_Commerce.Core.Entities.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("tag_listid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("ProductWishList", b =>
                 {
                     b.HasOne("E_Commerce.Core.Entities.WishList", null)
@@ -845,7 +889,6 @@ namespace E_Commerce.Repository.Data.Migrations
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Seller", b =>
                 {
-
                     b.Navigation("AppUser")
                         .IsRequired();
 

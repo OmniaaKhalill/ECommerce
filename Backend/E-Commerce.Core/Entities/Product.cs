@@ -1,4 +1,5 @@
-﻿using System;
+﻿using E_Commerce.Core.Entities.Oreder_Agrigate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,7 +30,7 @@ namespace E_Commerce.Core.Entities
 
         public int NumOfProductInStock {  get; set; }
 
-        public  ICollection<OrderItem>? OrderItems { get; set; }
+        public  ICollection<Order>? OrderItems { get; set; }
         public  List<Cart>? Carts {  get; set; }
 
         public List<WishList>? WishLists { get; set; }

@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Core.Entities;
+using E_Commerce.Core.Entities.Oreder_Agrigate;
 
 namespace E_Commerce.APIs.DTO
 {

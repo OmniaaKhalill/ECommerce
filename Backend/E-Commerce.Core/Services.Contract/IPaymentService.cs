@@ -10,6 +10,6 @@ namespace E_Commerce.Core.Services.Contract
     public interface IPaymentService
     {
         Task<customerCart> CreateOrUpdatePaymentIntent(string cartid);
-        Task<Order> UpdatePaymentIntentToSuccededOrFailed(string paymentIntentId, bool isSucceded);
+      //  Task<Order> UpdatePaymentIntentToSuccededOrFailed(string paymentIntentId, bool isSucceded);
     }
 }
