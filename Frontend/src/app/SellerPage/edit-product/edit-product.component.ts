@@ -34,7 +34,7 @@ export class EditProductComponent {
   hexval:string[]=[];
   categories:Category[]=[];
   categoryName:string="blach";
-  Editedproduct:any;
+  Editedproduct:Product = new Product(0,"",0,0,[],0,"","",0,[],"",0,"");
    id:number= Number(this.route.snapshot.paramMap.get('id'));
 constructor(
   private route: ActivatedRoute,
@@ -74,7 +74,6 @@ constructor(
 
     this.productService.GetById(productId).subscribe(
       (product)=>{
-this.Editedproduct.brand=product.brands;
 this.Editedproduct.categoryId=product.categoryId;
 this.Editedproduct.colors=product.colors;
 this.Editedproduct.description=product.description;

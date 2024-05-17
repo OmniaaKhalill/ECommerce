@@ -39,7 +39,7 @@ export class AddProductComponent implements OnDestroy,OnInit
   categoryName:string="blach";
   
 
-  newproduct:any;
+  newproduct:Product = new Product(0,"",0,0,[],0,"","",0,[],"",0,"");
 constructor(
   private productService: ProductService,
   public router:Router ,

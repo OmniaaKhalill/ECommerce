@@ -11,7 +11,7 @@
                 class="nav-link"
                
                
-                [routerLink]="['/orders','ebddc79b-c8b1-4a72-87e2-bd3d9394d82d']"
+                [routerLink]="['orders']"
                 routerLinkActive="activeLink"
                 aria-controls="tab-dashboard"
                 aria-selected="false"
@@ -22,7 +22,7 @@
             <li class="nav-item">
               <a
                 class="nav-link"
-                [routerLink]="['/profileDetails','ebddc79b-c8b1-4a72-87e2-bd3d9394d82d']"
+                [routerLink]="['profileDetails']"
                 
                 routerLinkActive="activeLink"
                 aria-controls="tab-dashboard"
@@ -31,10 +31,9 @@
               >
             </li>
             <hr />
-          <!-- <li class="nav-item" *ngIf="user.role === 'seller'" >
+           <li class="nav-item" *ngIf="isSeller">  
               <a
                 class="nav-link"
-           
                 routerLink="sellerprofileDetails"
                 routerLinkActive="activeLink"
                 aria-controls="tab-seller"
@@ -42,7 +41,31 @@
                 >page</a
               >
             </li>
-            <hr /> -->
+            <hr/>
+           <li class="nav-item" *ngIf="isSeller && seller?.pageId === null">  
+              <a
+                class="nav-link"
+                routerLink="sellerprofileDetails"
+                routerLinkActive="activeLink"
+                aria-controls="tab-seller"
+                aria-selected="false"
+                [routerLink]="['AddPage']"
+                >Add Page</a
+              >
+            </li>
+           
+            <li class="nav-item" *ngIf="!isSeller"> 
+              <a
+                class="nav-link"
+                [routerLink]="['joinUs']"
+                
+                routerLinkActive="activeLink"
+                aria-controls="tab-dashboard"
+                aria-selected="false"
+                >Join Us</a
+              >
+            </li>
+         
           </ul>
         </aside>
         <div class="col-md-8 col-lg-9">
