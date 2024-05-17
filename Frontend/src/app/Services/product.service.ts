@@ -53,12 +53,22 @@ baseurl="https://localhost:7191/api/Products";
     return this.http.get<Product[]>(url);
    }
   
+
+
+  delete(Id:number){
+    const url = `${this.baseurl}/${Id}`;
+
+    return this.http.delete(url);
+
+  }
+
    GetAllProducts():Observable<Product[]>{
     const url =  `${this.baseurl}/getAll`;
     return this.http.get<Product[]>(url);
    }
 
    
+
 }
 
 

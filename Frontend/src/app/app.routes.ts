@@ -65,11 +65,16 @@ export const routes: Routes = [
     { path: 'description/:id', component: DescriptionComponent },
     
 ]
+
+  },
+
+{ path: "Cart", component: CartComponent },
+{ path: "WishList", component: WishListProductsComponent }
+
 },
-{ path: "shop", component: ShopComponent },
-  { path: "", redirectTo: "category", pathMatch: "full" },
   { path: "category", component: CategoryPageComponent },
   { path: "products-category/:categoryId", component: ProductsPageComponent },
+
 
 
 ]

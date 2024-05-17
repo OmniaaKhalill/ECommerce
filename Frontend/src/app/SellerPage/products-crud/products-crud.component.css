@@ -1,45 +1,4 @@
-/* Product Starts */
-.product {
-    position: relative;
-    transition: all 0.3s ease-in-out;
-  }
-  /* Product Ends */
-  /* Image Starts */
-  img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .product-media {
-    position: relative;
-    display: block;
-    background-color: #d7d7d7;
-    margin-bottom: 0;
-    overflow: hidden;
-  }
-  
-  .product-image {
-    display: block;
-    width: 100%; /* Set the width to fill the container */
-    height: 100%; /* Set the height to fill the container */
-    object-fit: contain; /* Ensure the image covers the entire container */
-  }
-  
-  /* Image Ends */
-  /* Cart Starts */
-  .product-action {
-    position: absolute;
-    background-color: var(--light-color);
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 10;
-    transition: all 0.3s ease-in-out;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(100%);
-  }
+
   .product-action a {
     color: var(--dark-color);
   }
@@ -95,42 +54,38 @@
       .cart i {
         color: black;
       }
-    
-      /* Centering the icon */
       .add-product-link {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
       }
-      .Add-product-icon{
-          font-weight: 300;
-    line-height: 1.5;
-    letter-spacing: 0px;
-    text-transform: capitalize;
-    transition: all 0.3s ease-in-out;
-    color:black ;
-    
-      }
       .add-product-button {
-      border-color: var(--grey-color);
-      border-width: 2px;
-      border-style: solid;
-      transition: all 0.4s;
-       /* Specify the border style */
+        border-color: var(--grey-color);
+        border-width: 2px;
+        border-style: solid;
+        transition: all 0.4s;
+        padding: 0; /* Remove padding */
+        margin-top: 5px;
+      }
       
-  }
-  /* .add-product-word{
-      color:var(--grey-color) ;
-  } */
-  .add-product-button:hover a {
-      color: var(--light-color);
-  
-    }
-    .add-product-button:hover {   
-      border-style: none;
-  
-    }
+      /* Remove padding from the anchor tag inside the button */
+      .add-product-button a {
+        padding: 0; 
+        color:black ;
+
+      }
+      
+      .add-product-button:hover a {
+        color: var(--light-color);
+      }
+      
+      .add-product-button:hover {
+        border-style: none;
+      }
+      .add-product-button:hover i{
+        color: var(--light-color);
+      }
   /* Color Ends */
   .has-text-centered {
     text-align: center;
@@ -151,4 +106,114 @@
 .pagination-controls .active {
     font-weight: bold;
     text-decoration: underline;
+}
+
+.product-media {
+  position: relative;
+  display: block;
+  margin-bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 300px; /* Set the desired height */
+}
+
+.product-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure the image covers the container */
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the container without distortion */
+}
+
+/* Image Ends */
+/* Cart Starts */
+.product-action {
+  position: absolute;
+  background-color: var(--light-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+}
+
+
+.product:hover {
+  box-shadow: 0px 0px 20px #b4b4b4;
+  transform: scale(1.02);
+}
+/* Cart Ends */
+/* Price Starts */
+
+/* Price Ends */
+/* Color Starts */
+
+/* Color Ends */
+
+.product {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  height: 100%; /* Ensure all cards have the same height */
+}
+
+.product-media {
+  position: relative;
+  display: block;
+  margin-bottom: 0;
+  overflow: hidden;
+  height: 300px; /* Set a fixed height for the product media */
+}
+
+
+.product-action {
+  position: absolute;
+  background-color: var(--light-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+}
+
+/* pagination */
+
+nav ul li a {
+  font-size: var(--small-font);
+}
+.page-item-total {
+  font-size: var(--small-font);
+  color: var(--grey-color);
+}
+
+.page-link {
+  color: var(--dark-color);
+  background-color: var(--light-color);
+  border: none;
+}
+
+.page-link:hover {
+  color: var(--light-color);
+  background-color: var(--main-color);
+}
+
+.page-item.active .page-link {
+  color: var(--light-color);
+  background-color: var(--main-color);
+}
+
+.page-item.disabled .page-link {
+  color: var(--grey-color);
+
 }

@@ -5,7 +5,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { addTokenInterceptor } from './interceptor/add-token.interceptor';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ColorPickerModule } from 'ngx-color-picker';
+
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),provideHttpClient(),BrowserModule,BrowserAnimationsModule,provideHttpClient(withInterceptors([addTokenInterceptor]))]
+  providers: [provideRouter(routes),provideHttpClient(),BrowserModule,BrowserAnimationsModule,provideHttpClient(withInterceptors([addTokenInterceptor])), ReactiveFormsModule,ColorPickerModule]
 };
