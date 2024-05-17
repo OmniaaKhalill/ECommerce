@@ -12,7 +12,7 @@ namespace E_Commerce.Core.Repositories.Contract
     {
         IGenericRepository<Product> ProductRepo { get; set; }
         IGenericRepository<Category> CategoryRepo { get; set; }
-        IGenericRepository<Seller> SellerRepo { get; set; }
+        ISellerRepository SellerRepo { get; set; }
         IReviewRepository<Review> ReviewRepo { get; set; }
 
         IGenericRepositoryUser<AppUser> UserRepo { get; set; }

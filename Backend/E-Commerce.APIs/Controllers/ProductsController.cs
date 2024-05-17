@@ -29,13 +29,13 @@ namespace E_Commerce.APIs.Controllers
             this.unit = unit;
             this.mapper = mapper;
         }
-       
+
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
             var spec = new ProductSpecifications(id);
             var product = await unit.ProductRepo.GetSpecAsync(spec);
-            
+
             if (product == null)
             {
                 return NotFound(new ApiResponse(404));
@@ -45,22 +45,22 @@ namespace E_Commerce.APIs.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<ProductToReturnDto>> CreateProduct(Product product, int sellerId)
+        public async Task<ActionResult<ProductToReturnDto>> CreateProduct(Product product, string UserId)
         {
-            var seller = await unit.SellerRepo.GetAsync(sellerId);
+            var seller = await unit.SellerRepo.GetSellerByUserId(UserId);
             if (seller == null)
             {
                 return NotFound(new { Message = "Seller not found", StatusCode = 404 });
             }
             else
             {
-                product.SellerId = sellerId;
+                product.SellerId = seller.id;
                 product.seller = seller;
                 var addedProduct = await unit.ProductRepo.AddAsync(product);
 
                 seller.ProductList ??= new List<Product>();
                 seller.ProductList.Add(addedProduct);
-                await unit.SellerRepo.UpdateAsync(sellerId, seller);
+                await unit.SellerRepo.UpdateAsync(seller.id, seller);
 
                 var productToReturnDto = mapper.Map<Product, ProductToReturnDto>(addedProduct);
                 return Ok(productToReturnDto);
