@@ -1,0 +1,219 @@
+
+  .product-action a {
+    color: var(--dark-color);
+  }
+  
+  .product-action .cart {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .cart:hover {
+    background-color: var(--main-color);
+  }
+  
+  .cart:hover a {
+    color: var(--light-color);
+  }
+  
+  .product-action .wishlist {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .wishlist:hover {
+    background-color: var(--main-color);
+  }
+  
+  .wishlist:hover a {
+    color: var(--light-color);
+  }
+  
+  .product:hover .product-action,
+  .product:focus .product-action {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .product:hover {
+    box-shadow: 0px 0px 20px #b4b4b4;
+    transform: scale(1.02);
+  }
+  /* Cart Ends */
+  /* Price Starts */
+  .product-price {
+    color: var(--main-color);
+  }
+  /* Price Ends */
+  /* Color Starts */
+  .color {
+    width: 20px;
+    height: 20px;
+    margin: 0 3px 3px 3px;
+    border-radius: 50px;
+  }
+      /* Icon color */
+      .cart i {
+        color: black;
+      }
+      .add-product-link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+      .add-product-button {
+        border-color: var(--grey-color);
+        border-width: 2px;
+        border-style: solid;
+        transition: all 0.4s;
+        padding: 0; /* Remove padding */
+        margin-top: 5px;
+      }
+      
+      /* Remove padding from the anchor tag inside the button */
+      .add-product-button a {
+        padding: 0; 
+        color:black ;
+
+      }
+      
+      .add-product-button:hover a {
+        color: var(--light-color);
+      }
+      
+      .add-product-button:hover {
+        border-style: none;
+      }
+      .add-product-button:hover i{
+        color: var(--light-color);
+      }
+  /* Color Ends */
+  .has-text-centered {
+    text-align: center;
+}
+
+/* Ensure that the pagination controls are not affected by hover styles */
+.pagination-controls a {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: none;
+}
+
+.pagination-controls a:hover {
+    text-decoration: underline;
+}
+
+/* Ensure the active page is styled correctly */
+.pagination-controls .active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.product-media {
+  position: relative;
+  display: block;
+  margin-bottom: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 300px; /* Set the desired height */
+}
+
+.product-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure the image covers the container */
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the container without distortion */
+}
+
+/* Image Ends */
+/* Cart Starts */
+.product-action {
+  position: absolute;
+  background-color: var(--light-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+}
+
+
+.product:hover {
+  box-shadow: 0px 0px 20px #b4b4b4;
+  transform: scale(1.02);
+}
+/* Cart Ends */
+/* Price Starts */
+
+/* Price Ends */
+/* Color Starts */
+
+/* Color Ends */
+
+.product {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  height: 100%; /* Ensure all cards have the same height */
+}
+
+.product-media {
+  position: relative;
+  display: block;
+  margin-bottom: 0;
+  overflow: hidden;
+  height: 300px; /* Set a fixed height for the product media */
+}
+
+
+.product-action {
+  position: absolute;
+  background-color: var(--light-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+}
+
+/* pagination */
+
+nav ul li a {
+  font-size: var(--small-font);
+}
+.page-item-total {
+  font-size: var(--small-font);
+  color: var(--grey-color);
+}
+
+.page-link {
+  color: var(--dark-color);
+  background-color: var(--light-color);
+  border: none;
+}
+
+.page-link:hover {
+  color: var(--light-color);
+  background-color: var(--main-color);
+}
+
+.page-item.active .page-link {
+  color: var(--light-color);
+  background-color: var(--main-color);
+}
+
+.page-item.disabled .page-link {
+  color: var(--grey-color);
+
+}

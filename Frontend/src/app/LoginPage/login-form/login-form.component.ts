@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AccountService } from '../../services/account.service';
+
 import { Router, RouterModule } from '@angular/router';
+import { AccountService } from '../../services/account.service';
 
 
 @Component({
@@ -33,7 +34,6 @@ export class LoginFormComponent implements OnInit {
 
 
   onSubmit() {
-   console.log(this.userloginFrom.get('email')?.value,this.userloginFrom.get('password')?.value)
     
     this.acountRepo.login(this.userloginFrom.get('email')?.value, this.userloginFrom.get('password')?.value).then((success) => {
       if (success) {

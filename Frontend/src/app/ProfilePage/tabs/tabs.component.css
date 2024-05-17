@@ -1,0 +1,9 @@
+.nav-link{
+    color:var( --grey-color);
+}
+
+
+.activeLink{
+    color: var(--main-color) !important;
+    
+}

@@ -1,0 +1,119 @@
+<app-page-header  [PageName]="Pagename">
+
+</app-page-header>
+
+  
+
+<div class="container">
+    <!-- add product button -->
+    
+<div class="container">
+  <!-- add product button -->
+  <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+<app-breadcrumb></app-breadcrumb>
+          </div>
+     
+</div>
+      <!-- <div class="row"> -->
+        <div class="container">
+
+          <div>
+            <div class="col-12 mb-3">
+              <div class="add-product-link">
+                <a routerLink="/Add">
+                  <div class="col-12">
+                    <div class="cart p-2 text-center add-product-button">
+                      <a routerLink="/Add" class="Add-product-icon">
+                        <span class="add-product-word">Add Product   <i class="fa-solid fa-plus"></i></span>
+                       
+                      </a>
+                      
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+      <div class="products mb-5">
+        <div class="row">
+          @for (item of items; track $index) {
+            <div class="col-6 col-md-3 col-lg-3 p-1">
+              <div class="product">
+                <figure class="product-media">
+                  <a href="Go to single product" class="">
+                    <img [src]="item.image_link" alt="Product image" class="product-image p-3">
+                  </a>
+                  <div class="product-action text-center">
+                    <div class="row g-0">
+                      <a href="" class="col-6">
+                        <div class="col-12">
+                          <div class="cart border-end p-2">
+                            <a href="edit" class="">
+                              <i class="fas fa-edit"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </a>
+                      <a (click)="delete(item)" class="col-6">
+                        <div class="col-12">
+                          <div class="wishlist p-2">
+                            <a  class="" (click)="delete(item)">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </figure>
+      
+                <div class="product-body p-3">
+                  <h5 class="fw-bold text-capitalize">{{item.brand}}</h5>
+                  <h5 class="fw-bold my-3">{{item.name}}</h5>
+                  <p class="d-inline">
+                    <span class="fw-bold fs-5">Category: </span>
+                    <a href="Category" class="fs-5 text-dark text-capitalize">{{item.category}}</a>
+                  </p>
+                  <div class="product-price fs-5 my-2">
+                    ${{item.price}}
+                  </div>
+                  <div class="colour_section d-flex flex-wrap">
+                    <div class="color" *ngFor="let color of item.colors" [style.background]="color.hex_value">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+          @empty {
+            <div class="alert alert-danger" role="alert">
+              <strong>Add Products </strong>
+            </div>
+          }
+        </div>
+      </div>
+      
+      </div>
+      <!-- //pagination -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center align-items-center">
+          <li class="page-item" [ngClass]="{'disabled': CurrentPageNum === 1}" (click)="PreviousPage()" aria-label="Previous">
+              <a class="page-link page-link-prev fw-bold"  aria-label="Previous" tabindex="-1" aria-disabled="true">
+                  <span aria-hidden="true"><i class="fa fa-arrow-left pe-2"></i></span>Prev
+              </a>
+          </li>
+          <li class="page-item" *ngFor="let page of getPages()" [ngClass]="{'active': page === CurrentPageNum, 'disabled': page === '...'}">
+              <a class="page-link"  (click)="goToPage(page)" *ngIf="page !== '...'">{{ page }}</a>
+              <span class="page-link" *ngIf="page === '...'">{{ page }}</span>
+          </li>
+          <li class="page-item-total fw-bold">of {{ totalPages }}</li>
+          <li class="page-item" [ngClass]="{'disabled': CurrentPageNum === totalPages}" (click)="NextPage()" aria-label="Next">
+              <a class="page-link page-link-next fw-bold"  aria-label="Next">
+                  Next <span aria-hidden="true"><i class="ps-2 fa fa-arrow-right"></i></span>
+              </a>
+          </li>
+      </ul>
+  </nav>
+  
