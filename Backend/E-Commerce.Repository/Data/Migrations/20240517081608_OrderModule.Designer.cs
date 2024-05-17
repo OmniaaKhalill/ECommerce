@@ -4,6 +4,7 @@ using E_Commerce.Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Repository.Data.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20240517081608_OrderModule")]
+    partial class OrderModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -330,8 +333,8 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.Property<decimal>("amount")
                         .HasColumnType("decimal(18, 2)");
 
-                    //b.Property<int>("orderId")
-                    //    .HasColumnType("int");
+                    b.Property<int>("orderId")
+                        .HasColumnType("int");
 
                     b.Property<int>("paymentMethod")
                         .HasColumnType("int");
@@ -342,7 +345,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasKey("id");
 
-              //      b.HasIndex("orderId");
+                    b.HasIndex("orderId");
 
                     b.HasIndex("userId");
 
@@ -771,11 +774,11 @@ namespace E_Commerce.Repository.Data.Migrations
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Payment", b =>
                 {
-                    //b.HasOne("E_Commerce.Core.Entities.Oreder_Agrigate.Order", "Order")
-                    //    .WithMany()
-                    //   // .HasForeignKey("orderId")
-                    //    .OnDelete(DeleteBehavior.Cascade)
-                    //    .IsRequired();
+                    b.HasOne("E_Commerce.Core.Entities.Oreder_Agrigate.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("orderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("E_Commerce.Core.Entities.Identity.AppUser", "User")
                         .WithMany("Payment")
@@ -783,7 +786,7 @@ namespace E_Commerce.Repository.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                  //  b.Navigation("Order");
+                    b.Navigation("Order");
 
                     b.Navigation("User");
                 });

@@ -33,6 +33,8 @@ namespace E_Commerce.Repository
                 return Enumerable.Empty<Product>();
             }
 
+
+
             //get products by seller
             return await _dbcontext.products.Where(p => p.SellerId == seller.id).ToListAsync();
         }
