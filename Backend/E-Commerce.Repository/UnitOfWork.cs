@@ -13,7 +13,7 @@ namespace E_Commerce.Repository
     {
         public IGenericRepository<Product> ProductRepo { get; set; }
         public IGenericRepository<Category> CategoryRepo { get; set; }
-        public IGenericRepository<Seller> SellerRepo { get; set; }
+        public ISellerRepository SellerRepo { get; set; }
         public IGenericRepositoryUser<AppUser> UserRepo { get; set; }
 
         public IReviewRepository<Review> ReviewRepo { get; set; }
@@ -24,7 +24,7 @@ namespace E_Commerce.Repository
         public UnitOfWork(
             IGenericRepository<Product> productRepo,
             IGenericRepository<Category> categoryRepo,
-            IGenericRepository<Seller> sellerRepo,
+             ISellerRepository sellerRepo,
             IGenericRepositoryUser<AppUser> userRepo,
             IReviewRepository<Review> reviewRepo,
              IGenericRepository<Brands> brandsRepo,

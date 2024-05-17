@@ -29,7 +29,7 @@ namespace E_Commerce.Repository
             var seller = await GetSellerByUserId(UserId);
             if (seller == null)
             {
-               
+
                 return Enumerable.Empty<Product>();
             }
 
@@ -37,7 +37,7 @@ namespace E_Commerce.Repository
             return await _dbcontext.products.Where(p => p.SellerId == seller.id).ToListAsync();
         }
 
-        
+
 
         public async Task<Seller?> GetSellerByUserId(string UserId)
         {
@@ -50,22 +50,22 @@ namespace E_Commerce.Repository
             }
             return seller;
         }
-        public  async Task<IEnumerable<Product>> PaginationAsync(string UserId, int Page, int countPerPage)
+        public async Task<IEnumerable<Product>> PaginationAsync(string UserId, int Page, int countPerPage)
         {
             //get the seller from userId
             var seller = await GetSellerByUserId(UserId);
-            if(seller == null)
+            if (seller == null)
             {
                 return Enumerable.Empty<Product>();
             }
-           
-           
+
+
             return await _dbcontext.products.Where(p => p.SellerId == seller.id).Skip((Page - 1) * countPerPage).Take(countPerPage).ToListAsync();
 
         }
         public async Task<int> GetProductCount(string UserId)
         {
-            var seller =await GetSellerByUserId(UserId);
+            var seller = await GetSellerByUserId(UserId);
             //get count of the seller products
             return await _dbcontext.products.Where(p => p.SellerId == seller.id).CountAsync();
         }
