@@ -48,6 +48,13 @@ baseurl="https://localhost:7191/api/Products";
     return this.http.patch<Product>(url, UpdatedProduct);
   }
   
+
+  delete(Id:number){
+    const url = `${this.baseurl}/${Id}`;
+
+    return this.http.delete(url);
+
+  }
 }
 
 

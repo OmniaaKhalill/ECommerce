@@ -36,6 +36,7 @@ ngOnInit(): void
 
 async getCart()
 {
+  
   this.cartService.getCartById("d27583dc-4c5c-45b6-9f3b-e759ac95b13d").subscribe(
     async (data)=>{
       this.cart=data;

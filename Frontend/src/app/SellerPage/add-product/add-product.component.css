@@ -68,3 +68,29 @@
 
 
 
+  .color-picker {
+    width: 30px; /* Set the width of the color picker */
+    height: 30px; /* Set the height of the color picker */
+    border-radius: 50%; /* Make it a circle by setting border-radius to 50% */
+    padding: 0; /* Remove any padding */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+  }
+  
+  /* Optional: Style the color picker border or background */
+  .color-picker {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    padding: 0;
+    border: 2px solid #ccc; /* Add border */
+    background-color: #fff; /* Add background color */
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s; /* Add transition */
+  }
+  
+  .color-picker:focus {
+    border-color: var(--main-color); /* Change border color on focus */
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.1); /* Add box shadow when focused */
+  }
+  

@@ -16,7 +16,7 @@ export class SellerProductsService {
   getSellerProducts(UserId:string,page:number,countPerPage:number):Observable<ProductsPaginationReadDto >
   {
 
-    ;
+    
     return this.http.get<ProductsPaginationReadDto>(`${this.beseUrl}/${UserId}/${page}/${countPerPage}`)
   }
 }

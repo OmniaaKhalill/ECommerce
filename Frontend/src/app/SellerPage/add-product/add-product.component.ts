@@ -67,30 +67,31 @@ constructor(
       }
     );
   }
-  generateInputs(Name:string) 
-  {
+  generateInputs(Name:string) {
+    if(Name==="color") {
+        this.colorNameInputs = Array(this.numOfColors).fill('');
+        this.hexval = Array(this.numOfColors).fill('');
+        console.log(this.numOfColors);
+        console.log(this.hexval);
+    }
+}
+  // generateInputs(Name:string) 
+  // {
     
-    if(Name==="color")
-      {
-      this.colorNameInputs = [];
-      for (let i = 0; i < this.numOfColors; i++) {
-        this.colorNameInputs.push('');
-        this.hexval.push('');
-      }
-      console.log(this.numOfColors);
-      console.log(this.hexval)
+  //   if(Name==="color")
+  //     {
+  //     this.colorNameInputs = [];
+  //     for (let i = 0; i < this.numOfColors; i++) {
+  //       this.colorNameInputs.push('');
+  //       this.hexval.push('');
+  //     }
+  //     console.log(this.numOfColors);
+  //     console.log(this.hexval)
       
 
-    }
-    else{
-
-      this.TagsInput=[];
-      for (let i = 0; i < this.numOfTags; i++) {
-        this.TagsInput.push('');
-        console.log(this.numOfColors);
-
-      }
-    }}
+  //   }
+    
+  //   }
 
   removeInput(index: number,s:string) {
     if(s==="color"){
@@ -118,8 +119,8 @@ constructor(
   
     for (let i = 0; i < this.numOfColors; i++) {
       const color = {
-        hex_value: this.colorNameInputs[i],
-        colour_name: this.hexval[i]
+        hex_value: this.hexval[i],
+        colour_name: this.colorNameInputs[i]
       };
       this.newproduct.colors.push(color);
     }
