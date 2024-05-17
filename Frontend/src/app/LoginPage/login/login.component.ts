@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
+
 import { FormComponent } from '../form/form.component';
+import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
+
 
 @Component({
   selector: 'app-login',

@@ -84,8 +84,9 @@ export class AccountService {
     }
    
     
- 
+ console.log(this.claims);
     return this.claims;
+    
   }
   
   logout(){
