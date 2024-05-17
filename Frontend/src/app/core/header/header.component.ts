@@ -13,15 +13,15 @@ styleUrl: './header.component.css'
 export class HeaderComponent  {
 
 constructor( public router :Router,public accountSercice:AccountService) {
-  
 
-  
+
+
 }
 
 
 
 
 
- 
+
 
 }

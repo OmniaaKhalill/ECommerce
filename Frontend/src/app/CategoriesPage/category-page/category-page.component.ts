@@ -41,7 +41,7 @@ export class CategoryPageComponent {
     { src: '../../../assets/img/Category/col2/5.png', title: 'Eyebrow Pencil' }
   ];
   categories: Category[] = [];
-  product: Product[] = [];
+  // product: Product[] = [];
   // category = new Category(2, "Blusher");
   // category: Category;
 

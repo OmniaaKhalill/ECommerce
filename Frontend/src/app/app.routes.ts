@@ -24,10 +24,11 @@ import { ProductsComponent } from './HomePage/products/products.component';
 import { ShopComponent } from './ShopPage/shop/shop.component';
 import { CategoryPageComponent } from './CategoriesPage/category-page/category-page.component';
 import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 export const routes: Routes = [
-  
+
   { path: "home", component: HomeComponent },     //canActivate:[CanLoginGuard],
   { path: "", redirectTo: "login/Signin", pathMatch: "full" },
   { path: "login", component: LoginComponent ,children:[
@@ -59,17 +60,18 @@ export const routes: Routes = [
   {path:"WishList" , component:WishListProductsComponent},
      { path: "logout", component: LogoutComponent},
   { path: "product", component: ProductsComponent},
-  
+
   { path: 'product/:id', component: SingleProductComponent,children: [
       { path: 'reviews/:id', component: ReviewsComponent },
     { path: 'description/:id', component: DescriptionComponent },
-    
+
 ]
 },
 { path: "shop", component: ShopComponent },
   { path: "", redirectTo: "category", pathMatch: "full" },
   { path: "category", component: CategoryPageComponent },
   { path: "products-category/:categoryId", component: ProductsPageComponent },
+  { path: "loader", component: LoaderComponent },
 
 
 ]
