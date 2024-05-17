@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 
 import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { SimilarProductsComponent } from '../similar-products/similar-products.component';
-import { ProductService } from '../../Services/product.service';
+import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 
 @Component({
@@ -20,7 +20,7 @@ constructor(public productService:ProductService , public activatedRoute:Activat
   
 }
 
-product:Product = new Product(0,"","",0,0,[],0,"","",0,[]);
+product:Product = new Product(0,"",0,0,[],0,"","",0,[],"",0,"");
 ngOnInit():void{
   if(this.outOfStock()==true){
     let qtyInput = <HTMLInputElement>document.getElementById('qty');

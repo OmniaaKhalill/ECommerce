@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Token } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import * as jwtDecode from 'jwt-decode'
+import { BehaviorSubject } from 'rxjs';
+import { session } from '../models/User/session';
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
 
-  isAuthenticated =false;
-  claims:{Name:string, Email:string, IsSeller:string , UserId:string }|undefined
+  public claims=new session(false,"","","","")
 
-
-
+ 
+  user!: { isAuthenticated: boolean; Name: string; Email: string; IsSeller: string; UserId: string; };
  
   private baseUrl="https://localhost:7191/api/Account"
 
@@ -21,10 +22,11 @@ export class AccountService {
     return new Promise<boolean>((resolve) => {
       this.http.post(this.baseUrl + str, { email, password }, { responseType: 'text' }).subscribe(
         (response) => {
-          this.isAuthenticated = true;
+          
+       
+          
           localStorage.setItem("token", response);
-          this.claims = jwtDecode.jwtDecode(response);
-          console.log(this.claims);
+       
           resolve(true); // Resolve the promise indicating successful login
         },
         (error) => {
@@ -42,9 +44,11 @@ export class AccountService {
     return new Promise<boolean>((resolve) => {
       this.http.post(this.baseUrl + str, { displayName, email, password }, { responseType: 'text' }).subscribe(
         (response) => {
-          this.isAuthenticated = true;
+   
+
+          
           localStorage.setItem("token", response);
-          this.claims = jwtDecode.jwtDecode(response);
+     
         
           resolve(true); // Resolve the promise indicating success
         },
@@ -58,12 +62,36 @@ export class AccountService {
   
   
   
+  //  checkAuthenticationStatus :boolean() {
+   
+  //  return this.isAuthenticated$.next(this.isAuthenticated);
+  // }
 
 
 
+  getClaims(): session {
+    let token = localStorage.getItem("token");
+    
+
+    if (typeof token === 'string' && token ) {
+      this.claims.isAuthenticated=true
+      this.user = jwtDecode.jwtDecode(token);
+  
+      this.claims.Email=this.user?.Email
+      this.claims.Name=this.user.Name
+      this.claims.UserId=this.user.UserId
+      this.claims.IsSeller=this.user.IsSeller
+    }
+   
+    
+ console.log(this.claims);
+    return this.claims;
+    
+  }
+  
   logout(){
     localStorage.removeItem("token")
-    this.isAuthenticated =false;
+   this.claims.isAuthenticated=false
   }
 
 

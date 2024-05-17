@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './HomePage/home/home.component';
-import { ShopComponent } from './ShopPage/shop/shop.component';
+
 import { ProductsCrudComponent } from './SellerPage/products-crud/products-crud.component';
 import { AddProductComponent } from './SellerPage/add-product/add-product.component';
 import { TabsComponent } from './ProfilePage/tabs/tabs.component';
@@ -14,11 +14,17 @@ import { EditProductComponent } from './SellerPage/edit-product/edit-product.com
 import { SingleProductComponent } from './SingleProductPage/single-product/single-product.component';
 import { DescriptionComponent } from './SingleProductPage/description/description.component';
 import { ReviewsComponent } from './SingleProductPage/reviews/reviews.component';
+
 import { LoginComponent } from './LoginPage/login/login.component';
 import { RegisterFormComponent } from './LoginPage/register-form/register-form.component';
 import { LoginFormComponent } from './LoginPage/login-form/login-form.component';
 import { CanLoginGuard } from './guard/can-login.guard';
 import { LogoutComponent } from './LoginPage/logout/logout.component';
+import { ProductsComponent } from './HomePage/products/products.component';
+import { ShopComponent } from './ShopPage/shop/shop.component';
+import { CategoryPageComponent } from './CategoriesPage/category-page/category-page.component';
+import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
+
 
 export const routes: Routes = [
   
@@ -49,16 +55,26 @@ export const routes: Routes = [
   {path:"Add",component:AddProductComponent},
   {path:"Edite/:id",component:EditProductComponent},
   { path: 'home', component: HomeComponent },
+  {path:"Cart" , component:CartComponent},
+  {path:"WishList" , component:WishListProductsComponent},
+     { path: "logout", component: LogoutComponent},
+  { path: "product", component: ProductsComponent},
   
   { path: 'product/:id', component: SingleProductComponent,children: [
       { path: 'reviews/:id', component: ReviewsComponent },
     { path: 'description/:id', component: DescriptionComponent },
+    
 ]
+
   },
 
 { path: "Cart", component: CartComponent },
 { path: "WishList", component: WishListProductsComponent }
 
-];
+},
+  { path: "category", component: CategoryPageComponent },
+  { path: "products-category/:categoryId", component: ProductsPageComponent },
 
 
+
+]

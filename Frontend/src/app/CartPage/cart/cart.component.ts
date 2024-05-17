@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { CartProductsComponent } from '../cart-products/cart-products.component';
-import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
+
 import { CartTotalComponent } from '../cart-total/cart-total.component';
+import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
+
 
 @Component({
   selector: 'app-cart',

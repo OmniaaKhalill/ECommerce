@@ -47,7 +47,13 @@ baseurl="https://localhost:7191/api/Products";
     // Send the PATCH request
     return this.http.patch<Product>(url, UpdatedProduct);
   }
+
+  GetProductsByCategoryId(CategoryId: number): Observable<Product[]>{
+    const url = `${this.baseurl}/categories/${CategoryId}`;
+    return this.http.get<Product[]>(url);
+   }
   
+
 
   delete(Id:number){
     const url = `${this.baseurl}/${Id}`;
@@ -55,6 +61,14 @@ baseurl="https://localhost:7191/api/Products";
     return this.http.delete(url);
 
   }
+
+   GetAllProducts():Observable<Product[]>{
+    const url =  `${this.baseurl}/getAll`;
+    return this.http.get<Product[]>(url);
+   }
+
+   
+
 }
 
 

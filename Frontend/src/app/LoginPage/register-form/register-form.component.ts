@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AccountService } from '../../Services/account.service';
+import { AccountService } from '../../services/account.service';
 import { Router, RouterLink } from '@angular/router';
 
 
@@ -40,7 +40,11 @@ export class RegisterFormComponent implements OnInit {
       
       console.log(this.userRegisterFrom.get('email')?.value,this.userRegisterFrom.get('password')?.value)   ;
 
-      this.accountRepo.register(this.userRegisterFrom.get('displayName')?.value,this.userRegisterFrom.get('email')?.value, this.userRegisterFrom.get('password')?.value)
-      this.router.navigateByUrl("/home")
-     }
+      this.accountRepo.register(this.userRegisterFrom.get('displayName')?.value,this.userRegisterFrom.get('email')?.value, this.userRegisterFrom.get('password')?.value).then((success) => {
+        if (success) {
+          this.router.navigateByUrl("/home")
+        } 
+      });
+
+      }
 }

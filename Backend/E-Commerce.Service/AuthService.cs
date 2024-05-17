@@ -42,6 +42,7 @@ namespace E_Commerce.Service
                 authClaims.Add(new Claim("IsSeller", "true"));
             }
 
+
             else
             {
                 authClaims.Add(new Claim("IsSeller", "false"));

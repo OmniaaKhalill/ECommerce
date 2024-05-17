@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CartService } from '../../Services/cart.service';
+import { CartService } from '../../services/cart.service';
 import { Cart } from '../../models/cart';
-import { ProductService } from '../../Services/product.service';
+import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { ProductCart } from '../../models/product-cart';
 import { CartItem } from '../../models/cart-item';

@@ -1,17 +1,19 @@
 import { CommonModule, JsonPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule,Validators,FormArray } from '@angular/forms';
-import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
-import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
-import { ProductService } from '../../Services/product.service';
+
+import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import{ImegesService} from '../../Services/imeges.service'
+import{ImegesService} from '../../services/imeges.service'
 import { ColorPickerModule } from 'ngx-color-picker';
-import { CategoryService } from '../../Services/category.service';
+
 import { Category } from '../../models/category';
 import { ActivatedRoute } from '@angular/router';
+import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
+import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
+import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -32,14 +34,14 @@ export class EditProductComponent {
   hexval:string[]=[];
   categories:Category[]=[];
   categoryName:string="blach";
-  Editedproduct:Product=new Product(0,"","",0,0,[],0,"","",1,[]);
+  Editedproduct:any;
    id:number= Number(this.route.snapshot.paramMap.get('id'));
 constructor(
   private route: ActivatedRoute,
   private productService: ProductService,
   public router:Router ,
   private imageServece:ImegesService,
-  public CategoryService:CategoryService
+  public categoryService:CategoryService
 ) {}
   ngOnInit(): void 
   {
@@ -53,7 +55,7 @@ constructor(
   }
   getAllCategories()
   {
-    this.CategoryService.GetAll().subscribe(
+    this.categoryService.GetAll().subscribe(
       (data: Category[]) =>
       {
         console.log(data);
@@ -72,7 +74,7 @@ constructor(
 
     this.productService.GetById(productId).subscribe(
       (product)=>{
-this.Editedproduct.brand=product.brand;
+this.Editedproduct.brand=product.brands;
 this.Editedproduct.categoryId=product.categoryId;
 this.Editedproduct.colors=product.colors;
 this.Editedproduct.description=product.description;

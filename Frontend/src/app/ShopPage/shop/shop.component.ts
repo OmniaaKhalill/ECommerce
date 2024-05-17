@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PageHeaderComponent } from '../page-header/page-header.component';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 import { ToolboxComponent } from '../toolbox/toolbox.component';
 import { ProductSectionComponent } from '../product-section/product-section.component';
 import { CategorySectionComponent } from '../category-section/category-section.component';
 import { BrandSectionComponent } from '../brand-section/brand-section.component';
-import { TagSectionComponent } from '../tag-section/tag-section.component';
-import { PriceSectionComponent } from '../price-section/price-section.component';
+import { AccountService } from '../../services/account.service';
+
 
 @Component({
   selector: 'app-shop',
@@ -18,12 +18,15 @@ import { PriceSectionComponent } from '../price-section/price-section.component'
     ProductSectionComponent,
     CategorySectionComponent,
     BrandSectionComponent,
-    TagSectionComponent,
-    PriceSectionComponent
   ],
   templateUrl: './shop.component.html',
   styleUrl: './shop.component.css'
 })
-export class ShopComponent {
+export class ShopComponent implements OnInit {
 
+  constructor(public accountService:AccountService){}
+
+  ngOnInit(){
+     console.log(this.accountService.getClaims().UserId);
+  }
 }

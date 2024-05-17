@@ -55,32 +55,31 @@ namespace E_Commerce.APIs.Controllers
                 DisplayName = Model.DisplayName,
                 Email = Model.Email,
                 UserName = Model.DisplayName
-
             };
-            var result = await _userManager.CreateAsync(user, Model.Password);
-
-
 
             if (!await _roleManager.RoleExistsAsync("user"))
             {
                 var role = new IdentityRole();
-                role.Name = "seller";
-                _roleManager.CreateAsync(role);
-
+                role.Name = "user";
+                await _roleManager.CreateAsync(role);
             }
 
-           
-            await  _userManager.AddToRoleAsync(user, "user");
+            var result = await _userManager.CreateAsync(user, Model.Password);
 
-            if (result.Succeeded is false)
+     
+            if (!result.Succeeded)
             {
                 return BadRequest(440);
             }
 
-            var token = await _authService.CreatTokenAsync(user, _userManager);
-            return Ok(token);
+       
+            await _userManager.AddToRoleAsync(user, "user");
 
-           
+            
+            var token = await _authService.CreatTokenAsync(user, _userManager);
+
+            return Ok(token);
         }
+
     }
 }
