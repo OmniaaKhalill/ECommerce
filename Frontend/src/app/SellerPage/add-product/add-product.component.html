@@ -15,8 +15,10 @@
      <!-- End .col-sm-6 -->
 
      <div class="col-sm-6">
-       <label for="Brand" class="formstylebold">Brand *</label>
-       <input id="Brand"  type="text" name="Brand" class="form-control"  [(ngModel)]="newproduct.brand" required [ngModelOptions]="{standalone: true}" />
+      <label for="brandId" class="formstylebold">Brands *</label>
+      <select id="brandId" name="brandId" class="category form-select form-select-lg form-control" [(ngModel)]="newproduct.brandId" required>
+          <option *ngFor="let brand of brands" [value]="brand.id" >{{ brand.name }}</option>
+      </select>
      </div>
     
    </div>
@@ -27,11 +29,7 @@
     <select id="CategoryId" name="CategoryId" class="category form-select form-select-lg form-control" [(ngModel)]="newproduct.categoryId" required>
         <option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</option>
     </select>
-      
-
     </div>
-
-  
 
 <div class="row">
     
@@ -40,32 +38,28 @@
 
     <label for="Price" class="formstylebold">Price *</label>
     <input id="Price" name="Price" [(ngModel)]="newproduct.price" type="text" class="form-control" required  [ngModelOptions]="{standalone: true}"/>
-</div>
+  </div>
+  <div class="col-sm-8">
+    <label class="formstylebold">Number Of Colors</label>
+    <input id="number-of-color" class="form-control" name="numOfcolor" [(ngModel)]="numOfColors" (change)="generateInputs('color')" [ngModelOptions]="{standalone: true}" />
 
-    <div class="col-sm-8">
-        <label class="formstylebold">Number Of Colors</label>
-        <input id="number-of-color" class="form-control" name="numOfcolor" [(ngModel)]="numOfColors" (change)=" generateInputs('color')" [ngModelOptions]="{standalone: true}" />
-    
-        <div class="form-group mt-3" *ngFor="let color of colorNameInputs; let i = index">
-            <div class="input-group mb-3 row">
-                <div class="col-6">
-                 <input [(colorPicker)]="hexval[i]" name="hexval[i]" [style.background]="hexval[i]" value="hexval[i]" [(ngModel)]="hexval[i] "/>
-                </div>
-                <div class="col-6">
-                    <input id="colors"  class="form-control" placeholder="Enter color {{ i + 1 }}" [(ngModel)]="colorNameInputs[i]" name="color{{i}}" [ngModelOptions]="{standalone: true}">
-                    <div class="input-group-append">
-                        <button type="button" class="btn  btnstyle" (click)="removeInput(i,'color')">Remove</button>
-                    </div>
-                </div>
-                
+    <div class="form-group mt-3" *ngFor="let color of colorNameInputs; let i = index">
+        <div class="input-group mb-3 row">
+            <div class="col-4">
+                <input   class="form-control"  [(colorPicker)]="hexval[i]" name="hexval{{i}}" [style.background]="hexval[i]" value="{{hexval[i]}}" [(ngModel)]="hexval[i]" />
             </div>
-        </div> <!-- Close the div for Number Of Tags section -->
-    </div> <!-- Close the div for the second column -->
-    
-
-   
-   </div>
-    
+            <div class="col-6">
+<!-- Assuming 'colorNameInputs' and 'hexval' are arrays defined in your component -->
+<input id="colors" class="form-control" placeholder="Enter color {{ i + 1 }}" [(ngModel)]="colorNameInputs[i]" [name]="color[i]" />
+            </div>
+                <div class="input-group-append  col-2">
+                    <button type="button" class="btn  btnstyle" (click)="removeInput(i,'color')">Remove</button>
+                </div>
+           
+        </div>
+    </div>
+</div>
+</div>
 
         <label for="Description" class="formstylebold">Description</label>
         <input id="Description" name="Description" [(ngModel)]="newproduct.description" type="text" class="form-control" [ngModelOptions]="{standalone: true}"/>

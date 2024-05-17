@@ -8,11 +8,11 @@ export class Product {
         public numOfProductInStock: number,
         public image_link:string,
         public description:string,
-        public sellerId:number,
         public reviews:{content:string , rating:number ,datePosted:Date,userId:string ,displayName:string}[],
         public category: string,
         public brandsid: number,
         public brands: string,
+       
         
     ) {}
 }

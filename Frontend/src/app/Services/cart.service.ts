@@ -1,31 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Cart } from '../models/cart';
-import { AccountService } from './account.service';
-import { CartItem } from '../models/cart-item';
 import { Observable } from 'rxjs';
+import { Cart } from '../models/cart';
+import { CartItem } from '../models/cart-item';
+import { AccountService } from './account.service'; // Ensure correct casing
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  constructor(private http:HttpClient,private accountservice:AccountService) { }
+  private baseUrl = 'https://localhost:7191/api/Cart';
 
-  baseUrl="https://localhost:7191/api/Cart";
-  getCartById(Id:string){
+  constructor(
+    private http: HttpClient,
+    private accountService: AccountService
+  ) { }
 
-    // const Id=this.accountservice.claims?.UserId;
-
+  getCartById(Id: string): Observable<Cart> {
     return this.http.get<Cart>(`${this.baseUrl}/${Id}`);
-
   }
-
 
   update(UpdatedcartItem: CartItem, Id: string): Observable<CartItem> {
     const url = `https://localhost:7191/api/CartItem/${Id}`;
-
-    // Send the PATCH request
     return this.http.patch<CartItem>(url, UpdatedcartItem);
   }
 
@@ -33,5 +30,4 @@ export class CartService {
     const url = `https://localhost:7191/api/CartItem/${Id}`;
     return this.http.delete(url);
   }
-
 }

@@ -7,6 +7,7 @@ import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
 import { ProductCart } from '../../models/product-cart';
 import { CartItem } from '../../models/cart-item';
+import { AccountService } from '../../services/account.service';
 
 @Component({
   selector: 'app-cart-products',
@@ -22,7 +23,7 @@ export class CartProductsComponent implements OnInit
   cart=new Cart();
   ProductList:ProductCart[]=[];
   cartItem:CartItem=new CartItem();
-constructor(private cartService:CartService,private productService:ProductService){
+constructor(private cartService:CartService,private productService:ProductService,private accountservice:AccountService){
 
 }
 
@@ -49,6 +50,8 @@ ngOnInit(): void
 
 async getCart()
 {
+  var user=this.accountservice.getClaims().UserId;
+  console.log(user)
   this.cartService.getCartById("d27583dc-4c5c-45b6-9f3b-e759ac95b13d").subscribe(
     async (data)=>{
       this.cart=data;

@@ -11,9 +11,9 @@ export class ProductService {
 baseurl="https://localhost:7191/api/Products";
   constructor(public http:HttpClient) { }
   //add product to database
-  Add(newproduct: Product, sellerId: number): Observable<Product> {
+  Add(newproduct: Product, UserId: string): Observable<Product> {
     // Define query parameters
-    const params = new HttpParams().set('sellerId', sellerId.toString());
+    const params = new HttpParams().set('UserId', UserId.toString());
 
     // Define options for the POST request
     const options = {
@@ -57,6 +57,14 @@ baseurl="https://localhost:7191/api/Products";
     const url =  `${this.baseurl}/getAll`;
     return this.http.get<Product[]>(url);
    }
+   
+
+   delete(Id:number){
+    const url = `${this.baseurl}/${Id}`;
+
+    return this.http.delete(url);
+
+  }
 
    
 }

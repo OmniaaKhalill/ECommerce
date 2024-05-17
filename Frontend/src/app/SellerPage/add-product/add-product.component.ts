@@ -13,6 +13,9 @@ import { Category } from '../../models/category';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
 import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
 import { CategoryService } from '../../services/category.service';
+import { BrandService } from '../../services/brand.service';
+import { Brands } from '../../models/brands';
+import { AccountService } from '../../services/account.service';
 
 
 
@@ -36,31 +39,39 @@ export class AddProductComponent implements OnDestroy,OnInit
   sub:Subscription|null=null;
   hexval:string[]=[];
   categories:Category[]=[];
+  brands:Brands[]=[];
   categoryName:string="blach";
-  
-
-  newproduct:any;
+  brandName:string="flomar";
+  newproduct:any={};
 constructor(
   private productService: ProductService,
   public router:Router ,
   private imageServece:ImegesService,
-  public categoryService:CategoryService
+  public categoryService:CategoryService,
+  public brandService:BrandService,
+  public accountservice:AccountService
 ) {}
   ngOnInit(): void 
   {
-   this.getAllProducts();
+    this.getAllCategories();
+    this.getAllBrands()
+  
+  }
+  onloaed(){
+   
+    
   }
   ngOnDestroy(): void
   {
    this.sub?.unsubscribe;
    
   }
-  getAllProducts()
+  getAllCategories()
   {
     this.categoryService.GetAll().subscribe(
       (data: Category[]) =>
       {
-        console.log(data);
+        console.log("helo from categories"+data);
         this.categories = data;
         console.log("lvkvf"+this.categories)
         this.categories.forEach(category => {
@@ -71,6 +82,23 @@ constructor(
       }
     );
   }
+  getAllBrands()
+  {
+    this.brandService.GetBrands().subscribe(
+      (data: Brands[]) =>
+      {
+        console.log("helllllllllllo from brands"+data);
+        this.brands = data;
+        console.log("lvkvf"+this.brands)
+        this.brands.forEach(brand => {
+          // Log or perform operations on each category object
+          console.log(brand); // Example: Log each category object to the console
+      });
+      console.log(this.brands[0])
+      }
+    );
+  }
+  
   generateInputs(Name:string) 
   {
     
@@ -86,15 +114,8 @@ constructor(
       
 
     }
-    else{
-
-      this.TagsInput=[];
-      for (let i = 0; i < this.numOfTags; i++) {
-        this.TagsInput.push('');
-        console.log(this.numOfColors);
-
-      }
-    }}
+    
+    }
 
   removeInput(index: number,s:string) {
     if(s==="color"){
@@ -119,17 +140,25 @@ constructor(
         break;
       }
     }
+    for (let i = 0; i < this.brands.length; i++) {
+      if (this.brands[i].name === this.brandName) {
+        this.newproduct.brandid = this.brands[i].id;
+        console.log(this.newproduct.brandid);
+        console.log(this.brands[i].id);
+        break;
+      }
+    }
   
     for (let i = 0; i < this.numOfColors; i++) {
       const color = {
-        hex_value: this.colorNameInputs[i],
-        colour_name: this.hexval[i]
+        hex_value: this.hexval[i],
+        colour_name: this.colorNameInputs[i]
       };
       this.newproduct.colors.push(color);
     }
   
-    const sellerId = 1;
-    this.sub = this.productService.Add(this.newproduct, sellerId).subscribe({
+    const usrId = this.accountservice.getClaims().UserId;
+    this.sub = this.productService.Add(this.newproduct, usrId).subscribe({
       next: (data) => {
         console.log(data);
         this.router.navigateByUrl("/Product");
@@ -159,4 +188,3 @@ constructor(
   }
 
 }
-

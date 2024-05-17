@@ -82,7 +82,7 @@ this.Editedproduct.image_link=product.image_link;
 this.Editedproduct.name=product.name;
 this.Editedproduct.numOfProductInStock=product.numOfProductInStock;
 this.Editedproduct.price=product.price;
-this.Editedproduct.sellerId=product.sellerId;
+// this.Editedproduct.sellerId=product.sellerId;
 console.log("the object editeproduct"+JSON.stringify(this.Editedproduct));
         console.log(product);
       }

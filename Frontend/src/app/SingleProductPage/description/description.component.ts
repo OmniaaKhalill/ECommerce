@@ -15,7 +15,7 @@ export class DescriptionComponent {
   
   }
   
- product:Product = new Product(0,"",0,0,[],0,"","",0,[],"",0,"");
+ product:Product =  new Product(0,"",0,0,[],0,"","",[],"",0,"")
 
   ngOnInit():void{
     this.activatedRoute.params.subscribe(p=>{this.productService.GetById(p['id']).subscribe(d=>this.product = d) })
