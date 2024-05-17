@@ -119,7 +119,8 @@ namespace E_Commerce.APIs.Helpers
 
 
 
-
+            CreateMap<CustomerWishlistDto, CustomerWishlist>();
+            CreateMap<WishlistItemDto, WishlistItem>();
 
         }
     } 
