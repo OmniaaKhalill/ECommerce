@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient ,HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart } from '../models/cart';
@@ -28,6 +28,6 @@ export class CartService {
 
   delete(UpdatedcartItem: CartItem, Id: string){
     const url = `https://localhost:7191/api/CartItem/${Id}`;
-    return this.http.delete(url);
-  }
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.delete(url, { headers, body: UpdatedcartItem });  }
 }

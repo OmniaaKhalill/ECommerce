@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
 import { Observable } from 'rxjs';
 import { ProductCart } from '../models/product-cart';
+import { ProductToAdd } from '../models/product-to-add';
+import { ProductToEdite } from '../models/product-to-edite';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class ProductService {
 baseurl="https://localhost:7191/api/Products";
   constructor(public http:HttpClient) { }
   //add product to database
-  Add(newproduct: Product, UserId: string): Observable<Product> {
+  Add(newproduct: ProductToAdd, UserId: string): Observable<ProductToAdd> {
     // Define query parameters
     const params = new HttpParams().set('UserId', UserId.toString());
 
@@ -21,7 +23,7 @@ baseurl="https://localhost:7191/api/Products";
     };
 
     // Send the POST request
-    return this.http.post<Product>(this.baseurl, newproduct, options);
+    return this.http.post<ProductToAdd>(this.baseurl, newproduct, options);
   }
 
   GetById(Id: number): Observable<Product> {
@@ -41,11 +43,11 @@ baseurl="https://localhost:7191/api/Products";
   }
 
 
-  update(UpdatedProduct: Product, Id: number): Observable<Product> {
+  update(UpdatedProduct: ProductToEdite, Id: number): Observable<ProductToEdite> {
     const url = `${this.baseurl}/${Id}`;
 
     // Send the PATCH request
-    return this.http.patch<Product>(url, UpdatedProduct);
+    return this.http.patch<ProductToEdite>(url, UpdatedProduct);
   }
 
   GetProductsByCategoryId(CategoryId: number): Observable<Product[]>{

@@ -14,6 +14,10 @@ import { ActivatedRoute } from '@angular/router';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
 import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
 import { CategoryService } from '../../services/category.service';
+import { BrandService } from '../../services/brand.service';
+import { Brands } from '../../models/brands';
+import { ProductToAdd } from '../../models/product-to-add';
+import { ProductToEdite } from '../../models/product-to-edite';
 
 @Component({
   selector: 'app-edit-product',
@@ -34,19 +38,25 @@ export class EditProductComponent {
   hexval:string[]=[];
   categories:Category[]=[];
   categoryName:string="blach";
-  Editedproduct:any;
+  Editedproduct:ProductToEdite=new ProductToEdite(0,"",0,0,[],0,"","",0,0);
+  brands: Brands[] = [];
+  colorInputs: { name: string, hex: string }[] = [];
+
+
    id:number= Number(this.route.snapshot.paramMap.get('id'));
 constructor(
   private route: ActivatedRoute,
   private productService: ProductService,
   public router:Router ,
   private imageServece:ImegesService,
-  public categoryService:CategoryService
+  public categoryService:CategoryService,
+  public brandsService:BrandService
 ) {}
   ngOnInit(): void 
   {
    this.getAllCategories();
    this.getProductByID();  
+   this.getAllBrands();
   }
   ngOnDestroy(): void
   {
@@ -69,12 +79,25 @@ constructor(
       }
     );
   }
+
+  
+  getAllBrands() {
+    this.brandsService.GetBrands().subscribe(
+      (data: Brands[]) => {
+        this.brands = data;
+        console.log(data)
+      },
+      error => console.error(error)
+    );
+  }
   getProductByID(){
     const productId =this.id;
 
     this.productService.GetById(productId).subscribe(
       (product)=>{
-this.Editedproduct.brand=product.brands;
+        console.log(JSON.stringify(product));
+        this.Editedproduct.id=this.id;
+this.Editedproduct.brandsid=product.brandsid;
 this.Editedproduct.categoryId=product.categoryId;
 this.Editedproduct.colors=product.colors;
 this.Editedproduct.description=product.description;
@@ -82,38 +105,34 @@ this.Editedproduct.image_link=product.image_link;
 this.Editedproduct.name=product.name;
 this.Editedproduct.numOfProductInStock=product.numOfProductInStock;
 this.Editedproduct.price=product.price;
+this.Editedproduct.sellerId=product.sellerId;
 // this.Editedproduct.sellerId=product.sellerId;
 console.log("the object editeproduct"+JSON.stringify(this.Editedproduct));
         console.log(product);
       }
     )
   }
-  generateInputs(Name:string) 
-  {
-    
-    if(Name==="color")
-      {
-      this.colorNameInputs = [];
-      for (let i = 0; i < this.numOfColors; i++) {
-        this.colorNameInputs.push('');
-        this.hexval.push('');
-      }
-      console.log(this.numOfColors);
-      console.log(this.hexval)
-      
-
-    }
-    
-  }
-
-  removeInput(index: number,s:string) {
-    if(s==="color"){
-      this.colorNameInputs.splice(index, 1);
-
-    }
-   
-  }
   
+  generateInputs(Name: string) {
+   
+    this.colorNameInputs = [];
+    console.log("the number of colors "+this.numOfColors)
+    for (let i = 0; i < this.numOfColors; i++) {
+      this.colorInputs.push({"hex":"","name":""});
+     
+    }
+    console.log(this.numOfColors);
+    console.log(this.hexval);
+
+}
+
+removeInput(index: number) {
+
+    this.colorNameInputs.splice(index, 1);
+    this.hexval.splice(index, 1);
+ 
+}
+
   
   UploadImage(e:Event){
     console.log("hello fron func")
@@ -133,10 +152,12 @@ console.log("the object editeproduct"+JSON.stringify(this.Editedproduct));
     }
   }
 
-  update() 
-  {
+
+
+  update() {
+    console.log("from updta func"+JSON.stringify(this.Editedproduct));
     this.sub = this.productService.update(this.Editedproduct, this.id).subscribe({
-      next: (value: Product) => {
+      next: (value: ProductToAdd) => { // Adjust the type to ProductToAdd
         console.log("The product updated successfully");
       },
       error: (error: any) => {
@@ -144,6 +165,7 @@ console.log("the object editeproduct"+JSON.stringify(this.Editedproduct));
       }
     });
   }
+  
 
 }
 

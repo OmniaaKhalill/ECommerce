@@ -46,16 +46,15 @@
                     <img [src]="item.image_link" alt="Product image" class="product-image p-3">
                   </a>
                   <div class="product-action text-center">
-                    <div class="row g-0">
-                      <a href="" class="col-6">
+                    <div  class="row g-0">
+                      <a href="Edite/{{item.id}}"  class="col-6">
                         <div class="col-12">
-                          <div class="cart border-end p-2">
-                            <a href="edit" class="">
-                              <i class="fas fa-edit"></i>
-                            </a>
-                          </div>
+                            <div class="cart border-end p-2">
+                                <i class="fas fa-edit"></i>
+                            </div>
                         </div>
-                      </a>
+                    </a>
+                    
                       <a (click)="delete(item)" class="col-6">
                         <div class="col-12">
                           <div class="wishlist p-2">

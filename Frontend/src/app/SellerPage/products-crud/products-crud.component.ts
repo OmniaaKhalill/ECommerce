@@ -1,7 +1,7 @@
 import { Component, output,EventEmitter, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../core/header/header.component';
 import { PaginationComponent } from '../pagination/pagination.component';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
 import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
 import { ProductRead } from '../../models/product-read';
@@ -27,7 +27,7 @@ countPerPage=6;
 totalCount=1;
 CurrentPageNum=1;
 items:ProductRead[]=[]
-constructor(private sellerProduct:SellerProductsService,public accountService:AccountService,private prodctService:ProductService){
+constructor(private router: Router,private sellerProduct:SellerProductsService,public accountService:AccountService,private prodctService:ProductService){
 
 }
 ngOnInit(): void {
@@ -130,6 +130,11 @@ delete(item:ProductRead)
       this.items = this.items.filter(product => product.id !== item.id);
     }
   );
+}
+
+goToEdit(item:number){
+
+ return this.router.navigate(['/edit', item]);
 }
 
 

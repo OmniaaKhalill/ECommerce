@@ -16,7 +16,7 @@
 
      <div class="col-sm-6">
       <label for="brandId" class="formstylebold">Brands *</label>
-      <select id="brandId" name="brandId" class="category form-select form-select-lg form-control" [(ngModel)]="newproduct.brandId" required>
+      <select id="brandId" name="brandId" class="category form-select form-select-lg form-control" [(ngModel)]="newproduct.brandsid" required>
           <option *ngFor="let brand of brands" [value]="brand.id" >{{ brand.name }}</option>
       </select>
      </div>
@@ -42,25 +42,22 @@
   <div class="col-sm-8">
     <label class="formstylebold">Number Of Colors</label>
     <input id="number-of-color" class="form-control" name="numOfcolor" [(ngModel)]="numOfColors" (change)="generateInputs('color')" [ngModelOptions]="{standalone: true}" />
-
-    <div class="form-group mt-3" *ngFor="let color of colorNameInputs; let i = index">
+    
+    <div class="form-group mt-3" *ngFor="let color of colorInputs; let i = index">
         <div class="input-group mb-3 row">
             <div class="col-4">
-                <input   class="form-control"  [(colorPicker)]="hexval[i]" name="hexval{{i}}" [style.background]="hexval[i]" value="{{hexval[i]}}" [(ngModel)]="hexval[i]" />
+                <input class="form-control"  [(colorPicker)]="color.hex" name="hexval{{i}}" [style.background]="color.hex" value="{{hexval[i]}}" [(ngModel)]="color.hex"  />
             </div>
             <div class="col-6">
-<!-- Assuming 'colorNameInputs' and 'hexval' are arrays defined in your component -->
-<input id="colors" class="form-control" placeholder="Enter color {{ i + 1 }}" [(ngModel)]="colorNameInputs[i]" [name]="color[i]" />
+                <input class="form-control" placeholder="Enter color {{ i + 1 }}" [(ngModel)]="color.name" [name]="'colorName' + i" />
             </div>
-                <div class="input-group-append  col-2">
-                    <button type="button" class="btn  btnstyle" (click)="removeInput(i,'color')">Remove</button>
-                </div>
-           
+            <div class="input-group-append col-2">
+                <button type="button" class="btn btnstyle" (click)="removeInput(i)">Remove</button>
+            </div>
         </div>
     </div>
-</div>
-</div>
-
+  </div>
+</div>    
         <label for="Description" class="formstylebold">Description</label>
         <input id="Description" name="Description" [(ngModel)]="newproduct.description" type="text" class="form-control" [ngModelOptions]="{standalone: true}"/>
     

@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class SimilarProductsComponent {
 
   products: Product[] = []; 
-  product:Product = new Product(0,"",0,0,[],0,"","",[],"",0,"")
+  product:Product = new Product(0,"",0,0,[],0,"","",[],"",0,"",0)
 
   constructor(public productService: ProductService, public activatedRoute: ActivatedRoute) {}
 
