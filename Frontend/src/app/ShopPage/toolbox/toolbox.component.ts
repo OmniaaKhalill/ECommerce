@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SearchService } from '../../services/search.service';
 
 @Component({
   selector: 'app-toolbox',
@@ -8,5 +9,11 @@ import { Component } from '@angular/core';
   styleUrl: './toolbox.component.css'
 })
 export class ToolboxComponent {
+  searchText = '';
 
+  constructor(private searchService: SearchService) {}
+
+  onSearchChange() {
+    this.searchService.setSearchText(this.searchText);
+  }
 }
