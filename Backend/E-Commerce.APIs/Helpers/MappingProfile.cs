@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using E_Commerce.APIs.DTO;
 using E_Commerce.Core.Entities;
+using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Core.Entities.Oreder_Agrigate;
 
 namespace E_Commerce.APIs.Helpers
@@ -107,7 +108,7 @@ namespace E_Commerce.APIs.Helpers
             CreateMap<CustomerCartDto,customerCart>();
             CreateMap<CartItemDto, CartItem>();
 
-            CreateMap<CustomerWishlistDto, customerWishlist>();
+         
             CreateMap<WishlistItemDto, WishlistItem>();
             CreateMap<CartItemDto, CartItem>().ForMember(d => d.Quantity, o => o.MapFrom(S => S.Quentity));
             CreateMap<Category, CategoriesDto>()
