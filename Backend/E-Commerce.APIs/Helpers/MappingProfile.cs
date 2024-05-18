@@ -47,8 +47,8 @@ namespace E_Commerce.APIs.Helpers
                 ;
 
             CreateMap<Page, PageToReturnDto>()
-                .ForMember(d => d.PageDescription, o => o.MapFrom(S => S.Description))
-                .ForMember(d => d.PageName, o => o.MapFrom(S => S.name));
+                .ForMember(d => d.description, o => o.MapFrom(S => S.Description))
+                .ForMember(d => d.name, o => o.MapFrom(S => S.name));
 
             CreateMap<Product, ProductToReturnDto>()
                  .ForMember(p => p.Brands, o => o.MapFrom(s => s.Brands.name))
