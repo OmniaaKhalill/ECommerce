@@ -127,7 +127,7 @@
             <a href="Clear all checked" class="clear" style="font-size: var(--small-font);">Clean All</a>
           </div>
           <!-- Category -->
-          <div class="accordion border-bottom" id="accordionExample">
+          <!-- <div class="accordion border-bottom" id="accordionExample">
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button fw-bold" style="font-size: var(--small-font);" type="button"
@@ -138,17 +138,20 @@
               </h2>
               <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  @for (item of categories; track $index) {
-                  <div class="custom-control custom-radio">
-                    <input type="radio" class="custom-control-input" id="cat-1" name="category">
-                    <label class="custom-control-label text-capitalize" style="font-size: var(--small-font);"
-                      for="cat-1">{{item.name}}</label>
+                  <div *ngFor="let item of categories; let i = index; trackBy: trackByIdentity">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" [id]="'cat-' + i" name="category"
+                             (change)="onCategorySelected(item.id)">
+                      <label class="custom-control-label text-capitalize" [for]="'cat-' + i"
+                             style="font-size: var(--small-font);">{{item.name}}</label>
+                    </div>
                   </div>
-                  }
                 </div>
+
               </div>
             </div>
-          </div>
+          </div> -->
+
 
           <!-- Brand -->
           <div class="accordion border-bottom" id="accordionExample">
@@ -162,14 +165,17 @@
               </h2>
               <div id="collapseBrand" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                  @for (item of brand; track $index) {
-                  <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="cat-1">
-                    <label class="custom-control-label text-capitalize" style="font-size: var(--small-font);"
-                      for="cat-1">{{item.name}}</label>
+                  <div *ngFor="let item of brand; let i = index; trackBy: trackByIdentity">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" [id]="'brand-' + i" name="brand"
+                      (change)="onBrandSelected(item.id)">
+
+                      <label class="custom-control-label text-capitalize" [for]="'brand-' + i"
+                             style="font-size: var(--small-font);">{{item.name}}</label>
+                    </div>
                   </div>
-                  }
                 </div>
+
               </div>
             </div>
           </div>

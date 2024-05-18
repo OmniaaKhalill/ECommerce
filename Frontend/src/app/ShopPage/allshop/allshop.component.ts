@@ -101,7 +101,6 @@ export class AllshopComponent {
       console.log("After returning Sorted Products:", this.products);
     }
   }
-
   onSearch() {
     if (this.searchTermValue.trim() !== '') {
       this.productService.GetAllProducts().subscribe((data) => {
@@ -115,18 +114,38 @@ export class AllshopComponent {
       });
     }
   }
-
-
   onReset() {
     this.searchTermValue = '';
     this.productService.GetAllProducts().subscribe((data) => {
       this.products = data;
     });
   }
+  // onCategorySelected(categoryId: number) {
+  //   if (categoryId) {
+  //     this.categoryService.GetProductsByCategory(categoryId).subscribe((data) => {
+  //       this.products = data;
+  //     });
+  //   } else {
+  //     this.productService.GetAllProducts().subscribe((data) => {
+  //       this.products = data;
+  //     });
+  //   }
+  // }
+  onBrandSelected(brandsid: number) {
+    if (brandsid) {
+      this.brandService.GetProductsByBrand(brandsid).subscribe((data) => {
+        console.log("Found:", data);
+        this.products = data;
+      });
+    } else {
+      this.productService.GetAllProducts().subscribe((data) => {
+        console.log("Not Found:", data);
+        this.products = data;
+      });
+    }
+  }
 
-
-
-
-
-
+  trackByIdentity(index: number, item: any) {
+    return item.id;
+  }
 }
