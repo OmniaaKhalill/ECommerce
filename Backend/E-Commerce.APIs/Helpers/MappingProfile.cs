@@ -114,7 +114,6 @@ namespace E_Commerce.APIs.Helpers
                     .ForMember(d => d.name, o => o.MapFrom(S => S.name));
 
 
-
             CreateMap<Product, ProductSellerDto>().ForMember(p => p.Category, o => o.MapFrom(s => s.Category.name));
 
 
