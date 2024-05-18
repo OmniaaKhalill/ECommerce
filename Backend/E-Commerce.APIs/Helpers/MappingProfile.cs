@@ -105,7 +105,7 @@ namespace E_Commerce.APIs.Helpers
                       
                    
             CreateMap<CustomerCartDto,customerCart>();
-            CreateMap<CartItemDto, CartItem>();
+            CreateMap<CartItemDto, CartItem>().ForMember(d => d.Quantity, o => o.MapFrom(S => S.Quentity));
             CreateMap<Category, CategoriesDto>()
                 .ForMember(d => d.name, o => o.MapFrom(S => S.name))
                 .ForMember(d => d.id, o => o.MapFrom(S => S.id));
@@ -121,6 +121,7 @@ namespace E_Commerce.APIs.Helpers
 
             CreateMap<CustomerWishlistDto, CustomerWishlist>();
             CreateMap<WishlistItemDto, WishlistItem>();
+            
 
         }
     } 
