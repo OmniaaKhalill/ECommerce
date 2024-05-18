@@ -46,6 +46,11 @@ namespace E_Commerce.Repository
             var existingItem = cart.Items.FirstOrDefault(i => i.Id == item.Id);
             if (existingItem != null)
             {
+                if (item.Quantity == 10)
+                {
+                    return null;
+                    
+                }
                 existingItem.Quantity += item.Quantity;
             }
             else

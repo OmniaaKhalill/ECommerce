@@ -26,7 +26,14 @@ namespace E_Commerce.APIs.Controllers
             if (unit.ProductRepo.GetAsync(item.Id) != null)
             {
                 var cart = await cartRepositery.AddCartItem(cartId, item);
-                return Ok(cart);
+                if (cart !=null)
+                {
+                    return Ok(cart);
+
+                }
+                return Ok("you can not add more than 10");
+
+
             }
             else
             {
