@@ -31,5 +31,11 @@ namespace E_Commerce.Repository
            return  await _dbcontext.orders.Include(o => o.DeliveryMethod).Include(o => o.Items).SingleOrDefaultAsync(o=>o.id==orderId&& o.BuyerEmail==buyerEmail);
   
         }
+        public async Task <Order> GetOrderByPaymentIdAsync(string paymentintentId)
+        {
+            return await _dbcontext.orders.Include(o => o.DeliveryMethod).Include(o => o.Items).SingleOrDefaultAsync(o => o.PaymentIntentId == paymentintentId);
+        }
+
+       
     }
 }

@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Core.Entities;
+using E_Commerce.Core.Entities.Oreder_Agrigate;
 using E_Commerce.Core.Services.Contract;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -39,31 +40,26 @@ namespace E_Commerce.APIs.Controllers
         public async Task<IActionResult> StripeHook()
         {
             var json = await new StreamReader(HttpContext.Request.Body).ReadToEndAsync();
-            try
-            {
+            
                 var stripeEvent = EventUtility.ConstructEvent(json,
                     Request.Headers["Stripe-Signature"], _whSecret);
                 var paymentIntent = (PaymentIntent)stripeEvent.Data.Object;
-
+                Order order;
                 // Handle the event
-                //switch (stripeEvent.Type)
-                //{
-                //    case Events.PaymentIntentSucceeded:
-                //        await _paymentService.UpdatePaymentIntentToSuccededOrFailed(paymentIntent.Id, true);
-                //        break;
+                switch (stripeEvent.Type)
+                {
+                    case Events.PaymentIntentSucceeded:
+                      order=  await _paymentService.UpdatePaymentIntentToSuccededOrFailed(paymentIntent.Id, true);
+                        break;
 
-                //     case Events.PaymentIntentPaymentFailed:
-                //        await _paymentService.UpdatePaymentIntentToSuccededOrFailed(paymentIntent.Id, false);
-                //        break;
+                    case Events.PaymentIntentPaymentFailed:
+                       order= await _paymentService.UpdatePaymentIntentToSuccededOrFailed(paymentIntent.Id, false);
+                        break;
 
-                //}
+                }
 
                 return Ok();
-            }
-            catch (StripeException e)
-            {
-                return BadRequest();
-            }
+            
         }
     }
   

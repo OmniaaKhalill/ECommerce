@@ -65,6 +65,13 @@ namespace E_Commerce.APIs.Controllers
 
             return Ok(order); // Return 200 with the list of orders
         }
+        [HttpGet("Orders/{paymentintentId}")]
+        public async Task<ActionResult<Order>> GetOrderByPaymentId( string paymentintentId)
+        {
+            var order= await _orderService.GetOrderByPaymentId(paymentintentId);
+            return Ok(order);
+        }
+
 
 
     }

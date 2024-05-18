@@ -16,12 +16,14 @@ namespace E_Commerce.Service
      
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICartRepositery _cartRepo;
+        private readonly IPaymentService _paymentService;
 
-        public OrderService(IUnitOfWork unitOfWork, ICartRepositery cartRepo) 
+        public OrderService(IUnitOfWork unitOfWork, ICartRepositery cartRepo,IPaymentService paymentService) 
         { 
            
             _unitOfWork = unitOfWork;
             _cartRepo = cartRepo;
+            _paymentService = paymentService;
         }
 
         public async Task<Order?> CreateAsync(string buyerEmail, string CartId, int DeliveryMethodId, Address shippingAddress)
@@ -57,8 +59,15 @@ namespace E_Commerce.Service
             // 4.get delivery method from delivryMethod
             var delivryMethod= await _unitOfWork.DelivryMethosRepo.GetAsync(DeliveryMethodId);
 
+            var existingOrder = await _unitOfWork.OrdersRepo.GetOrderByPaymentIdAsync(cart.PaymentIntentId);
+            if (existingOrder != null)
+            {
+                await _unitOfWork.OrdersRepo.DeleteAsync(existingOrder.id);
+                await _paymentService.CreateOrUpdatePaymentIntent(CartId);
+
+            }
             // 5.create order
-            var order = new Order(buyerEmail, shippingAddress,delivryMethod, orderItems, subTotal);
+            var order = new Order(buyerEmail, shippingAddress,delivryMethod, orderItems, subTotal,cart.PaymentIntentId);
 
             await _unitOfWork.OrdersRepo.AddAsync(order);
 
@@ -84,6 +93,12 @@ namespace E_Commerce.Service
            var orders=  await _unitOfWork.OrdersRepo.GetOrdersByEmailAsync(buyerEmail);
 
            return orders;
+        }
+         public async Task<Order> GetOrderByPaymentId(string PaymentintentId)
+        {
+            var order = await _unitOfWork.OrdersRepo.GetOrderByPaymentIdAsync(PaymentintentId);
+            return order;
+
         }
     }
 }

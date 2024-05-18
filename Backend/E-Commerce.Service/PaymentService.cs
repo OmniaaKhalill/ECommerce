@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Core.Entities;
+using E_Commerce.Core.Entities.Oreder_Agrigate;
 using E_Commerce.Core.Repositories.Contract;
 using E_Commerce.Core.Services.Contract;
 using Microsoft.Extensions.Configuration;
@@ -30,6 +31,13 @@ namespace E_Commerce.Service
             StripeConfiguration.ApiKey = _configuration["StripeSettings:SecretKey"];
             var cart= await _cartRepositery.getCartAsync(cartid);
             if (cart is null) return null;
+            var shippingPrice = 0m;
+            if (cart.DeliveryMethodId.HasValue)
+            {
+               var deliveryMethod= await _unitOfWork.DelivryMethosRepo.GetAsync(cart.DeliveryMethodId.Value);
+                cart.ShippingPrice = deliveryMethod.Cost;
+                shippingPrice = deliveryMethod.Cost;
+            }
             if (cart.Items.Count > 0)
             {
                 foreach (var item in cart.Items)
@@ -49,7 +57,7 @@ namespace E_Commerce.Service
             {
                 var CreateOptions = new PaymentIntentCreateOptions()
                 {
-                    Amount = (long)cart.Items.Sum(item => item.price * item.Quantity * 100),
+                    Amount = (long)cart.Items.Sum(item => item.price * item.Quantity * 100)+ (long)shippingPrice*100,
                     Currency = "usd",
                     PaymentMethodTypes = new List<string>() { "card" }
 
@@ -75,12 +83,22 @@ namespace E_Commerce.Service
             return cart;
 
         }
-        //public async Task<Order> UpdatePaymentIntentToSuccededOrFailed(string paymentid,bool issucess)
-        //{
-        //    //var spec =new orderwithpaymentintentidspecifications()
-        //    return new Order { };
-        //    //neeeed the ordeeeeer 
+        public async Task<Order> UpdatePaymentIntentToSuccededOrFailed(string paymentid, bool issucess)
+        {
+            
+            var order = await _unitOfWork.OrdersRepo.GetOrderByPaymentIdAsync(paymentid);
+            if(issucess)
+            {
+                order.Status = OrderStatus.PaymentReceived;
+            }
+            else
+            {
+                order.Status = OrderStatus.PaymentFailed;
+            }
+            _unitOfWork.OrdersRepo.UpdateAsync(order.id,order);
+            await _unitOfWork.OrdersRepo.Complete();
+            return order; 
 
-        //}
+        }
     }
 }

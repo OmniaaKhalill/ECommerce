@@ -12,7 +12,8 @@ namespace E_Commerce.APIs.DTO
         public string? ClientSecret { get; set; }
         public List<CartItemDto> Items { get; set; }
 
-
+        public int? DeliveryMethodId { get; set; }
+        public decimal ShippingPrice { get; set; }
 
     }
 }

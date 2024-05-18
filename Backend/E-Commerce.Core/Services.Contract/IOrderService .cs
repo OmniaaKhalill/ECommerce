@@ -14,5 +14,7 @@ namespace E_Commerce.Core.Services.Contract
         Task<IReadOnlyList<Order?>> GetOrdersForUserAsync (string buyerEmail);
 
        Task<Order?> GetOrderByIdForUserAsync(int orderId, string buyerEmail);
+
+        Task<Order> GetOrderByPaymentId( string PaymentintentId);
     }
 }

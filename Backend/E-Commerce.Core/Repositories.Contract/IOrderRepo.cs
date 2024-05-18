@@ -11,8 +11,8 @@ namespace E_Commerce.Core.Repositories.Contract
     {
 
         Task<Order> GetOrderByIdForUserAsync(int orderId, string buyerEmail);
+        Task <Order> GetOrderByPaymentIdAsync(string paymentintentId);
 
-
-       Task<IReadOnlyList<Order>> GetOrdersByEmailAsync(string email );
+        Task<IReadOnlyList<Order>> GetOrdersByEmailAsync(string email );
     }
 }
