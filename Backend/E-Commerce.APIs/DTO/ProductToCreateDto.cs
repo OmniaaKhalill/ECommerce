@@ -19,7 +19,7 @@ namespace E_Commerce.APIs.DTO
         public List<Coulor>? Colors { get; set; }
 
 
-        public string SellerId { get; set; }
+        public int SellerId { get; set; }
         public string seller { get; set; }
         public int NumOfProductInStock { get; set; }
     }

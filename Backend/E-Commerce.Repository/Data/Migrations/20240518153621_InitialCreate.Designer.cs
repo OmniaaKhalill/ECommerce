@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Repository.Data.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20240507172956_Add-new-Models")]
-    partial class AddnewModels
+    [Migration("20240518153621_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,6 +154,9 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("SellerId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -174,65 +177,117 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("E_Commerce.Core.Entities.Order", b =>
+            modelBuilder.Entity("E_Commerce.Core.Entities.Oreder_Agrigate.DeliveryMethod", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<string>("ShippingAddress")
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("DeliveryTime")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ShortName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("DeliveryMethods");
+                });
+
+            modelBuilder.Entity("E_Commerce.Core.Entities.Oreder_Agrigate.Order", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
+                    b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("cartId")
+                    b.Property<string>("BuyerEmail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("orderDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("DeliveryMethodid")
+                        .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<DateTimeOffset>("OrderDate")
+                        .HasColumnType("datetimeoffset");
 
-                    b.HasIndex("UserId");
+                    b.Property<string>("PaymentIntentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("cartId");
+                    b.Property<int?>("Productid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("SubTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("DeliveryMethodid");
+
+                    b.HasIndex("Productid");
 
                     b.ToTable("orders");
                 });
 
-            modelBuilder.Entity("E_Commerce.Core.Entities.OrderItem", b =>
+            modelBuilder.Entity("E_Commerce.Core.Entities.Oreder_Agrigate.OrderItem", b =>
                 {
-                    b.Property<int>("OrderItemId")
+                    b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<int>("OrderId")
+                    b.Property<int?>("Orderid")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("OrderItemId");
+                    b.Property<string>("name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("OrderId");
+                    b.HasKey("id");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("Orderid");
 
                     b.ToTable("Orderitems");
                 });
@@ -249,9 +304,8 @@ namespace E_Commerce.Repository.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SellerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("SellerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("name")
                         .IsRequired()
@@ -306,15 +360,14 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<int>("NumOfProductInStock")
                         .HasColumnType("int");
 
-                    b.Property<string>("SellerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("SellerId")
+                        .HasColumnType("int");
 
                     b.Property<string>("brand")
                         .IsRequired()
@@ -381,35 +434,22 @@ namespace E_Commerce.Repository.Data.Migrations
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Seller", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("IDImgUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PageId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("sellers");
-                });
-
-            modelBuilder.Entity("E_Commerce.Core.Entities.Tag", b =>
-                {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<string>("IDImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("name")
                         .IsRequired()
@@ -417,7 +457,10 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("tags");
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("sellers");
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.WishList", b =>
@@ -573,21 +616,6 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProductTag", b =>
-                {
-                    b.Property<int>("Productsid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("tag_listid")
-                        .HasColumnType("int");
-
-                    b.HasKey("Productsid", "tag_listid");
-
-                    b.HasIndex("tag_listid");
-
-                    b.ToTable("ProductTag");
-                });
-
             modelBuilder.Entity("ProductWishList", b =>
                 {
                     b.Property<int>("WishListsId")
@@ -640,42 +668,97 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("E_Commerce.Core.Entities.Order", b =>
+            modelBuilder.Entity("E_Commerce.Core.Entities.Oreder_Agrigate.Order", b =>
                 {
-                    b.HasOne("E_Commerce.Core.Entities.Identity.AppUser", "user")
+                    b.HasOne("E_Commerce.Core.Entities.Identity.AppUser", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId");
 
-                    b.HasOne("E_Commerce.Core.Entities.Cart", "cart")
+                    b.HasOne("E_Commerce.Core.Entities.Cart", null)
                         .WithMany("order")
-                        .HasForeignKey("cartId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("CartId");
+
+                    b.HasOne("E_Commerce.Core.Entities.Oreder_Agrigate.DeliveryMethod", "DeliveryMethod")
+                        .WithMany()
+                        .HasForeignKey("DeliveryMethodid")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("cart");
+                    b.HasOne("E_Commerce.Core.Entities.Product", null)
+                        .WithMany("OrderItems")
+                        .HasForeignKey("Productid");
 
-                    b.Navigation("user");
+                    b.OwnsOne("E_Commerce.Core.Entities.Oreder_Agrigate.Address", "ShippingAddress", b1 =>
+                        {
+                            b1.Property<int>("Orderid")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Country")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("FirstName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("LName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<string>("Street")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("Orderid");
+
+                            b1.ToTable("orders");
+
+                            b1.WithOwner()
+                                .HasForeignKey("Orderid");
+                        });
+
+                    b.Navigation("DeliveryMethod");
+
+                    b.Navigation("ShippingAddress")
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("E_Commerce.Core.Entities.OrderItem", b =>
+            modelBuilder.Entity("E_Commerce.Core.Entities.Oreder_Agrigate.OrderItem", b =>
                 {
-                    b.HasOne("E_Commerce.Core.Entities.Order", "Order")
+                    b.HasOne("E_Commerce.Core.Entities.Oreder_Agrigate.Order", null)
                         .WithMany("Items")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Orderid");
+
+                    b.OwnsOne("E_Commerce.Core.Entities.Oreder_Agrigate.ProductItemOrder", "Product", b1 =>
+                        {
+                            b1.Property<int>("OrderItemid")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("PictureUrl")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.Property<int>("ProductId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("ProductName")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("OrderItemid");
+
+                            b1.ToTable("Orderitems");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderItemid");
+                        });
+
+                    b.Navigation("Product")
                         .IsRequired();
-
-                    b.HasOne("E_Commerce.Core.Entities.Product", "Product")
-                        .WithMany("OrderItems")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Page", b =>
@@ -691,7 +774,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Payment", b =>
                 {
-                    b.HasOne("E_Commerce.Core.Entities.Order", "Order")
+                    b.HasOne("E_Commerce.Core.Entities.Oreder_Agrigate.Order", "Order")
                         .WithMany()
                         .HasForeignKey("orderId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -712,7 +795,9 @@ namespace E_Commerce.Repository.Data.Migrations
                 {
                     b.HasOne("E_Commerce.Core.Entities.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("E_Commerce.Core.Entities.Seller", "seller")
                         .WithMany("ProductList")
@@ -742,6 +827,17 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("E_Commerce.Core.Entities.Seller", b =>
+                {
+                    b.HasOne("E_Commerce.Core.Entities.Identity.AppUser", "AppUser")
+                        .WithOne("Seller")
+                        .HasForeignKey("E_Commerce.Core.Entities.Seller", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
                 });
 
             modelBuilder.Entity("E_Commerce.Core.Entities.WishList", b =>
@@ -806,21 +902,6 @@ namespace E_Commerce.Repository.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProductTag", b =>
-                {
-                    b.HasOne("E_Commerce.Core.Entities.Product", null)
-                        .WithMany()
-                        .HasForeignKey("Productsid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("E_Commerce.Core.Entities.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("tag_listid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("ProductWishList", b =>
                 {
                     b.HasOne("E_Commerce.Core.Entities.WishList", null)
@@ -849,11 +930,13 @@ namespace E_Commerce.Repository.Data.Migrations
 
                     b.Navigation("Reviews");
 
+                    b.Navigation("Seller");
+
                     b.Navigation("WishList")
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("E_Commerce.Core.Entities.Order", b =>
+            modelBuilder.Entity("E_Commerce.Core.Entities.Oreder_Agrigate.Order", b =>
                 {
                     b.Navigation("Items");
                 });
@@ -869,8 +952,7 @@ namespace E_Commerce.Repository.Data.Migrations
 
             modelBuilder.Entity("E_Commerce.Core.Entities.Seller", b =>
                 {
-                    b.Navigation("Page")
-                        .IsRequired();
+                    b.Navigation("Page");
 
                     b.Navigation("ProductList");
                 });
