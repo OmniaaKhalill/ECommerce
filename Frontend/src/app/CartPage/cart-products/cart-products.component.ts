@@ -33,7 +33,7 @@ ngOnInit(): void
 {
 
   this.getCart();
-  
+
 }
 
 
@@ -64,13 +64,13 @@ getcartItems(){
             image_link:data.image_link,
             quantity:this.cart.items[i].quantity,
             numOfProductInStock:data.numOfProductInStock
-          });    
+          });
           });
     promises.push(promise);
   }
   return Promise.all(promises);}
- 
-    
+
+
 increment(item: ProductCart, index: number) {
   let qtyInput = <HTMLInputElement>document.getElementById('qty' + index);
   let currentValue = parseInt(qtyInput.value);
@@ -124,8 +124,8 @@ decrement(item: ProductCart,index: number) {
   }
 }
 
-  
-  
+
+
   print(){
     for(let i=0;i<this.ProductList.length;i++){
       console.log("helo from print"+JSON.stringify(this.ProductList[i]));
@@ -136,13 +136,13 @@ decrement(item: ProductCart,index: number) {
     const totalPrice = item.price * item.quantity;
     return totalPrice.toFixed(2);
   }
-  
+
   // increment(item:ProductCart) {
   //   let qtyInput = <HTMLInputElement>document.getElementById('qty');
   //   let currentValue = parseInt(qtyInput.value);
   //   let newValue = currentValue + 1;
   //   item.quantity=newValue;
-  
+
   //   this.cartItem.id=item.id;
   //   this.cartItem.price=item.price;
   //   this.cartItem.quantity=item.quantity;
@@ -151,13 +151,13 @@ decrement(item: ProductCart,index: number) {
   //       console.log("updated cart item"+JSON.stringify(data));
   //     }
   //   )
-  
+
   //   if (newValue <= 10) {
   //     qtyInput.value = newValue.toString();
   //     // this.Total = this.ProductPrice * newValue; // Update total
   //   }
   // }
-  
+
   // decrement(item:ProductCart) {
   //   let qtyInput = <HTMLInputElement>document.getElementById('qty');
   //   let currentValue = parseInt(qtyInput.value);
@@ -176,7 +176,7 @@ decrement(item: ProductCart,index: number) {
   //     // this.Total = this.ProductPrice * newValue; // Update total
   //   }
   // }
-  
+
   // print(){
   //   for(let i=0;i<this.ProductList.length;i++){
   //     console.log("helo from print"+JSON.stringify(this.ProductList[i]));

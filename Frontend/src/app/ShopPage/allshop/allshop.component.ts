@@ -164,7 +164,12 @@ export class AllshopComponent {
     }
   }
 
+
   trackByIdentity(index: number, item: any) {
     return item.id;
+  }
+
+  trackByFn(index: number, item: Product): number {
+    return item.id; // or item.id depending on your unique identifier
   }
 }

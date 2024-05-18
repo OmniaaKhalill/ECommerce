@@ -10,6 +10,8 @@ import { CartService } from '../../services/cart.service';
 import { AccountService } from '../../services/account.service';
 import { CartItem } from '../../models/cart-item';
 import { FormsModule } from '@angular/forms';
+import { WishlistItem } from '../../models/wishlist-item';
+import { WishlistService } from '../../services/wishlist.service';
 
 @Component({
   selector: 'app-single-product',
@@ -23,7 +25,8 @@ export class SingleProductComponent {
 constructor(public productService:ProductService , public activatedRoute:ActivatedRoute,
   public cartService:CartService,
   public accountService:AccountService,
-  public router:Router
+  public router:Router,
+  public wishlistService: WishlistService
 ) {
 }
 
@@ -42,23 +45,23 @@ ngOnInit():void{
   bigImage: string ="../../../assets/img/Home/product1.jpeg"
 
   preventReload(event: MouseEvent) {
-   
+
     event.preventDefault();
-    
+
   }
 
 
   outOfStock(): boolean {
-   
+
     return this.product.numOfProductInStock === 0;
-    
+
 }
 
 
 
 
   increment() {
-   
+
     let qtyInput = <HTMLInputElement>document.getElementById('qty');
     let currentValue = parseInt(qtyInput.value);
     let newValue = currentValue + 1;
@@ -75,7 +78,7 @@ ngOnInit():void{
       qtyInput.value = newValue.toString();
     }
   }
-  
+
 
   activeTab: string = 'description';
 
@@ -88,26 +91,26 @@ ngOnInit():void{
   }
 
   colors = { colour_name: "", hex_value: "" };
-  
+
   getColor(index: number, event: MouseEvent) {
-    event.preventDefault(); 
+    event.preventDefault();
     console.log(this.product.colors[index]);
     this.colors = this.product.colors[index];
   }
-  
-  
+
+
 
   cartItem: CartItem = new CartItem(this.product.id,0,this.product.price,this.colors);
   addToCart() {
     let userid = this.accountService.getClaims().UserId;
-  
+
     // Get the selected color
     let selectedColor = this.colors;
-  
+
     // Get the quantity
     let qtyInput = <HTMLInputElement>document.getElementById('qty');
     let quantity = parseInt(qtyInput.value);
-  
+
     // Create the CartItem object with color and quantity
     let cartItem: CartItem = new CartItem(
       this.product.id,
@@ -115,7 +118,7 @@ ngOnInit():void{
       this.product.price,
       selectedColor
     );
-  
+
     console.log("Product"+JSON.stringify(this.product))
     console.log("AddToCart"+JSON.stringify(cartItem))
     // Add the cart item to the cart service
@@ -129,7 +132,25 @@ ngOnInit():void{
       }
     });
   }
-  
 
 
+  AddToWishlist() {
+    let userid = this.accountService.getClaims().UserId;
+    let qtyInput = <HTMLInputElement>document.getElementById('qty');
+    let wishlistItem: WishlistItem = new WishlistItem(
+      this.product.id,
+      this.product.price,
+    );
+    console.log("Product "+JSON.stringify(this.product));
+    console.log("AddToWishlist "+JSON.stringify(wishlistItem));
+    this.wishlistService.AddWishlistItem(userid, wishlistItem).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.router.navigateByUrl("/Wishlist");
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
 }

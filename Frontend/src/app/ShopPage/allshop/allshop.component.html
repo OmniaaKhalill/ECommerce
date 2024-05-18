@@ -27,12 +27,6 @@
                 <div class="toolbox-sort py-2 d-flex align-items-center">
                   <label for="sortby" class="me-2" style="font-size: var(--small-font);">Sort by:</label>
                   <div class="select-custom">
-                    <!-- <select class="custom-select mb-4" (change)="onSortSelected($event)">
-                      <option *ngFor="let sort of sortOptions" [selected]="shopParams.sort === sort.value"
-                        [value]="sort.value">
-                        {{sort.name}}
-                      </option>
-                    </select> -->
                     <select class="form-select" (change)="sortProducts($event)">
                       <option value="name">Alphabetical</option>
                       <option value="priceAsc">Price: Low to High</option>
@@ -46,66 +40,52 @@
         </div>
         <div class="products mb-5">
           <div class="row">
-            @for (item of products; track $index){
-            <div class="col-6 col-md-4 col-lg-4 p-1">
-              <div class="product">
-                <figure class="product-media">
-                  <a href="Go to single product" class="">
-                    <a [routerLink]="['/product',item.id]">
-                      <img [src]="item.image_link" alt="Product image" class="product-image p-3"> </a>
-                  </a>
-                  <div class="product-action text-center">
-                    <div class="row g-0">
-                      <a href="" class="col-6">
+            <ng-container *ngFor="let item of products; trackBy: trackByFn">
+              <div class="col-6 col-md-4 col-lg-4 p-1">
+                <div class="product">
+                  <figure class="product-media">
+                    <a [routerLink]="['/product', item.id]" class="">
+                      <img [src]="item.image_link" alt="Product image" class="product-image p-3">
+                    </a>
+                    <div class="product-action text-center">
+                      <div class="row g-0">
                         <div class="col-12">
                           <div class="cart border-end p-2">
-                            <a href="cart" class="">
-                              <i class="fas fa-cart-plus"></i>
+                            <a [routerLink]="['/product', item.id]" class="">
+                              <i class="fas fa-eye pe-2"></i>
+                              <span>View Product</span>
                             </a>
                           </div>
                         </div>
-                      </a>
-                      <a href="" class="col-6">
-                        <div class="col-12">
-                          <div class="wishlist p-2">
-                            <a href="wishlist" class="">
-                              <i class="fa fa-heart" aria-hidden="true"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </a>
+                      </div>
                     </div>
-                  </div>
-                </figure>
-                <div class="product-body p-3">
-                  <h5 class="fw-bold text-capitalize">{{item.brands}}</h5>
-                  <a [routerLink]="['/product',item.id]">
-                    <h5 class="fw-bold my-3">{{item.name}}</h5>
-                  </a>
-
-                  <p class="d-inline">
-                    <span class="fw-bold fs-5">Category: </span>
-                    <a href="Category" class="fs-5 text-dark text-capitalize">{{item.category}}</a>
-                  </p>
-                  <div class="product-price fs-5 my-2">
-                    ${{item.price}}
-                  </div>
-                  <div class="colour_section d-flex flex-wrap">
-                    <div class="color" *ngFor="let color of item.colors" [style.background]="color.hex_value">
+                  </figure>
+                  <div class="product-body p-3">
+                    <h5 class="fw-bold text-capitalize">{{item.brands}}</h5>
+                    <a [routerLink]="['/product', item.id]">
+                      <h5 class="fw-bold my-3">{{item.name}}</h5>
+                    </a>
+                    <p class="d-inline">
+                      <span class="fw-bold fs-5">Category: </span>
+                      <a href="Category" class="fs-5 text-dark text-capitalize">{{item.category}}</a>
+                    </p>
+                    <div class="product-price fs-5 my-2">
+                      ${{item.price}}
+                    </div>
+                    <div class="colour_section d-flex flex-wrap">
+                      <div class="color" *ngFor="let color of item.colors" [style.background]="color.hex_value">
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-            }
-            @empty {
-            <div class="alert alert-danger" role="alert">
+            </ng-container>
+            <div *ngIf="products.length === 0" class="alert alert-danger" role="alert">
               <strong>No Products Found!!!</strong>
             </div>
-
-            }
           </div>
         </div>
+
 
         <nav aria-label="Page navigation">
           <ul class="pagination justify-content-center align-items-center">
