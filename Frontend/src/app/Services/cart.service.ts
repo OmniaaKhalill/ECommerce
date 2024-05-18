@@ -19,14 +19,27 @@ export class CartService {
     private accountService: AccountService
   ) { }
 
-addTocart(cartId:string,cartItem:CartItem):Observable<CartItem>{
+// addTocart(cartId:string,cartItem:CartItem):Observable<CartItem>{
+//   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+//   const params = new HttpParams().set('cartId', cartId.toString());
+//   const options = {
+//     headers,
+//     params
+//   };
+//   return this.http.post<CartItem>(`${this.baseUrl2}`, { headers, body: cartItem },options);
+// }
+
+
+addTocart(cartId: string, cartItem: CartItem): Observable<CartItem> {
   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  const params = new HttpParams().set('cartId', cartId.toString());
-    const options = {
-      params: params
-    };
-  return this.http.post<CartItem>(`${this.baseUrl2}`, { headers, body: cartItem },options);
+  const params = new HttpParams().set('cartId', cartId);
+  const options = {
+    headers,
+    params
+  };
+  return this.http.post<CartItem>(`${this.baseUrl2}`, cartItem, options);
 }
+
 
   getCartById(Id: string): Observable<Cart> {
     return this.http.get<Cart>(`${this.baseUrl}/${Id}`);

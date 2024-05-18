@@ -116,6 +116,8 @@ ngOnInit():void{
       selectedColor
     );
   
+    console.log("Product"+JSON.stringify(this.product))
+    console.log("AddToCart"+JSON.stringify(cartItem))
     // Add the cart item to the cart service
     this.cartService.addTocart(userid, cartItem).subscribe({
       next: (data) => {
