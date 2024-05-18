@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Product } from '../../models/product';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,8 @@ import { SearchService } from '../../services/search.service';
   styleUrl: './product-section.component.css'
 })
 export class ProductSectionComponent implements OnInit {
-  products: Product[] = [];
+  @Input() products: Product[] = [];
+  // products: Product[] = [];
   filteredProducts: Product[] = [];
   searchTextSubscription!: Subscription;
 

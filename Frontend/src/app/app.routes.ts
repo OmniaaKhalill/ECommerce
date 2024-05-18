@@ -25,6 +25,7 @@ import { ShopComponent } from './ShopPage/shop/shop.component';
 import { CategoryPageComponent } from './CategoriesPage/category-page/category-page.component';
 import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
 import { LoaderComponent } from './loader/loader.component';
+import { AllshopComponent } from './ShopPage/allshop/allshop.component';
 
 
 export const routes: Routes = [
@@ -68,6 +69,7 @@ export const routes: Routes = [
 ]
 },
 { path: "shop", component: ShopComponent },
+{ path: "allshop", component: AllshopComponent },
   { path: "", redirectTo: "category", pathMatch: "full" },
   { path: "category", component: CategoryPageComponent },
   { path: "products-category/:categoryId", component: ProductsPageComponent },

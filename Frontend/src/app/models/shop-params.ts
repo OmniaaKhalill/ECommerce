@@ -6,4 +6,5 @@ export class ShopParams {
   pageIndex = 1;
   search = '';
   sort = 'name';
+  pageNumber: any;
 }
