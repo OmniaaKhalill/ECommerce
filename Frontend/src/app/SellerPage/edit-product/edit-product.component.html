@@ -14,12 +14,14 @@
     </div>
      <!-- End .col-sm-6 -->
 
+
      <div class="col-sm-6">
       <label for="brandId" class="formstylebold">Brands *</label>
       <select id="brandId" name="brandId" class="category form-select form-select-lg form-control" [(ngModel)]="Editedproduct.brandsid" required>
           <option *ngFor="let brand of brands" [value]="brand.id" >{{ brand.name }}</option>
       </select>
      </div>
+
     
    </div>
   

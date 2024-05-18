@@ -24,6 +24,8 @@ import { ProductsComponent } from './HomePage/products/products.component';
 import { ShopComponent } from './ShopPage/shop/shop.component';
 import { CategoryPageComponent } from './CategoriesPage/category-page/category-page.component';
 import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
+import { JoinUsComponent } from './ProfilePage/join-us/join-us.component';
+import { SellerAddPageFormComponent } from './ProfilePage/seller-add-page-form/seller-add-page-form.component';
 
 
 export const routes: Routes = [
@@ -44,9 +46,11 @@ export const routes: Routes = [
     path: 'profile',
     component: TabsComponent,
     children: [
-      { path: 'orders/:id', component: OrdersComponent },
-      { path: 'profileDetails/:id', component: ProfileDetailsComponent },
+      { path: 'orders', component: OrdersComponent },
+      { path: 'profileDetails', component: ProfileDetailsComponent },
       {path:'sellerprofileDetails',component:SellerPageComponent},
+      { path: 'joinUs', component: JoinUsComponent },
+      { path: 'AddPage', component: SellerAddPageFormComponent },
     ],
   },
 

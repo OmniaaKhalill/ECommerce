@@ -4,6 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../models/user';
+import { AccountService } from '../../../services/account.service';
+import { Seller } from '../../../models/seller';
 
 
 
@@ -15,23 +17,30 @@ import { User } from '../../../models/user';
   styleUrl: './profile-details.component.css'
 })
 export class ProfileDetailsComponent {
-  constructor(public userService:UserService , public activatedRoute:ActivatedRoute,public router:Router) {
+  constructor(public userService:UserService , 
+    public activatedRoute:ActivatedRoute,public router:Router ,
+    public accountService:AccountService,
+  
+  
+  ) {
   
   }
   
   user:User = new User("","","","","","","","");
+
   ngOnInit():void{
-    this.activatedRoute.params.subscribe(p=>{this.userService.GetById(p['id']).subscribe(d=>this.user = d) })
+    let userid = this.accountService.getClaims().UserId;
+    this.activatedRoute.params.subscribe(p=>{this.userService.GetById(userid).subscribe(d=>this.user = d) })
   }
 
   edit(){
     this.userService.update(this.user).subscribe(d=>{
       this.user= d;
-      this.router.navigateByUrl(`/`)
+      this.router.navigateByUrl(`/shop`)
     })
   }
 
-
+ 
 
 
 

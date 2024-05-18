@@ -27,6 +27,7 @@ export class AddProductComponent implements OnDestroy, OnInit {
   pagename: string = "Add products";
   numOfColors: number = 0;
   colorNameInputs: string[] = [];
+
   imageUrl: string = "";
   sub: Subscription | null = null;
   hexval: string[] = [];
@@ -50,6 +51,7 @@ export class AddProductComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.getAllCategories();
     this.getAllBrands();
+
   }
 
   ngOnDestroy(): void {

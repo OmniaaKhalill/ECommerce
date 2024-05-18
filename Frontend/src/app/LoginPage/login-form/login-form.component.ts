@@ -37,7 +37,7 @@ export class LoginFormComponent implements OnInit {
     
     this.acountRepo.login(this.userloginFrom.get('email')?.value, this.userloginFrom.get('password')?.value).then((success) => {
       if (success) {
-        this.router.navigateByUrl("/home")
+        this.router.navigateByUrl("/profile/profileDetails")
       } 
     });
 

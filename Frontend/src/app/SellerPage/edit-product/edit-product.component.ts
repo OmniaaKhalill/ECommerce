@@ -38,9 +38,11 @@ export class EditProductComponent {
   hexval:string[]=[];
   categories:Category[]=[];
   categoryName:string="blach";
+
   Editedproduct:ProductToEdite=new ProductToEdite(0,"",0,0,[],0,"","",0,0);
   brands: Brands[] = [];
   colorInputs: { name: string, hex: string }[] = [];
+
 
 
    id:number= Number(this.route.snapshot.paramMap.get('id'));
@@ -95,9 +97,11 @@ constructor(
 
     this.productService.GetById(productId).subscribe(
       (product)=>{
+
         console.log(JSON.stringify(product));
         this.Editedproduct.id=this.id;
 this.Editedproduct.brandsid=product.brandsid;
+
 this.Editedproduct.categoryId=product.categoryId;
 this.Editedproduct.colors=product.colors;
 this.Editedproduct.description=product.description;
