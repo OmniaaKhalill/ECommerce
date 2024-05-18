@@ -21,58 +21,62 @@ import { LoginFormComponent } from './LoginPage/login-form/login-form.component'
 import { CanLoginGuard } from './guard/can-login.guard';
 import { LogoutComponent } from './LoginPage/logout/logout.component';
 import { ProductsComponent } from './HomePage/products/products.component';
-import { ShopComponent } from './ShopPage/shop/shop.component';
+// import { ShopComponent } from './ShopPage/shop/shop.component';
 import { CategoryPageComponent } from './CategoriesPage/category-page/category-page.component';
 import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
 import { JoinUsComponent } from './ProfilePage/join-us/join-us.component';
 import { SellerAddPageFormComponent } from './ProfilePage/seller-add-page-form/seller-add-page-form.component';
+import { AllshopComponent } from './ShopPage/allshop/allshop.component';
 
 
 export const routes: Routes = [
-  
+
   { path: "home", component: HomeComponent },     //canActivate:[CanLoginGuard],
   { path: "", redirectTo: "login/Signin", pathMatch: "full" },
-  { path: "login", component: LoginComponent ,children:[
-    { path: "", component: LoginFormComponent},
-     { path: "Register", component: RegisterFormComponent},
-    { path: "Signin", component: LoginFormComponent}
-  ]},
-  { path: "logout", component: LogoutComponent},
-    { path: "shop", component: ShopComponent },
-  { path: "Product", component:ProductsCrudComponent },
-  {path:"Add",component:AddProductComponent},
-  {path:"Edite/:id",component:EditProductComponent},
+  {
+    path: "login", component: LoginComponent, children: [
+      { path: "", component: LoginFormComponent },
+      { path: "Register", component: RegisterFormComponent },
+      { path: "Signin", component: LoginFormComponent }
+    ]
+  },
+  { path: "logout", component: LogoutComponent },
+  { path: "shop", component: AllshopComponent },
+  { path: "Product", component: ProductsCrudComponent },
+  { path: "Add", component: AddProductComponent },
+  { path: "Edite/:id", component: EditProductComponent },
   {
     path: 'profile',
     component: TabsComponent,
     children: [
       { path: 'orders', component: OrdersComponent },
       { path: 'profileDetails', component: ProfileDetailsComponent },
-      {path:'sellerprofileDetails',component:SellerPageComponent},
+      { path: 'sellerprofileDetails', component: SellerPageComponent },
       { path: 'joinUs', component: JoinUsComponent },
       { path: 'AddPage', component: SellerAddPageFormComponent },
-     
+
     ],
   },
 
-  { path: "profile/product", component: ProductsCrudComponent},
-  { path: "shop", component: ShopComponent },
-  { path: "Product", component:ProductsCrudComponent },
-  {path:"Add",component:AddProductComponent},
-  {path:"Edite/:id",component:EditProductComponent},
+  { path: "profile/product", component: ProductsCrudComponent },
+  { path: "shop", component: AllshopComponent },
+  { path: "Product", component: ProductsCrudComponent },
+  { path: "Add", component: AddProductComponent },
+  { path: "Edite/:id", component: EditProductComponent },
   { path: 'home', component: HomeComponent },
-  {path:"Cart" , component:CartComponent},
-  {path:"WishList" , component:WishListProductsComponent},
-     { path: "logout", component: LogoutComponent},
-  
-  
-  { path: 'product/:id', component: SingleProductComponent,children: [
+  { path: "Cart", component: CartComponent },
+  { path: "WishList", component: WishListProductsComponent },
+  { path: "logout", component: LogoutComponent },
+
+
+  {
+    path: 'product/:id', component: SingleProductComponent, children: [
       { path: 'reviews/:id', component: ReviewsComponent },
-    { path: 'description/:id', component: DescriptionComponent },
-    
-]
-},
-{ path: "shop", component: ShopComponent },
+      { path: 'description/:id', component: DescriptionComponent },
+
+    ]
+  },
+  { path: "shop", component: AllshopComponent },
   { path: "", redirectTo: "category", pathMatch: "full" },
   { path: "category", component: CategoryPageComponent },
   { path: "products-category/:categoryId", component: ProductsPageComponent },

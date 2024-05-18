@@ -1,0 +1,193 @@
+<p>allshop works!</p>
+<app-page-header></app-page-header>
+<app-breadcrumb></app-breadcrumb>
+<div class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="toolbox d-flex justify-content-center align-items-center mb-3">
+          <div class="row w-100 d-flex justify-content-center align-items-center">
+            <div class="col-md-6">
+              <div class="w-75">
+                <div class="d-flex form" *ngIf="products">
+                  <input [(ngModel)]="searchTermValue" type="text" class="form-control" placeholder="Search" (keyup)="onSearch()" />
+                    <!-- <button (click)="onSearch()" class="btn">
+                      <i class="fa fa-search fs-5"></i>
+                    </button> -->
+                    <span class="ps-2"></span>
+                    <button (click)="onReset()" class="btn border border-1 rounded-0">
+                      Reset
+                    </button>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="toolbox-right d-flex justify-content-end">
+                <div class="toolbox-sort py-2 d-flex align-items-center">
+                  <label for="sortby" class="me-2" style="font-size: var(--small-font);">Sort by:</label>
+                  <div class="select-custom">
+                    <!-- <select class="custom-select mb-4" (change)="onSortSelected($event)">
+                      <option *ngFor="let sort of sortOptions" [selected]="shopParams.sort === sort.value"
+                        [value]="sort.value">
+                        {{sort.name}}
+                      </option>
+                    </select> -->
+                    <select class="form-select" (change)="sortProducts($event)">
+                      <option value="name">Alphabetical</option>
+                      <option value="priceAsc">Price: Low to High</option>
+                      <option value="priceDesc">Price: High to Low</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="products mb-5">
+          <div class="row">
+            @for (item of products; track $index){
+            <div class="col-6 col-md-4 col-lg-4 p-1">
+              <div class="product">
+                <figure class="product-media">
+                  <a href="Go to single product" class="">
+                    <a [routerLink]="['/product',item.id]">
+                      <img [src]="item.image_link" alt="Product image" class="product-image p-3"> </a>
+                  </a>
+                  <div class="product-action text-center">
+                    <div class="row g-0">
+                      <a href="" class="col-6">
+                        <div class="col-12">
+                          <div class="cart border-end p-2">
+                            <a href="cart" class="">
+                              <i class="fas fa-cart-plus"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </a>
+                      <a href="" class="col-6">
+                        <div class="col-12">
+                          <div class="wishlist p-2">
+                            <a href="wishlist" class="">
+                              <i class="fa fa-heart" aria-hidden="true"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </figure>
+                <div class="product-body p-3">
+                  <h5 class="fw-bold text-capitalize">{{item.brands}}</h5>
+                  <a [routerLink]="['/product',item.id]">
+                    <h5 class="fw-bold my-3">{{item.name}}</h5>
+                  </a>
+
+                  <p class="d-inline">
+                    <span class="fw-bold fs-5">Category: </span>
+                    <a href="Category" class="fs-5 text-dark text-capitalize">{{item.category}}</a>
+                  </p>
+                  <div class="product-price fs-5 my-2">
+                    ${{item.price}}
+                  </div>
+                  <div class="colour_section d-flex flex-wrap">
+                    <div class="color" *ngFor="let color of item.colors" [style.background]="color.hex_value">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            }
+            @empty {
+            <div class="alert alert-danger" role="alert">
+              <strong>No Products Found!!!</strong>
+            </div>
+
+            }
+          </div>
+        </div>
+
+        <nav aria-label="Page navigation">
+          <ul class="pagination justify-content-center align-items-center">
+            <li class="page-item disabled pe-3">
+              <a class="page-link page-link-prev " href="#" aria-label="Previous" tabindex="-1" aria-disabled="true">
+                <span aria-hidden="true"><i class="fa fa-arrow-left pe-2"></i></span>Prev
+              </a>
+            </li>
+            <li class="page-item active" aria-current="page"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item-total ">of 6</li>
+            <li class="page-item ps-3">
+              <a class="page-link page-link-next " href="#" aria-label="Next">
+                Next <span aria-hidden="true"><i class="ps-2 fa fa-arrow-right"></i></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <aside class="col-lg-3 order-lg-first">
+        <div class="sidebar sidebar-shop">
+          <div class="filter d-flex justify-content-between border-bottom mb-2 px-3">
+            <label class="" style="font-size: var(--small-font);">Filters:</label>
+            <a href="Clear all checked" class="clear" style="font-size: var(--small-font);">Clean All</a>
+          </div>
+          <!-- Category -->
+          <div class="accordion border-bottom" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button fw-bold" style="font-size: var(--small-font);" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true"
+                  aria-controls="collapseOne">
+                  Category
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div *ngFor="let item of categories; let i = index; trackBy: trackByIdentity">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" [id]="'cat-' + i" name="category"
+                             (change)="onCategorySelected(item.id)">
+                      <label class="custom-control-label text-capitalize" [for]="'cat-' + i"
+                             style="font-size: var(--small-font);">{{item.name}}</label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Brand -->
+          <div class="accordion border-bottom" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button fw-bold" style="font-size: var(--small-font);" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#collapseBrand" aria-expanded="true"
+                  aria-controls="collapseBrand">
+                  Brand
+                </button>
+              </h2>
+              <div id="collapseBrand" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                  <div *ngFor="let item of brand; let i = index; trackBy: trackByIdentity">
+                    <div class="custom-control custom-radio">
+                      <input type="radio" class="custom-control-input" [id]="'brand-' + i" name="brand"
+                      (change)="onBrandSelected(item.id)">
+
+                      <label class="custom-control-label text-capitalize" [for]="'brand-' + i"
+                             style="font-size: var(--small-font);">{{item.name}}</label>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
