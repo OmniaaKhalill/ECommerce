@@ -128,7 +128,7 @@ namespace E_Commerce.APIs.Controllers
 
             var products = await unit.ProductRepo.GetAllSpecAsync(spec);
 
-         
+
             var productsToReturn = mapper.Map<List<Product>, List<ProductToReturnDto>>(products.ToList());
 
       
