@@ -11,12 +11,18 @@ namespace E_Commerce.Core.Entities.Identity
     public class AppUser:IdentityUser
     {
    
-        public string DisplayName {  get; set; }    
+        public string? DisplayName {  get; set; }    
         public string? Address {  get; set; }
-        public  ICollection<Review> Reviews { get; set; }
-        public ICollection<Order> Orders { get; set; }
-        public ICollection<Payment> Payment { get; set; }
-        public WishList WishList { get; set; }
+        public  ICollection<Review>? Reviews { get; set; }
+
+
+        public ICollection<Order>? Orders { get; set; }
+        public ICollection<Payment>? Payment { get; set; }
+
+        public WishList? WishList { get; set; }
+
+    
+  
         public int? SellerId { get; set; }
         public Seller? Seller { get; set; } 
 

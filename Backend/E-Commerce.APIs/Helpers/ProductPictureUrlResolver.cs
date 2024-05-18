@@ -16,7 +16,7 @@ namespace E_Commerce.APIs.Helpers
         {
             if (!string.IsNullOrEmpty(source.image_link))
             {
-                return $"{"https://localhost:7191"}/{source.image_link}";
+                return $"{source.image_link}";
             }
             return string.Empty;
         }

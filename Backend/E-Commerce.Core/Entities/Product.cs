@@ -9,8 +9,9 @@ namespace E_Commerce.Core.Entities
 {
     public class Product:BaseEntity
     {
-    
-        public string brand {  get; set; }
+
+
+        public string name { get; set; }
         public decimal price {  get; set; }
         public string description {  get; set; }
 
@@ -34,5 +35,9 @@ namespace E_Commerce.Core.Entities
         public  List<Cart>? Carts {  get; set; }
 
         public List<WishList>? WishLists { get; set; }
+        public int Brandsid { get; set; }//forignKey(Brand)
+        public Brands? Brands { get; set; }//navigation prop
+
+
     }
 }

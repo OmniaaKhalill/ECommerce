@@ -8,8 +8,9 @@ namespace E_Commerce.Core.Entities
 {
     public class Category:BaseEntity
     {
-    
-    
-    
+
+        public string name { get; set; }
+
+        public List<Product> Products { get; set; }
     }
 }

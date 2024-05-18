@@ -38,6 +38,9 @@ namespace E_Commerce.Repository.Data
         public DbSet<WishList> wishlist { get; set; }
 
 
+        public DbSet<Brands> brandss { get; set; }
+
+
 
         //==> create dbset for  
         //order(s)
@@ -53,7 +56,7 @@ namespace E_Commerce.Repository.Data
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Seller>()
                 .HasOne(s => s.Page)
-                .WithOne(p => p.Seller)
+                .WithOne(p => p.seller)
                 .HasForeignKey<Page>(p => p.SellerId);
 
 

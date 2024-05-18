@@ -7,6 +7,6 @@ namespace E_Commerce.APIs.DTO
 
         [Required]
         public string Id { get; set; }
-        public List<CartItemDto> Items { get; set; }
+        public List<WishlistItemDto> Items { get; set; }
     }
 }

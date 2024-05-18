@@ -9,11 +9,15 @@ namespace E_Commerce.Core.Specifications.ProductSpecs
 {
     public class ProductsWithFilterationForCountSpecifications : BaseSpecifications<Product>
     {
+        public ProductsWithFilterationForCountSpecifications(ProductWithPaginationSpecParams specParams): base()
+        {
+            
+        }
         public ProductsWithFilterationForCountSpecifications(ProductSpecParams specParams)
-            : base(p =>
-                (string.IsNullOrEmpty(specParams.brand) || p.brand == specParams.brand)
-                &&
-                (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
+              : base(p =>
+                  (!specParams.Brandsid.HasValue || p.Brandsid == specParams.Brandsid.Value)
+                  &&
+                  (!specParams.CategoryId.HasValue || p.CategoryId == specParams.CategoryId.Value))
         {
         }
     }

@@ -35,82 +35,78 @@ namespace E_Commerce.Repository
 
         public async Task<customerCart?> UpdateCartAsync(customerCart cart)
         {
-            var createdOrUpdated= await _db.StringSetAsync(cart.Id, JsonSerializer.Serialize<customerCart>(cart), TimeSpan.FromDays(30));
-            if(!createdOrUpdated)
-                return null;
-            return await getCartAsync(cart.Id);
+            var createdOrUpdated = await _db.StringSetAsync(cart.Id, JsonSerializer.Serialize(cart), TimeSpan.FromDays(30));
+            return createdOrUpdated ? await getCartAsync(cart.Id) : null;
         }
         public async Task<customerCart?> AddCartItem(string cartId, CartItem item)
         {
-       
-            var cart=await getCartAsync(cartId);
-            if (cart==null)
-            {
-                cart=new customerCart(cartId);
-                await UpdateCartAsync(cart);
-                await AddCartItem(cartId, item);
 
-            }
-            foreach(var Item in cart.Items)
+            var cart = await getCartAsync(cartId) ?? new customerCart(cartId);
+
+            var existingItem = cart.Items.FirstOrDefault(i => i.Id == item.Id);
+            if (existingItem != null)
             {
-                if (Item.Id == item.Id)
+                if (item.Quantity == 10)
                 {
-                   await UpdateCartItemAsync(cartId, item);
+                    return null;
+                    
                 }
+                existingItem.Quantity += item.Quantity;
             }
-            cart.Items.Add(item);
+            else
+            {
+                cart.Items.Add(item);
+            }
 
             return await UpdateCartAsync(cart);
-            
-
-
-
         }
 
         public async Task<customerCart?> UpdateCartItemAsync(string cartId, CartItem cartItem)
         {
             var cart = await getCartAsync(cartId);
+            if (cart == null) return null;
 
-            // Exit early if cart is null
-            if (cart == null)
-            {
-                return null;
-            }
-
-            // Find the item in the cart
             var itemToUpdate = cart.Items.FirstOrDefault(item => item.Id == cartItem.Id);
-
-            // Update the quantity if item is found
             if (itemToUpdate != null)
             {
                 itemToUpdate.Quantity = cartItem.Quantity;
                 return await UpdateCartAsync(cart);
             }
 
-            // Return null if item is not found
             return null;
         }
 
         public async Task<customerCart?> DeleteCartItemAsync(string cartId, CartItem cartItem)
         {
             var cart = await getCartAsync(cartId);
+            if (cart == null) return null;
 
-            // Exit early if cart is null
-            if (cart == null)
+            var itemToRemove = cart.Items.FirstOrDefault(item => item.Id == cartItem.Id);
+            if (itemToRemove != null)
             {
-                return null;
+                cart.Items.Remove(itemToRemove);
+                return await UpdateCartAsync(cart);
             }
-            foreach(var item in cart.Items)
+
+            return null;
+
+        }
+
+        public async Task<customerCart?> updateItemQuentity(string cartId, CartItem cartItem)
+        {
+
+            var cart = await getCartAsync(cartId);
+            if (cart == null) return null;
+            var itemToUpdate = cart.Items.FirstOrDefault(i=>i.Id == cartItem.Id);
+            if (itemToUpdate != null)
             {
-                if (item.Id == cartItem.Id)
-                {
-                    cart.Items.Remove(item);
-                    return await UpdateCartAsync(cart);
-
-
-                }
+                itemToUpdate.Quantity = cartItem.Quantity;
+                return await UpdateCartAsync(cart);
             }
             return null;
+           
+
+
 
         }
     }

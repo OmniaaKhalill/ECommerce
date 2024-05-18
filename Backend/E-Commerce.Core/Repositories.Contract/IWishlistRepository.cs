@@ -9,11 +9,11 @@ namespace E_Commerce.Core.Repositories.Contract
 {
     public interface IWishlistRepository
     {
-        Task<customerWishlist?> GetWishlistAsync(string wishlistId);
-        Task<customerWishlist?> UpdateWishlistAsync(customerWishlist wishlist);
+        Task<CustomerWishlist?> GetWishlistAsync(string wishlistId);
+        Task<CustomerWishlist?> UpdateWishlistAsync(CustomerWishlist wishlist);
         Task<bool> DeleteWishlistAsync(string wishlistId);
-        Task<customerWishlist?> AddWishlistItem(string wishlistId, WishlistItem item);
-        Task<customerWishlist?> UpdateWishlistItemAsync(string wishlistId, WishlistItem wishlistItem);
-        Task<customerWishlist?> DeleteWishlistItemAsync(string wishlistId, WishlistItem wishlistItem);
+        Task<CustomerWishlist?> AddWishlistItem(string wishlistId, WishlistItem item);
+        Task<CustomerWishlist?> UpdateWishlistItemAsync(string wishlistId, WishlistItem wishlistItem);
+        Task<CustomerWishlist?> DeleteWishlistItemAsync(string wishlistId, WishlistItem wishlistItem);
     }
 }

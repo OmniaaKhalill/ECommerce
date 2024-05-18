@@ -13,20 +13,27 @@ namespace E_Commerce.APIs.Controllers
         IUnitOfWork unit;
         public CartItemController(
             ICartRepositery cartRepositery,
-            IUnitOfWork unit   )
+            IUnitOfWork unit)
         {
-            this.cartRepositery= cartRepositery;
-            this.unit= unit;
+            this.cartRepositery = cartRepositery;
+            this.unit = unit;
 
         }
         [HttpPost]
         public async Task<ActionResult<customerCart>> AddCartItem(string cartId, CartItem item)
         {
-           
+
             if (unit.ProductRepo.GetAsync(item.Id) != null)
             {
-                var cart = cartRepositery.AddCartItem(cartId, item);
-                return Ok(cart);
+                var cart = await cartRepositery.AddCartItem(cartId, item);
+                if (cart !=null)
+                {
+                    return Ok(cart);
+
+                }
+                return Ok("you can not add more than 10");
+
+
             }
             else
             {
@@ -34,16 +41,29 @@ namespace E_Commerce.APIs.Controllers
             }
 
         }
-        [HttpDelete]
-        public async Task<ActionResult<customerCart>> DeleteCartItem(string cartId, CartItem item)
+        [HttpDelete("{cartId}")]
+        public async Task<ActionResult<customerCart>> DeleteCartItem(string cartId, [FromBody] CartItem item)
         {
-            var cart=cartRepositery.DeleteCartItemAsync(cartId, item);
-            if(cart != null)
+            var cart = await cartRepositery.DeleteCartItemAsync(cartId, item);
+            if (cart != null)
             {
                 return Ok(cart);
             }
             return BadRequest(400);
-          
+
+        }
+        [HttpPatch("{cartId}")]
+        public async Task<ActionResult<customerCart>> UpdateCartItemQuentity(string cartId, CartItem item)
+        {
+        
+            var cart=await cartRepositery.updateItemQuentity(cartId, item);
+            if (cart != null)
+            {
+                return Ok(cart);
+            }
+            return BadRequest(400);
+
+
         }
 
 

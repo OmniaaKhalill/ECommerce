@@ -3,6 +3,7 @@ using E_Commerce.APIs.DTO;
 using E_Commerce.Core.Entities;
 using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Core.Repositories.Contract;
+using E_Commerce.Core.Services.Contract;
 using E_Commerce.Core.Specifications;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,13 +18,15 @@ namespace E_Commerce.APIs.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IMapper _mapper;
+        private readonly IAuthService _authService;
 
-        public SellersController(ISellerRepository sellerRepo, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper)
+        public SellersController(ISellerRepository sellerRepo, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, IAuthService authServic)
         {
             this.sellerRepo = sellerRepo;
             this._userManager = userManager;
             _roleManager = roleManager;
             _mapper = mapper;
+            _authService = authServic;
         }
 
         [HttpPost("img/{sellerId}")]
@@ -45,7 +48,7 @@ namespace E_Commerce.APIs.Controllers
 
 
         [HttpPost("AddSeller")]
-        public async Task<ActionResult<SellerDto>> addSeller(SellerDto model)
+        public async Task<ActionResult<string>> addSeller(SellerDto model)
         {
 
             if (!ModelState.IsValid)
@@ -81,11 +84,15 @@ namespace E_Commerce.APIs.Controllers
 
             await _userManager.AddToRoleAsync(user, "seller");
 
+           
+
+            var token = await _authService.CreatTokenAsync(user, _userManager);
+
             var AddedSeller = await sellerRepo.AddAsync(seller);
 
             model.Name = user.UserName;
 
-            return Ok(model);
+            return Ok(token);
         }
 
 
@@ -94,7 +101,7 @@ namespace E_Commerce.APIs.Controllers
 
         public async Task<ActionResult<IEnumerable<Product>>> GetProductsBySeller(string UserId)
         {
-             var products = await sellerRepo.GetAllPrpductByUserIdAsync(UserId);
+            var products = await sellerRepo.GetAllPrpductByUserIdAsync(UserId); 
 
             if (products == null)
             {
@@ -107,11 +114,45 @@ namespace E_Commerce.APIs.Controllers
 
             return  Ok(mappedProducts);
         }
-    
 
+        //using pagination
+        [HttpGet("/GetProductsPagenation/{UserId}/{page}/{countPerPage}")]
+
+        public async Task<ActionResult<ProductPaginationDto>> GetProductsBySellerPagination(string UserId, int page, int countPerPage)
+        {
+            var products = await sellerRepo.PaginationAsync(UserId,page, countPerPage);
+            var count=await sellerRepo.GetProductCount(UserId);
+
+            if (products == null)
+            {
+                return NotFound(new { Message = "products Not Found", StatusCode = 404 });
+
+
+            }
+            var mappedProducts = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductSellerDto>>(products);
+
+            var ProductPagination = new ProductPaginationDto
+            {
+                Items = mappedProducts,
+                TotalCount = count
+            };
+            return Ok(ProductPagination);
+        }
+
+        [HttpGet("getSeller/{userId}")]
+
+        public async Task<IActionResult> GetSellerByUserId(string userId)
+        {
+;
+            var seller = await sellerRepo.GetSellerByUserId(userId);
+            if (seller == null)
+            {
+                return NotFound("Seller not found");
+            }
 
             
-       
 
+            return Ok(seller);
+        }
     }  
 }
