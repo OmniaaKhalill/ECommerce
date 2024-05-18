@@ -10,6 +10,7 @@ using E_Commerce.Repository.Data;
 using E_Commerce.Service;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using StackExchange.Redis;
 using Talabat.APIs.Extensions;
 
@@ -61,6 +62,7 @@ namespace E_Commerce.APIs
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<ICartRepositery,CartReposetory>();
+            builder.Services.AddScoped<IWishlistRepository,WishlistRepository>();
 
             builder.Services.AddScoped<ISellerRepository, SellerRepository>();
 
@@ -107,7 +109,13 @@ namespace E_Commerce.APIs
 
 
             var app = builder.Build();
+            var staticPath = Path.Combine(Environment.CurrentDirectory, "Images");
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(staticPath),
+                RequestPath = "/Images"
 
+            });
 
             using (var scope = app.Services.CreateScope())
             {
