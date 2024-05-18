@@ -35,6 +35,8 @@ export class AllshopComponent {
     { name: 'Price: High to low', value: 'priceDesc', selected: false },
   ];
 
+  sortedProducts: any[] = [];
+
   searchTermValue: string = '';
 
   products: Product[] = [];
@@ -61,6 +63,7 @@ export class AllshopComponent {
       console.log(data);
       this.brand = data;
     });
+    this.sortedProducts = [...this.products];
   }
 
   getProducts(useCache = false) {
@@ -71,6 +74,22 @@ export class AllshopComponent {
     }, error => {
       console.log(error);
     })
+  }
+
+  sortProducts(event: any) {
+    switch (event) {
+      case 'name':
+        this.sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'priceAsc':
+        this.sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case 'priceDesc':
+        this.sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      default:
+        break;
+    }
   }
 
   onSortSelected(event: any) {
@@ -120,17 +139,17 @@ export class AllshopComponent {
       this.products = data;
     });
   }
-  // onCategorySelected(categoryId: number) {
-  //   if (categoryId) {
-  //     this.categoryService.GetProductsByCategory(categoryId).subscribe((data) => {
-  //       this.products = data;
-  //     });
-  //   } else {
-  //     this.productService.GetAllProducts().subscribe((data) => {
-  //       this.products = data;
-  //     });
-  //   }
-  // }
+  onCategorySelected(categoryId: number) {
+    if (categoryId) {
+      this.categoryService.GetProductsByCategory(categoryId).subscribe((data) => {
+        this.products = data;
+      });
+    } else {
+      this.productService.GetAllProducts().subscribe((data) => {
+        this.products = data;
+      });
+    }
+  }
   onBrandSelected(brandsid: number) {
     if (brandsid) {
       this.brandService.GetProductsByBrand(brandsid).subscribe((data) => {
