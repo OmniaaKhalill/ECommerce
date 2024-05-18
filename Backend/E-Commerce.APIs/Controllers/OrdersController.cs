@@ -24,7 +24,7 @@ namespace E_Commerce.APIs.Controllers
         public async Task<ActionResult<OrderDto>> CreateOrder(OrderDto orderDto)
         {
             var shippingAddress = _mapper.Map<AddressDto, Address>(orderDto.shippingAddress);
-            var createdOrder = await _orderService.CreateAsync(orderDto.buyerEmail, orderDto.CartId, orderDto.DeliveryMethodId, shippingAddress);
+            var createdOrder = await _orderService.CreateAsync(orderDto.buyerEmail, orderDto.CartId, shippingAddress);
 
 
             if (createdOrder == null)

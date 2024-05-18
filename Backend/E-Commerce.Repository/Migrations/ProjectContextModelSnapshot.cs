@@ -190,34 +190,6 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("E_Commerce.Core.Entities.Oreder_Agrigate.DeliveryMethod", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
-
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("DeliveryTime")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ShortName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("DeliveryMethods");
-                });
-
             modelBuilder.Entity("E_Commerce.Core.Entities.Oreder_Agrigate.Order", b =>
                 {
                     b.Property<int>("id")
@@ -234,9 +206,6 @@ namespace E_Commerce.Repository.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DeliveryMethodid")
                         .HasColumnType("int");
 
                     b.Property<DateTimeOffset>("OrderDate")
@@ -261,8 +230,6 @@ namespace E_Commerce.Repository.Data.Migrations
                     b.HasIndex("AppUserId");
 
                     b.HasIndex("CartId");
-
-                    b.HasIndex("DeliveryMethodid");
 
                     b.HasIndex("Productid");
 
@@ -680,12 +647,6 @@ namespace E_Commerce.Repository.Data.Migrations
                         .WithMany("order")
                         .HasForeignKey("CartId");
 
-                    b.HasOne("E_Commerce.Core.Entities.Oreder_Agrigate.DeliveryMethod", "DeliveryMethod")
-                        .WithMany()
-                        .HasForeignKey("DeliveryMethodid")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("E_Commerce.Core.Entities.Product", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("Productid");
@@ -722,8 +683,6 @@ namespace E_Commerce.Repository.Data.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("Orderid");
                         });
-
-                    b.Navigation("DeliveryMethod");
 
                     b.Navigation("ShippingAddress")
                         .IsRequired();

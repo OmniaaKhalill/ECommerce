@@ -27,19 +27,7 @@ namespace E_Commerce.Repository.Data.Config
                 OStatus => (OrderStatus)Enum.Parse(typeof(OrderStatus), OStatus)
             );
 
-            builder.Property(O => O.SubTotal)
-
-
-                    .HasColumnType("decimal(18,2)");
-
-
-
-
-            builder.HasOne(O => O.DeliveryMethod)
-                 .WithMany()
-             .OnDelete(DeleteBehavior.NoAction);
-
-
+          
         }
 
       

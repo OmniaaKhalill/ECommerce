@@ -21,7 +21,7 @@ namespace E_Commerce.Core.Repositories.Contract
         IGenericRepository<Brands> BrandsRepo { get; set; }
 
         IColorRepository ColotRepo { get; set; }
-        IGenericRepository<DeliveryMethod> DelivryMethosRepo { get; set; }
+        //IGenericRepository<DeliveryMethod> DelivryMethosRepo { get; set; }
         IOrderRepo OrdersRepo { get; set; }
     }
 }

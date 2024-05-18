@@ -22,18 +22,18 @@ namespace E_Commerce.Repository
 
         public async Task<IReadOnlyList<Order?>> GetOrdersByEmailAsync(string email)
         {
-           return await  _dbcontext.orders.Include(o=>o.DeliveryMethod).Include(o=>o.Items).Where(o=>o.BuyerEmail == email).ToListAsync();
+           return await  _dbcontext.orders.Include(o=>o.Items).Where(o=>o.BuyerEmail == email).ToListAsync();
         }
 
         public async Task<Order?> GetOrderByIdForUserAsync(int orderId, string buyerEmail)
         {
 
-           return  await _dbcontext.orders.Include(o => o.DeliveryMethod).Include(o => o.Items).SingleOrDefaultAsync(o=>o.id==orderId&& o.BuyerEmail==buyerEmail);
+           return  await _dbcontext.orders.Include(o => o.Items).SingleOrDefaultAsync(o=>o.id==orderId&& o.BuyerEmail==buyerEmail);
   
         }
         public async Task <Order> GetOrderByPaymentIdAsync(string paymentintentId)
         {
-            return await _dbcontext.orders.Include(o => o.DeliveryMethod).Include(o => o.Items).SingleOrDefaultAsync(o => o.PaymentIntentId == paymentintentId);
+            return await _dbcontext.orders.Include(o => o.Items).SingleOrDefaultAsync(o => o.PaymentIntentId == paymentintentId);
         }
 
        

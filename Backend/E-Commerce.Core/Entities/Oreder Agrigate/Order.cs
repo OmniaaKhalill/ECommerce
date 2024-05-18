@@ -13,12 +13,11 @@ namespace E_Commerce.Core.Entities.Oreder_Agrigate
         {
             
         }
-        public Order(string buyerEmail, Address shippingAddress, DeliveryMethod deliveryMethod, ICollection<OrderItem> items, decimal subTotal,string paymentIntentId)
+        public Order(string buyerEmail, Address shippingAddress,  ICollection<OrderItem> items, decimal subTotal,string paymentIntentId)
         {
             BuyerEmail = buyerEmail;
         
             ShippingAddress = shippingAddress;
-            DeliveryMethod = deliveryMethod;
             Items = items;
             SubTotal = subTotal;
             PaymentIntentId = paymentIntentId;
@@ -28,10 +27,9 @@ namespace E_Commerce.Core.Entities.Oreder_Agrigate
         public DateTimeOffset OrderDate { get; set; } = DateTimeOffset.UtcNow;
         public OrderStatus Status { get; set; } = OrderStatus.Pending;
         public Address ShippingAddress { get; set; }
-        public DeliveryMethod DeliveryMethod { get; set; } //navi prop
         public ICollection<OrderItem> Items { get; set; }  = new HashSet<OrderItem>();
         public decimal SubTotal { get; set; }
-        public decimal GetTotal() => SubTotal + DeliveryMethod.Cost;
+        public decimal GetTotal() => SubTotal;
         public string PaymentIntentId { get; set; } 
     }
 }

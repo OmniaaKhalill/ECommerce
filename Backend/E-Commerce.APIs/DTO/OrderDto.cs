@@ -10,9 +10,8 @@ namespace E_Commerce.APIs.DTO
         [Required]
 
         public string CartId { get; set; }
-        [Required]
+        
 
-        public int DeliveryMethodId { get; set; }
         
 
         public AddressDto shippingAddress { get; set; }

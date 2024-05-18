@@ -32,12 +32,6 @@ namespace E_Commerce.Service
             var cart= await _cartRepositery.getCartAsync(cartid);
             if (cart is null) return null;
             var shippingPrice = 0m;
-            if (cart.DeliveryMethodId.HasValue)
-            {
-               var deliveryMethod= await _unitOfWork.DelivryMethosRepo.GetAsync(cart.DeliveryMethodId.Value);
-                cart.ShippingPrice = deliveryMethod.Cost;
-                shippingPrice = deliveryMethod.Cost;
-            }
             if (cart.Items.Count > 0)
             {
                 foreach (var item in cart.Items)

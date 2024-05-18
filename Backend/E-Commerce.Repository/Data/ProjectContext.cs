@@ -28,8 +28,6 @@ namespace E_Commerce.Repository.Data
         public DbSet<Order> orders { get; set; }
         public DbSet<OrderItem> Orderitems { get; set; }
 
-        public DbSet<DeliveryMethod> DeliveryMethods { get; set; }
-
         public DbSet<Page>Pages { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Review> reviews { get; set; }

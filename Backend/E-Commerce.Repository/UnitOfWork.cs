@@ -24,9 +24,9 @@ namespace E_Commerce.Repository
         public IGenericRepository<Brands> BrandsRepo { get; set; }
 
        
-        public IGenericRepository<DeliveryMethod> IDelivryMethosRepo { get; set; }
+        //public IGenericRepository<DeliveryMethod> IDelivryMethosRepo { get; set; }
         public IOrderRepo OrdersRepo { get; set; }
-        public IGenericRepository<DeliveryMethod> DelivryMethosRepo { get; set; }
+        //public IGenericRepository<DeliveryMethod> DelivryMethosRepo { get; set; }
 
         public UnitOfWork(
             IGenericRepository<Product> productRepo,
@@ -34,7 +34,7 @@ namespace E_Commerce.Repository
            
             IColorRepository colorRepo,
             ICartRepositery cartRepo, 
-            IGenericRepository<DeliveryMethod> delivryMethosRepo,
+            //IGenericRepository<DeliveryMethod> delivryMethosRepo,
             IOrderRepo  ordersRepo,
              ISellerRepository sellerRepo,
             IGenericRepositoryUser<AppUser> userRepo,
@@ -53,7 +53,7 @@ namespace E_Commerce.Repository
             SellerRepo = sellerRepo;
             ColotRepo = colorRepo;
 
-           DelivryMethosRepo = delivryMethosRepo;
+           //DelivryMethosRepo = delivryMethosRepo;
            OrdersRepo = ordersRepo;
             UserRepo = userRepo;
             ReviewRepo = reviewRepo;

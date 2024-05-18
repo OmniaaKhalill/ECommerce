@@ -26,7 +26,7 @@ namespace E_Commerce.Service
             _paymentService = paymentService;
         }
 
-        public async Task<Order?> CreateAsync(string buyerEmail, string CartId, int DeliveryMethodId, Address shippingAddress)
+        public async Task<Order?> CreateAsync(string buyerEmail, string CartId, Address shippingAddress)
         {
        
 
@@ -57,7 +57,7 @@ namespace E_Commerce.Service
 
 
             // 4.get delivery method from delivryMethod
-            var delivryMethod= await _unitOfWork.DelivryMethosRepo.GetAsync(DeliveryMethodId);
+            //var delivryMethod= await _unitOfWork.DelivryMethosRepo.GetAsync(DeliveryMethodId);
 
             var existingOrder = await _unitOfWork.OrdersRepo.GetOrderByPaymentIdAsync(cart.PaymentIntentId);
             if (existingOrder != null)
@@ -67,12 +67,12 @@ namespace E_Commerce.Service
 
             }
             // 5.create order
-            var order = new Order(buyerEmail, shippingAddress,delivryMethod, orderItems, subTotal,cart.PaymentIntentId);
+            var order = new Order(buyerEmail, shippingAddress, orderItems, subTotal,cart.PaymentIntentId);
 
             await _unitOfWork.OrdersRepo.AddAsync(order);
 
 
-            var result = await _unitOfWork.OrdersRepo.Complete();
+            var result = await _unitOfWork.OrdersRepo.Complete()    ;
 
             if (result <= 0) return null;
 
