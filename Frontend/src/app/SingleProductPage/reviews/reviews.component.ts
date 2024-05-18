@@ -19,7 +19,7 @@ export class ReviewsComponent {
   
   }
 
-  product:Product = new Product(0,"",0,0,[],0,"","",0,[],"",0,"");
+  product:Product =  new Product(0,"",0,0,[],0,"","",[],"",0,"",0)
   user:User = new User("","","","","","","","");
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
