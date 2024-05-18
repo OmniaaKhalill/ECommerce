@@ -9,7 +9,7 @@ namespace E_Commerce.APIs.DTO
         [Required]
         public int Id { get; set; }
         [Required]
-        [Range(1,int.MaxValue)]
+        [Range(1, int.MaxValue)]
         public int Quentity { get; set; }
 
         public int price {  get; set; }

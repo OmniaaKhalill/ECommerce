@@ -139,6 +139,20 @@ namespace E_Commerce.APIs.Controllers
             return Ok(ProductPagination);
         }
 
+        [HttpGet("getSeller/{userId}")]
 
+        public async Task<IActionResult> GetSellerByUserId(string userId)
+        {
+;
+            var seller = await sellerRepo.GetSellerByUserId(userId);
+            if (seller == null)
+            {
+                return NotFound("Seller not found");
+            }
+
+            
+
+            return Ok(seller);
+        }
     }  
 }

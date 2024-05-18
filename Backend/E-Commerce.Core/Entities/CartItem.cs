@@ -15,7 +15,7 @@ namespace E_Commerce.Core.Entities
         public decimal price { get; set; }
         public color colors { get; set; }
 
-    
+
     
     
     }

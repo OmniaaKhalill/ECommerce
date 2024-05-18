@@ -37,18 +37,15 @@ namespace E_Commerce.APIs.Controllers
         [HttpGet("seller/{sellerId}")]
         public async Task<ActionResult<PageToReturnDto>> GetPageBySellerId(int sellerId)
         {
-            var category = await _pageRepo.GetAsync(sellerId);
-            if (category == null)
-                return NotFound(new { Message = "not found seller", StatusCode = "404" });
-            else
-            {
+           
+            
                 var spec = new PageSpec(sellerId,true);
                 var page = await _pageRepo.GetSpecAsync(spec);
                 if (page is null)
                     return NotFound(new { Message = "not found page", StatusCode = "404" });
 
                 return Ok(_mapper.Map<Page, PageToReturnDto>(page));
-            }
+            
         }
 
 
