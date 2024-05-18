@@ -2,8 +2,7 @@ import { Component, output,EventEmitter, OnInit } from '@angular/core';
 import { HeaderComponent } from '../../core/header/header.component';
 import { PaginationComponent } from '../pagination/pagination.component';
 import { Router, RouterLink } from '@angular/router';
-import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
-import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
+
 import { ProductRead } from '../../models/product-read';
 import { SellerProductsService } from '../../services/seller-products.service';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -11,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { AccountService } from '../../services/account.service';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product.service';
+import { BreadcrumbComponent } from '../../ShopPage/breadcrumb/breadcrumb.component';
+import { PageHeaderComponent } from '../../ShopPage/page-header/page-header.component';
 
 
 @Component({

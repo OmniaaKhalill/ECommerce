@@ -162,7 +162,8 @@ removeInput(index: number) {
     console.log("from updta func"+JSON.stringify(this.Editedproduct));
     this.sub = this.productService.update(this.Editedproduct, this.id).subscribe({
       next: (value: ProductToAdd) => { // Adjust the type to ProductToAdd
-        console.log("The product updated successfully");
+       
+        this.router.navigateByUrl("/Product");
       },
       error: (error: any) => {
         console.log(error);

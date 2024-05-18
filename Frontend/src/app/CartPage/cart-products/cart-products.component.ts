@@ -23,7 +23,8 @@ export class CartProductsComponent implements OnInit
   Total: number = this.ProductPrice;
   cart=new Cart();
   ProductList:ProductCart[]=[];
-  cartItem:CartItem=new CartItem();
+  colors = { colour_name: "", hex_value: "" };
+  cartItem:CartItem=new CartItem(0,0,0,this.colors);
 constructor(private cartService:CartService,private productService:ProductService,private accountservice:AccountService){
 
 }

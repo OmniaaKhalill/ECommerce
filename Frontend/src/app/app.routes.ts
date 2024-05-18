@@ -51,9 +51,11 @@ export const routes: Routes = [
       {path:'sellerprofileDetails',component:SellerPageComponent},
       { path: 'joinUs', component: JoinUsComponent },
       { path: 'AddPage', component: SellerAddPageFormComponent },
+     
     ],
   },
 
+  { path: "profile/product", component: ProductsCrudComponent},
   { path: "shop", component: ShopComponent },
   { path: "Product", component:ProductsCrudComponent },
   {path:"Add",component:AddProductComponent},
@@ -62,7 +64,7 @@ export const routes: Routes = [
   {path:"Cart" , component:CartComponent},
   {path:"WishList" , component:WishListProductsComponent},
      { path: "logout", component: LogoutComponent},
-  { path: "product", component: ProductsComponent},
+  
   
   { path: 'product/:id', component: SingleProductComponent,children: [
       { path: 'reviews/:id', component: ReviewsComponent },

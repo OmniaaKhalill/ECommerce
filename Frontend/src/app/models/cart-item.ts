@@ -1,6 +1,13 @@
 export class CartItem {
-    id:number=0;
-    quantity:number=0;
-    price:number=0;
+  
+
+
+    constructor(
+       public id:number=0,
+       public quantity:number=0,
+       public price:number=0,
+       public colors: { colour_name: string, hex_value: string },
+    ){}
+
 
 }

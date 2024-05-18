@@ -2,22 +2,29 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 
-import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
+import { RouterLink, RouterOutlet, ActivatedRoute, Router } from '@angular/router';
 import { SimilarProductsComponent } from '../similar-products/similar-products.component';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
+import { CartService } from '../../services/cart.service';
+import { AccountService } from '../../services/account.service';
+import { CartItem } from '../../models/cart-item';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-single-product',
   standalone: true,
-  imports: [CommonModule,RouterLink,RouterOutlet,SimilarProductsComponent],
+  imports: [CommonModule,RouterLink,RouterOutlet,SimilarProductsComponent,FormsModule],
   templateUrl: './single-product.component.html',
   styleUrl: './single-product.component.css'
 })
 export class SingleProductComponent {
 
-constructor(public productService:ProductService , public activatedRoute:ActivatedRoute) {
-  
+constructor(public productService:ProductService , public activatedRoute:ActivatedRoute,
+  public cartService:CartService,
+  public accountService:AccountService,
+  public router:Router
+) {
 }
 
 product:Product = new Product(0,"",0,0,[],0,"","",[],"",0,"",0);
@@ -79,4 +86,48 @@ ngOnInit():void{
   setActive(tab: string): void {
     this.activeTab = tab;
   }
+
+  colors = { colour_name: "", hex_value: "" };
+  
+  getColor(index: number, event: MouseEvent) {
+    event.preventDefault(); 
+    console.log(this.product.colors[index]);
+    this.colors = this.product.colors[index];
+  }
+  
+  
+
+  cartItem: CartItem = new CartItem(this.product.id,0,this.product.price,this.colors);
+  addToCart() {
+    let userid = this.accountService.getClaims().UserId;
+  
+    // Get the selected color
+    let selectedColor = this.colors;
+  
+    // Get the quantity
+    let qtyInput = <HTMLInputElement>document.getElementById('qty');
+    let quantity = parseInt(qtyInput.value);
+  
+    // Create the CartItem object with color and quantity
+    let cartItem: CartItem = new CartItem(
+      this.product.id,
+      quantity,
+      this.product.price,
+      selectedColor
+    );
+  
+    // Add the cart item to the cart service
+    this.cartService.addTocart(userid, cartItem).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.router.navigateByUrl("/Cart");
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
+  }
+  
+
+
 }

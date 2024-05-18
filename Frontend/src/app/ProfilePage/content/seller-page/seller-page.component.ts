@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Page } from '../../../models/page';
 import { Seller } from '../../../models/seller';
 import { User } from '../../../models/user';
@@ -11,7 +11,7 @@ import { UserService } from '../../../services/user.service';
 @Component({
   selector: 'app-seller-page',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './seller-page.component.html',
   styleUrl: './seller-page.component.css'
 })
