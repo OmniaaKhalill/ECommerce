@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Core.Entities;
+using E_Commerce.Core.Entities.Identity;
 using E_Commerce.Core.Entities.Oreder_Agrigate;
 using E_Commerce.Core.Repositories.Contract;
 using System;
@@ -30,16 +31,16 @@ namespace E_Commerce.Repository
         public UnitOfWork(
             IGenericRepository<Product> productRepo,
             IGenericRepository<Category> categoryRepo,
-            IGenericRepository<Seller> sellerRepo,
+           
             IColorRepository colorRepo,
             ICartRepositery cartRepo, 
             IGenericRepository<DeliveryMethod> delivryMethosRepo,
-            IOrderRepo  ordersRepo
+            IOrderRepo  ordersRepo,
              ISellerRepository sellerRepo,
             IGenericRepositoryUser<AppUser> userRepo,
             IReviewRepository<Review> reviewRepo,
-             IGenericRepository<Brands> brandsRepo,
-            IColorRepository colorRepo
+             IGenericRepository<Brands> brandsRepo
+           
             )
         
 

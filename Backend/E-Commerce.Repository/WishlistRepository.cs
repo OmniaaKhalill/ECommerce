@@ -12,11 +12,10 @@ namespace E_Commerce.Repository
 {
     public class WishlistRepository : IWishlistRepository
     {
-          private readonly IDatabase db;
+        private readonly IDatabase db;
 
         public WishlistRepository(IConnectionMultiplexer redis)
         {
-            //this.context = redis;
             this.db = redis.GetDatabase();
         }
 
@@ -102,8 +101,6 @@ namespace E_Commerce.Repository
             }
             return wishlist;
         }
-            return null;
-        }
 
         public async Task<CustomerWishlist?> DeleteWishlistItemAsync(string wishlistId, WishlistItem wishlistItem)
         {
@@ -112,10 +109,7 @@ namespace E_Commerce.Repository
             // Exit early if wishlist is null
             if (wishlist == null)
             {
-            var createdOrUpdated = await db.StringSetAsync(wishlist.Id, JsonSerializer.Serialize<customerWishlist>(wishlist), TimeSpan.FromDays(30));
-            if (!createdOrUpdated)
                 return null;
-            return await GetWishlistAsync(wishlist.Id);
             }
             foreach (var item in wishlist.Items)
             {
