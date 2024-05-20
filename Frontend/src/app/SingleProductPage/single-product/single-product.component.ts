@@ -134,16 +134,50 @@ ngOnInit():void{
   }
 
 
+  // AddToWishlist() {
+  //   let userid = this.accountService.getClaims().UserId;
+
+  //   let qtyInput = <HTMLInputElement>document.getElementById('qty');
+  //   let wishlistItem: WishlistItem = new WishlistItem(
+  //     this.product.id,
+  //     this.product.price,
+  //   );
+  //   console.log("Product "+JSON.stringify(this.product));
+  //   console.log("AddToWishlist "+JSON.stringify(wishlistItem));
+  //   this.wishlistService.AddWishlistItem(userid, wishlistItem).subscribe({
+  //     next: (data) => {
+  //       console.log(data);
+  //       this.router.navigateByUrl("/Wishlist");
+  //     },
+  //     error: (error) => {
+  //       console.log(error);
+  //     }
+  //   })
+  // }
+
+
   AddToWishlist() {
-    let userid = this.accountService.getClaims().UserId;
-    let qtyInput = <HTMLInputElement>document.getElementById('qty');
-    let wishlistItem: WishlistItem = new WishlistItem(
+    const userId = this.accountService.getClaims().UserId;
+    if (!userId) {
+      console.log("User ID is missing");
+      return;
+    }
+
+    const wishlistId = userId;  // assuming wishlistId is the same as userId for simplicity
+    const wishlistItem: WishlistItem = new WishlistItem(
       this.product.id,
-      this.product.price,
+      this.product.price
     );
-    console.log("Product "+JSON.stringify(this.product));
-    console.log("AddToWishlist "+JSON.stringify(wishlistItem));
-    this.wishlistService.AddWishlistItem(userid, wishlistItem).subscribe({
+
+    console.log("Product", JSON.stringify(this.product));
+    console.log("AddToWishlist", JSON.stringify(wishlistItem));
+
+    if (!wishlistId) {
+      console.log("Wishlist ID is missing");
+      return;
+    }
+
+    this.wishlistService.AddWishlistItem(wishlistId, wishlistItem).subscribe({
       next: (data) => {
         console.log(data);
         this.router.navigateByUrl("/Wishlist");
@@ -151,6 +185,6 @@ ngOnInit():void{
       error: (error) => {
         console.log(error);
       }
-    })
+    });
   }
 }

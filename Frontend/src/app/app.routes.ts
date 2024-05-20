@@ -31,66 +31,68 @@ import { AllshopComponent } from './ShopPage/allshop/allshop.component';
 
 export const routes: Routes = [
 
-  // { path: "home", component: HomeComponent },
-  // { path: "", redirectTo: "login/Signin", pathMatch: "full" },
-  // {
-  //   path: "login", component: LoginComponent, children: [
-  //     { path: "", component: LoginFormComponent },
-  //     { path: "Register", component: RegisterFormComponent },
-  //     { path: "Signin", component: LoginFormComponent }
-  //   ]
-  // },
-  // { path: "logout", component: LogoutComponent },
-  // { path: "shop", component: AllshopComponent },
-  // { path: "Product", component: ProductsCrudComponent },
-  // { path: "Add", component: AddProductComponent },
-  // { path: "Edite/:id", component: EditProductComponent },
-  // {
-  //   path: 'profile',
-  //   component: TabsComponent,
-  //   children: [
-  //     { path: 'orders', component: OrdersComponent },
-  //     { path: 'profileDetails', component: ProfileDetailsComponent },
-  //     { path: 'sellerprofileDetails', component: SellerPageComponent },
-  //     { path: 'joinUs', component: JoinUsComponent },
-  //     { path: 'AddPage', component: SellerAddPageFormComponent },
+  { path: "home", component: HomeComponent },
+  { path: "", redirectTo: "login/Signin", pathMatch: "full" },
+  {
+    path: "login", component: LoginComponent, children: [
+      { path: "", component: LoginFormComponent },
+      { path: "Register", component: RegisterFormComponent },
+      { path: "Signin", component: LoginFormComponent }
+    ]
+  },
+  { path: "logout", component: LogoutComponent },
+  { path: "shop", component: AllshopComponent },
+  { path: "Product", component: ProductsCrudComponent },
+  { path: "Add", component: AddProductComponent },
+  { path: "Edite/:id", component: EditProductComponent },
+  {
+    path: 'profile',
+    component: TabsComponent,
+    children: [
+      { path: 'orders', component: OrdersComponent },
+      { path: 'profileDetails', component: ProfileDetailsComponent },
+      { path: 'sellerprofileDetails', component: SellerPageComponent },
+      { path: 'joinUs', component: JoinUsComponent },
+      { path: 'AddPage', component: SellerAddPageFormComponent },
 
-  //   ],
-  // },
+    ],
+  },
 
-  // { path: "profile/product", component: ProductsCrudComponent },
-  // { path: "shop", component: AllshopComponent },
-  // { path: "Product", component: ProductsCrudComponent },
-  // { path: "Add", component: AddProductComponent },
-  // { path: "Edite/:id", component: EditProductComponent },
-  // { path: 'home', component: HomeComponent },
-  // { path: "Cart", component: CartComponent },
-  // { path: "WishList", component: WishListProductsComponent },
-  // { path: "logout", component: LogoutComponent },
+  { path: "profile/product", component: ProductsCrudComponent },
+  { path: "shop", component: AllshopComponent },
+  { path: "Product", component: ProductsCrudComponent },
+  { path: "Add", component: AddProductComponent },
+  { path: "Edite/:id", component: EditProductComponent },
+  { path: 'home', component: HomeComponent },
+  { path: "category", component: CategoryPageComponent },
+  { path: "products-category/:categoryId", component: ProductsPageComponent },
+  { path: "Cart", component: CartComponent },
+  { path: "logout", component: LogoutComponent },
 
 
-  // {
-  //   path: 'product/:id', component: SingleProductComponent, children: [
-  //     { path: 'reviews/:id', component: ReviewsComponent },
-  //     { path: 'description/:id', component: DescriptionComponent },
+  { path: 'Wishlist', component: WishListProductsComponent },
+  {
+    path: 'product/:id', component: SingleProductComponent, children: [
+      { path: 'reviews/:id', component: ReviewsComponent },
+      { path: 'description/:id', component: DescriptionComponent },
 
-  //   ]
-  // },
+    ]
+  },
   // { path: "shop", component: AllshopComponent },
   // { path: "", redirectTo: "category", pathMatch: "full" },
   // { path: "category", component: CategoryPageComponent },
   // { path: "products-category/:categoryId", component: ProductsPageComponent },
 
 
-  { path: "", redirectTo: "shop", pathMatch: "full" },
-  { path: "shop", component: AllshopComponent },
-  {
-    path: 'product/:id', component: SingleProductComponent, children: [
-      { path: 'reviews/:id', component: ReviewsComponent },
-      { path: 'description/:id', component: DescriptionComponent },
-    ]
-  },
-  { path: "WishList", component: WishListProductsComponent },
-  { path: "cart", component: CartComponent },
+  // { path: "", redirectTo: "shop", pathMatch: "full" },
+  // { path: "shop", component: AllshopComponent },
+  // {
+  //   path: 'product/:id', component: SingleProductComponent, children: [
+  //     { path: 'reviews/:id', component: ReviewsComponent },
+  //     { path: 'description/:id', component: DescriptionComponent },
+  //   ]
+  // },
+  // { path: "WishList", component: WishListProductsComponent },
+  // { path: "cart", component: CartComponent },
 
 ]
