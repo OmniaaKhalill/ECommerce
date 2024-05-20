@@ -1,0 +1,27 @@
+<section class="products">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center heading mb-5 mt-5">
+          <span>You May Also Like</span>
+        </h1>
+        <div id="productCarousel" >
+         
+           
+            <div *ngFor="let product of products; let i = index" [ngClass]="{'carousel-item': true, 'active': i === 0}">
+              <div class="row">
+                <div class="col-md-3" *ngFor="let product of products | slice: (i*4):((i*4) + 4)">
+                  <a [routerLink]="['/product',product.id]">  <img [src]="product.image_link" class="w-100"/></a>
+                  <h5><a [routerLink]="['/product',product.id]" class="grid-link__title">{{ product.name }}</a></h5>
+                  <div class="product_price">${{ product.price }}</div>
+                </div>
+              </div>
+            </div>
+        
+
+       
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

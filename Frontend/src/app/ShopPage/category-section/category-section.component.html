@@ -1,0 +1,30 @@
+<div class="accordion border-bottom" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button fw-bold" style="font-size: var(--small-font);" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        Category
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        @for (item of categories; track $index) {
+          <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" id="cat-1" name="category">
+            <label class="custom-control-label text-capitalize" style="font-size: var(--small-font);" for="cat-1">{{item.name}}</label>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+
+          <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" id="cat-2" name="category">
+          <label class="custom-control-label text-capitalize" style="font-size: var(--small-font);" for="cat-2">foundation</label>
+        </div>
+        <div class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" id="cat-3" name="category">
+          <label class="custom-control-label text-capitalize" style="font-size: var(--small-font);" for="cat-3">eyeliner</label>
+        </div>
+ -->

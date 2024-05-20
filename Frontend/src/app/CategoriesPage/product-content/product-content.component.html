@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="products mb-5">
+    <div class="row">
+      @for (item of product; track $index){
+        <div class="col-6 col-md-4 col-lg-4 p-1">
+          <div class="product">
+            <figure class="product-media">
+              <a href="Go to single product" class="">
+                <img [src]="item.image_link" alt="Product image"
+                  class="product-image p-3">
+              </a>
+              <div class="product-action text-center">
+                <div class="row g-0">
+                  <a href="" class="col-6">
+                    <div class="col-12">
+                      <div class="cart border-end p-2">
+                        <a href="cart" class="">
+                          <i class="fas fa-cart-plus"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </a>
+                  <a href="" class="col-6">
+                    <div class="col-12">
+                      <div class="wishlist p-2">
+                        <a href="wishlist" class="">
+                          <i class="fa fa-heart" aria-hidden="true"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </figure>
+            <div class="product-body p-3">
+              <h5 class=" text-capitalize">{{item.brands}}</h5>
+              <h5 class=" my-3">{{item.name}}</h5>
+              <p class="d-inline">
+                <span class=" fs-5">Category: </span>
+                <a href="Category" class="fs-5 text-dark text-capitalize">{{item.category}}</a>
+              </p>
+              <div class="product-price fs-5 my-2">
+                ${{item.price}}
+              </div>
+              <div class="colour_section d-flex flex-wrap">
+                <div class="color" *ngFor="let color of item.colors" [style.background]="color.hex_value">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+      @empty {
+        <div
+          class="alert alert-danger"
+          role="alert"
+        >
+          <strong>No Products Found!!!</strong>
+        </div>
+      }
+    </div>
+  </div>
+
+</div>

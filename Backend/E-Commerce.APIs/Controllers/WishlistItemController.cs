@@ -9,6 +9,7 @@ namespace E_Commerce.APIs.Controllers
     [ApiController]
     public class WishlistItemController : ControllerBase
     {
+<<<<<<< HEAD
         private readonly IWishlistRepository repo;
         private readonly IUnitOfWork unit;
 
@@ -54,3 +55,40 @@ namespace E_Commerce.APIs.Controllers
 
     }
 }
+=======
+        //private readonly IWishlistRepository wishlistRepo;
+        //private readonly IUnitOfWork unit;
+
+        //public WishlistItemController(IWishlistRepository wishlistRepo, IUnitOfWork unit)
+        //{
+        //    this.wishlistRepo = wishlistRepo;
+        //    this.unit = unit;
+        //}
+
+        //[HttpPost]
+        //public async Task<ActionResult<customerWishlist>> AddWishlist(string wishlistId, WishlistItem item)
+        //{
+        //    if (unit.ProductRepo.GetAsync(item.Id) != null)
+        //    {
+        //        var wishlist = wishlistRepo.AddWishlistItem(wishlistId, item);
+        //        return Ok(wishlist);
+        //    }
+        //    else
+        //    {
+        //        return BadRequest("You cannot add Product that does not exist");
+        //    }
+        //}
+
+        //[HttpDelete]
+        //public async Task<ActionResult<customerWishlist>> DeleteWishlistItem(string wishlistId, WishlistItem item)
+        //{
+        //    var wishlist = wishlistRepo.DeleteWishlistItemAsync(wishlistId, item);
+        //    if (wishlist != null)
+        //    {
+        //        return Ok(wishlist);
+        //    }
+        //    return BadRequest(400);
+        }
+    }
+
+>>>>>>> d1feedafe6940e0f064b1a06642e8a8fafa54525

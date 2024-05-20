@@ -1,0 +1,94 @@
+/* Product Starts */
+.product {
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+/* Product Ends */
+/* Image Starts */
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.product-media {
+  position: relative;
+  display: block;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.product-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Image Ends */
+/* Cart Starts */
+.product-action {
+  position: absolute;
+  background-color: var(--light-color);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(100%);
+}
+.product-action a {
+  color: var(--dark-color);
+}
+a {
+  color: var(--dark-color);
+}
+
+.product-action .cart {
+  transition: all 0.3s ease-in-out;
+}
+
+.cart:hover {
+  background-color: var(--main-color);
+}
+
+.cart:hover a {
+  color: var(--light-color);
+}
+
+.product-action .wishlist {
+  transition: all 0.3s ease-in-out;
+}
+
+.wishlist:hover {
+  background-color: var(--main-color);
+}
+
+.wishlist:hover a {
+  color: var(--light-color);
+}
+
+.product:hover .product-action,
+.product:focus .product-action {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+.product:hover {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+}
+/* Cart Ends */
+/* Price Starts */
+.product-price {
+  color: var(--main-color);
+}
+/* Price Ends */
+/* Color Starts */
+.color {
+  width: 20px;
+  height: 20px;
+  margin: 0 3px 3px 3px;
+  border-radius: 50px;
+}
+/* Color Ends */

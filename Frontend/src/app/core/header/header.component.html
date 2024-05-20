@@ -23,7 +23,7 @@
           </div>
 
           <div class="icon px-4">
-            <a href="#">
+            <a routerLink="Cart">
               <i class="fa fa-cart-shopping fs-4 text-dark"></i>
             </a>
           </div>
@@ -35,7 +35,7 @@
           </div>
           
          
-          @if(accountSercice.isAuthenticated){
+          @if(accountSercice.getClaims().isAuthenticated){
             <div class="icon px-4">
             <a [routerLink]="['/logout']" >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
