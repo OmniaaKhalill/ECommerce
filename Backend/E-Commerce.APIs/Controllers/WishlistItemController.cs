@@ -18,9 +18,71 @@ namespace E_Commerce.APIs.Controllers
             this.unit = unit;
         }
 
+        //[HttpPost]
+        //public async Task<ActionResult<CustomerWishlist>> AddWishlistItem([FromQuery] string wishlistId, [FromBody] WishlistItem item)
+        //{
+        //    var product = await unit.ProductRepo.GetAsync(item.Id);
+        //    if (product != null)
+        //    {
+        //        var wishlist = await repo.AddWishlistItem(wishlistId, item);
+        //        if (wishlist != null)
+        //        {
+        //            return Ok(wishlist);
+        //        }
+        //        else
+        //        {
+        //            return StatusCode(500, "An error occurred while updating the wishlist.");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return BadRequest("You cannot add a product that does not exist.");
+        //    }
+        //}
+
+
+
+        //[HttpDelete]
+        //public async Task<ActionResult<CustomerWishlist>> DeleteWishlistItem(string wishlistId, WishlistItem item)
+        //{
+        //    var wishlist = await repo.DeleteWishlistItemAsync(wishlistId, item);
+        //    if (wishlist != null)
+        //    {
+        //        return Ok(wishlist);
+        //    }
+        //    return BadRequest("The item could not be deleted.");
+        //}
+
+        //[HttpPost]
+        //public async Task<ActionResult<CustomerWishlist>> AddWishlistItem([FromQuery] string wishlistId, [FromBody] WishlistItem item)
+        //{
+        //    var product = await unit.ProductRepo.GetAsync(item.Id);
+        //    if (product != null)
+        //    {
+        //        var wishlist = await repo.AddWishlistItem(wishlistId, item);
+        //        if (wishlist != null)
+        //        {
+        //            return Ok(wishlist);
+        //        }
+        //        else
+        //        {
+        //            return StatusCode(500, "An error occurred while updating the wishlist.");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return BadRequest("You cannot add a product that does not exist.");
+        //    }
+        //}
+
         [HttpPost]
-        public async Task<ActionResult<CustomerWishlist>> AddWishlistItem(string wishlistId, WishlistItem item)
+        public async Task<ActionResult<CustomerWishlist>> AddWishlistItem([FromQuery] string wishlistId, [FromBody] WishlistItem item)
         {
+            if (string.IsNullOrWhiteSpace(wishlistId))
+            {
+                return BadRequest("wishlistId cannot be null or empty.");
+            }
+
             var product = await unit.ProductRepo.GetAsync(item.Id);
             if (product != null)
             {
@@ -40,9 +102,8 @@ namespace E_Commerce.APIs.Controllers
             }
         }
 
-
         [HttpDelete]
-        public async Task<ActionResult<CustomerWishlist>> DeleteWishlistItem(string wishlistId, WishlistItem item)
+        public async Task<ActionResult<CustomerWishlist>> DeleteWishlistItem([FromQuery] string wishlistId, [FromBody] WishlistItem item)
         {
             var wishlist = await repo.DeleteWishlistItemAsync(wishlistId, item);
             if (wishlist != null)
@@ -51,6 +112,7 @@ namespace E_Commerce.APIs.Controllers
             }
             return BadRequest("The item could not be deleted.");
         }
+
 
     }
 }

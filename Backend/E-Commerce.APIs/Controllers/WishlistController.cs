@@ -25,11 +25,17 @@ namespace E_Commerce.APIs.Controllers
             this.unit = unit;
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<CustomerWishlist>> GetWishlist(string id)
         {
+            Console.WriteLine($"Request received for wishlist ID: {id}");
             var wishlist = await repo.GetWishlistAsync(id);
-            return wishlist ?? new CustomerWishlist(id);
+            if (wishlist == null)
+            {
+                Console.WriteLine("Wishlist not found");
+                return NotFound(new { message = "Wishlist not found" });
+            }
+            return Ok(wishlist);
         }
 
         [HttpPost]
