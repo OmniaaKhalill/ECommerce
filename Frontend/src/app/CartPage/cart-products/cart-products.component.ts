@@ -49,6 +49,9 @@ async getCart()
     }
   )
 }
+
+
+
 getcartItems(){
   let promises = [];
   for(let i=0;i<this.cart.items.length;i++)

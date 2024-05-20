@@ -1,12 +1,12 @@
-export class ShippingAddress {
+export class shippingAddress {
 
     constructor(
 
         public firstName:string,
-        public lastName: string,
+        public lName: string,
         public street: string,
         public city: string,
-        public countr: string
+        public country: string
     ){
  
     }

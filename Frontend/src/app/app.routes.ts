@@ -26,6 +26,9 @@ import { CategoryPageComponent } from './CategoriesPage/category-page/category-p
 import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
 import { JoinUsComponent } from './ProfilePage/join-us/join-us.component';
 import { SellerAddPageFormComponent } from './ProfilePage/seller-add-page-form/seller-add-page-form.component';
+import { OrderComponent } from './Order/order/order.component';
+import { OrderDoneComponent } from './Order/order-done/order-done.component';
+import { OrderPageComponent } from './Order/order-page/order-page.component';
 
 
 export const routes: Routes = [
@@ -34,11 +37,23 @@ export const routes: Routes = [
 
 
   { path: "", redirectTo: "login/Signin", pathMatch: "full" },
+
+
   { path: "login", component: LoginComponent ,children:[
     { path: "", component: LoginFormComponent},
      { path: "Register", component: RegisterFormComponent},
     { path: "Signin", component: LoginFormComponent}
   ]},
+
+
+  {path:"order", component:OrderPageComponent,children:[
+
+    {path:"",component:OrderComponent},
+
+    {path:"OrderCreated",component:OrderDoneComponent}
+
+  ]},
+
   { path: "logout", component: LogoutComponent},
     { path: "shop", component: ShopComponent },
   { path: "Product", component:ProductsCrudComponent },
@@ -65,8 +80,9 @@ export const routes: Routes = [
   {path:"Edite/:id",component:EditProductComponent},
   { path: 'home', component: HomeComponent },
   {path:"Cart" , component:CartComponent},
+ 
   {path:"WishList" , component:WishListProductsComponent},
-     { path: "logout", component: LogoutComponent},
+  { path: "logout", component: LogoutComponent},
   
   
   { path: 'product/:id', component: SingleProductComponent,children: [

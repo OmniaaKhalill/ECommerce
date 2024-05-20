@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Order } from '../models/order';
-import { ShippingAddress } from '../models/shipping-address';
+import { order } from '../models/order';
+import { shippingAddress } from '../models/shipping-address';
 
 @Injectable({
   providedIn: 'root'
@@ -9,30 +9,21 @@ import { ShippingAddress } from '../models/shipping-address';
 export class OrderService {
 
 
-
-  
-   shippingAddress = new ShippingAddress("John", "Doe", "123 Main St", "Springfield", "USA");
-   order = new Order("john.doe@example.com", "cart123", this.shippingAddress);
-
-
  
-  private baseUrl="https://localhost:7191/api/Account"
+  private baseUrl="https://localhost:7191/api/"
 
-  login(email: string, password: string): Promise<boolean> {
-    let str: string = `/Login`;
+  createOrder(Order:order): Promise<boolean> {
+    let str: string = `orders`;
   
     return new Promise<boolean>((resolve) => {
-      this.http.post(this.baseUrl + str, { email, password }, { responseType: 'text' }).subscribe(
+      this.http.post(this.baseUrl + str, Order, { responseType: 'text' }).subscribe(
         (response) => {
           
-       
-          
-          localStorage.setItem("token", response);
-       
+       return response
           resolve(true); // Resolve the promise indicating successful login
         },
         (error) => {
-          console.error("Error occurred during login:", error);
+          console.error("Error occurred during  creating order:", error);
           resolve(false); // Resolve the promise indicating failed login
         }
       );

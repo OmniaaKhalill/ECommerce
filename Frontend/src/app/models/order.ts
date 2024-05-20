@@ -1,11 +1,11 @@
-import { ShippingAddress } from "./shipping-address";
+import { shippingAddress } from "./shipping-address";
 
-export class Order {
+export class order {
 
   
     constructor(
         public buyerEmail: string,
         public cartId: string,
-        public shippingAddress:ShippingAddress
+        public shippingAddress:shippingAddress
     ) {}
 }
