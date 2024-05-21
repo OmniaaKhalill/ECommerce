@@ -1,31 +1,41 @@
+<app-page-header [PageName]="Pagename"></app-page-header>
 
-<app-page-header  [PageName]="Pagename">
-</app-page-header>
-
-<div class="container mt-5">
-<table class="table">
+<div class="container mt-5" *ngIf="productList.length > 0; else noItems">
+  <table class="table">
     <thead>
       <tr>
         <th scope="col">Product</th>
         <th scope="col">Price</th>
         <th scope="col">Stock Status</th>
-        <th scope="col">Remove</th>
-        <th scope="col">Add To Cart</th>
-        
-       
+        <th scope="col"></th>
+        <!-- <th scope="col"></th> -->
       </tr>
     </thead>
     <tbody>
-      <tr >
-        <th scope="row"><img src="../../../assets/img/Shop/Blushers/open-uri20171224-4-11ndp61.jpeg" class=" d-inline" alt="product"><p class="d-inline">Beige knitted elastic runner shoes</p></th>
-        <td class="align-middle">$40</td>
-        <td class="align-middle">In Stock</td>
-
-        <td class="align-middle"><i class="fa-solid fa-trash"></i></td>
-        <td class="align-middle"><i class="fa-solid fa-cart-plus"></i></td>
+      <tr *ngFor="let item of productList; let i = index">
+        <td>
+          <img src="{{item.image_link}}" alt="product" class="d-inline">
+          <p class="d-inline">{{item.name}}</p>
+        </td>
+        <td class="align-middle">${{item.price}}</td>
+        <td class="align-middle">{{item.numOfProductInStock}}</td>
+        <td class="align-middle">
+        </td>
+        <td class="align-middle">
+          <button (click)="Delete(item)">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+        <!-- <td class="align-middle">
+          <button (click)="addToCart()">
+            <i class="fa-solid fa-cart-plus"></i>
+          </button>
+        </td> -->
       </tr>
-     
-      
     </tbody>
   </table>
 </div>
+
+<ng-template #noItems>
+  <p>No items in your wishlist.</p>
+</ng-template>

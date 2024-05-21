@@ -4,29 +4,29 @@
     <div class="row">
         <div class="col-sm-5">
 
-   
+
           <img [src]="product.image_link" alt="productImg" class="pb-5 w-100">
-        
-    
+
+
         </div>
          <div class="col-sm-7 mt-5" >
-          
-          <span *ngIf="outOfStock()" class="out-of-stock-message  fs-1 text-bg-danger ">Out of stock </span> 
+
+          <span *ngIf="outOfStock()" class="out-of-stock-message  fs-1 text-bg-danger ">Out of stock </span>
             <h4  class="mt-3">{{product.name}}</h4>
             <p class="price">Price : ${{product.price}}</p>
             <p class="desc">{{product.description}}</p>
-         
+
 
             <div class="details-filter-row details-row-size">
                 <label>Color:</label>
                 <div class="product-nav product-nav-dots">
-               
-                  
+
+
                   <a *ngFor="let color of product.colors; let i = index"
    [style.background]="color.hex_value"
    (click)="getColor(i, $event)" ></a>
 
-                  
+
                 </div>
             </div>
 
@@ -48,37 +48,41 @@
                               </button>
                             </span>
                           </div>
-                          
-                    </div>
-                  
-                    <button class="btn-product btn-cart" (click)="addToCart()"><span>Add To cart</span></button>
 
-                    <a class="btn-product btn-wishlist"><span> Add To Whishlist</span></a>
+                    </div>
+
+                    <button class="btn-product btn-cart" (click)="addToCart()">
+                      <span>Add To cart</span>
+                    </button>
+
+                    <button class="btn-product btn-wishlist" (click) = "AddToWishlist()">
+                      <span> Add To Whishlist</span>
+                    </button>
                 </div>
 
-             
+
             </div>
 
 
-          
+
         </div>
     </div>
     <div class="row text-center">
-        <div class="col-sm-12 ">   
+        <div class="col-sm-12 ">
              <div class="navbar">
               <ul>
                 <li [class.active]="isActive('description')">
-                  <a (click)="setActive('description')" [routerLink]="['/product',product.id,'description',product.id]">Description</a> 
+                  <a (click)="setActive('description')" [routerLink]="['/product',product.id,'description',product.id]">Description</a>
                 </li>
                 <li [class.active]="isActive('reviews')">
                   <a  (click)="setActive('reviews')" [routerLink]="['/product', product.id, 'reviews',product.id]">
                     Reviews ({{ product.reviews.length }})
                   </a>
                 </li>
-              
+
               </ul>
-              
-              
+
+
     </div>
     <router-outlet></router-outlet>
    <app-similar-products></app-similar-products>

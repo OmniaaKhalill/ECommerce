@@ -1,5 +1,8 @@
 export class WishlistItem {
-constructor( id:number,price:number){}
+constructor(
+  public id:number,
+  public price:number
+){}
 
 
 }
