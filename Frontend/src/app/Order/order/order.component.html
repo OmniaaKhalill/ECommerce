@@ -1,0 +1,120 @@
+
+
+
+
+
+
+
+            <form
+             class="p-5">
+          
+          
+            <div class="form-group">
+              <label for="DisplayName" class="mb-2">Display Name</label>
+              <input
+                type="text"
+                id="DisplayName"
+                class="form-control mb-2"
+               [required]="true" 
+               [value]="user.Name"
+               name="Name"
+                [(ngModel)]="user.Name"
+
+             
+              />
+            </div>
+          
+          
+            
+            
+            <div class="form-group">
+              <label for="Emai;"class="mb-2">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control mb-2"
+                name="Email"
+                [value]="user.Email"
+                [(ngModel)]="user.Email"
+             
+                
+              />
+            </div>
+          
+          
+            <br> <br>
+          
+            <label for="Address"class="mb-2">Address</label>
+            
+            <div class="form-group">
+           
+              <label for="Address"class="mb-2">First Name</label>
+              <input
+                type="text"
+                id="Address"
+                class="form-control mb-2"
+           name="firstName"
+                [(ngModel)]="order.shippingAddress.firstName"
+              />
+            </div>
+          
+            <div class="form-group">
+              <label for="PhoneNumber"class="mb-2">last Name</label>
+              <input
+                type="tel"
+                id="PhoneNumber"
+             name="lastName"
+                class="form-control mb-2"
+                [(ngModel)]="order.shippingAddress.lName"
+              />
+            </div>
+
+
+            <div class="form-group">
+                <label for="PhoneNumber"class="mb-2">street</label>
+                <input
+                  type="tel"
+                  id="PhoneNumber"
+                  class="form-control mb-2"
+              name="street"
+                  [(ngModel)]="order.shippingAddress.street"
+                />
+              </div>
+          
+            <div class="form-group">
+              <label for="PhoneNumber"class="mb-2">city</label>
+              <input
+                type="tel"
+                id="PhoneNumber"
+                class="form-control mb-2"
+                name="city"
+                [(ngModel)]="order.shippingAddress.city"
+              />
+            </div>
+          
+          
+        
+          
+          
+            <div class="form-group">
+              <label for="PhoneNumber"class="mb-2">Country</label>
+              <input
+                type="text"
+                id="PhoneNumber"
+                class="form-control mb-2"
+                name="Country"
+                [(ngModel)]="order.shippingAddress.country"
+              />
+            </div>
+          
+          
+          
+        
+            <br />
+            <button (click)="onSubmit()" class="btn btnstyle" >
+              <span>Chickout </span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </button>
+          </form>
+
+  

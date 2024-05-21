@@ -1,4 +1,5 @@
 ﻿using E_Commerce.Core.Entities;
+using E_Commerce.Core.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,16 @@ using System.Threading.Tasks;
 
 namespace E_Commerce.Core.Repositories.Contract
 {
-    public interface IGenericRepositoryUser<T> where T : IdentityUser  
+
+    public interface IGenericRepositoryUser<T> where T : AppUser
+
     {
 
-        Task<T?> UpdateAsync(int id, T entityToUpdate);
+        Task<T?> UpdateAsync(string id, T entityToUpdate);
+
+        Task<T?> GetAsync(string id);
+
+         Task SaveChanges();
 
     }
 }

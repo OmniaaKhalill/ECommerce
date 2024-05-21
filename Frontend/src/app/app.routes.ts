@@ -26,6 +26,39 @@ import { CategoryPageComponent } from './CategoriesPage/category-page/category-p
 import { ProductsPageComponent } from './CategoriesPage/products-page/products-page.component';
 import { JoinUsComponent } from './ProfilePage/join-us/join-us.component';
 import { SellerAddPageFormComponent } from './ProfilePage/seller-add-page-form/seller-add-page-form.component';
+
+import { OrderComponent } from './Order/order/order.component';
+import { OrderDoneComponent } from './Order/order-done/order-done.component';
+import { OrderPageComponent } from './Order/order-page/order-page.component';
+
+
+export const routes: Routes = [
+  
+  { path: "home", component: HomeComponent },     //canActivate:[CanLoginGuard],
+
+
+  { path: "", redirectTo: "login/Signin", pathMatch: "full" },
+
+
+  { path: "login", component: LoginComponent ,children:[
+    { path: "", component: LoginFormComponent},
+     { path: "Register", component: RegisterFormComponent},
+    { path: "Signin", component: LoginFormComponent}
+  ]},
+
+
+  {path:"order", component:OrderPageComponent,children:[
+
+    {path:"",component:OrderComponent},
+
+    {path:"OrderCreated",component:OrderDoneComponent}
+
+  ]},
+
+  { path: "logout", component: LogoutComponent},
+  { path: "Product", component:ProductsCrudComponent },
+  {path:"Add",component:AddProductComponent},
+  {path:"Edite/:id",component:EditProductComponent},
 import { AllshopComponent } from './ShopPage/allshop/allshop.component';
 
 
@@ -50,6 +83,7 @@ export const routes: Routes = [
     component: TabsComponent,
     children: [
       { path: 'orders', component: OrdersComponent },
+      
       { path: 'profileDetails', component: ProfileDetailsComponent },
       { path: 'sellerprofileDetails', component: SellerPageComponent },
       { path: 'joinUs', component: JoinUsComponent },
@@ -64,6 +98,25 @@ export const routes: Routes = [
   { path: "Add", component: AddProductComponent },
   { path: "Edite/:id", component: EditProductComponent },
   { path: 'home', component: HomeComponent },
+
+  {path:"Cart" , component:CartComponent},
+ 
+  {path:"WishList" , component:WishListProductsComponent},
+  { path: "logout", component: LogoutComponent},
+  
+  
+  { path: 'product/:id', component: SingleProductComponent,children: [
+      { path: 'reviews/:id', component: ReviewsComponent },
+    { path: 'description/:id', component: DescriptionComponent },
+    
+]
+},
+
+
+{ path: "", redirectTo: "category", pathMatch: "full" },
+{ path: "category", component: CategoryPageComponent },
+{ path: "products-category/:categoryId", component: ProductsPageComponent },
+
   { path: "category", component: CategoryPageComponent },
   { path: "products-category/:categoryId", component: ProductsPageComponent },
   { path: "Cart", component: CartComponent },
@@ -77,22 +130,6 @@ export const routes: Routes = [
       { path: 'description/:id', component: DescriptionComponent },
 
     ]
-  },
-  // { path: "shop", component: AllshopComponent },
-  // { path: "", redirectTo: "category", pathMatch: "full" },
-  // { path: "category", component: CategoryPageComponent },
-  // { path: "products-category/:categoryId", component: ProductsPageComponent },
-
-
-  // { path: "", redirectTo: "shop", pathMatch: "full" },
-  // { path: "shop", component: AllshopComponent },
-  // {
-  //   path: 'product/:id', component: SingleProductComponent, children: [
-  //     { path: 'reviews/:id', component: ReviewsComponent },
-  //     { path: 'description/:id', component: DescriptionComponent },
-  //   ]
-  // },
-  // { path: "WishList", component: WishListProductsComponent },
-  // { path: "cart", component: CartComponent },
+  }
 
 ]

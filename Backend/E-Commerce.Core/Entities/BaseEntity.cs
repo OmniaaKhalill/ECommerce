@@ -10,7 +10,6 @@ namespace E_Commerce.Core.Entities
     {
    
         public int id { get; set; }
-        public string name { get; set; }
     
     }
 }

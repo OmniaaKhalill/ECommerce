@@ -10,7 +10,9 @@ namespace E_Commerce.Core.Entities
 {
     public class Seller : BaseEntity
     {
-   
+
+
+        public string name { get; set; }
         public String IDImgUrl {  get; set; }
     
         public List<Product>? ProductList {  get; set; }//navigation
@@ -19,6 +21,7 @@ namespace E_Commerce.Core.Entities
 
         public int? PageId { get; set; }
         public Page? Page {  get; set; }
+
 
         [ForeignKey("AppUser")]
         public string UserId { get; set; }

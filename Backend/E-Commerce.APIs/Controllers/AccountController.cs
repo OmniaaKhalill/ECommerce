@@ -66,16 +66,18 @@ namespace E_Commerce.APIs.Controllers
 
             var result = await _userManager.CreateAsync(user, Model.Password);
 
-     
+
             if (!result.Succeeded)
             {
                 return BadRequest(440);
             }
 
-       
+
+
             await _userManager.AddToRoleAsync(user, "user");
 
-            
+
+
             var token = await _authService.CreatTokenAsync(user, _userManager);
 
             return Ok(token);

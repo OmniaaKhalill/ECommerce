@@ -89,10 +89,15 @@ namespace E_Commerce.APIs.Controllers
         public async Task<T?> AddAsync(T entity)
         {
 
-           await _dbcontext.Set<T>().AddAsync(entity);
-           await _dbcontext.SaveChangesAsync();
+           await _dbcontext.AddAsync(entity);
             return entity;
-            
         }
+
+       public async Task<int> Complete()
+        {
+            return await  _dbcontext.SaveChangesAsync();
+        }
+
+        
     }
 }

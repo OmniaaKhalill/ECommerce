@@ -6,5 +6,7 @@
         public string UserId { get; set; }
         public string IDImgUrl { get; set; }
 
+      //  public string Description { get; set; }
+
     }
 }

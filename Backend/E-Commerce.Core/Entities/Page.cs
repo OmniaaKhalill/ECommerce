@@ -9,15 +9,15 @@ namespace E_Commerce.Core.Entities
 {
     public  class Page:BaseEntity
     {
-  
+
+        public string name { get; set; }
         public string Description { get; set; }
 
-        //[ForeignKey("Seller")]
-        public int SellerId { get; set; }
-        public Seller? Seller { get; set; }
+        public int SellerId { get; set; }//forignKey (seller)
+        public Seller? seller { get; set; }//navigation prop
 
-    
-    
-    
+
+
+
     }
 }

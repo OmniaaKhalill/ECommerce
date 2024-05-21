@@ -15,7 +15,7 @@ namespace E_Commerce.Core.Entities
 
         public int ProductId {  get; set; }
 
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
     
     }
 }
