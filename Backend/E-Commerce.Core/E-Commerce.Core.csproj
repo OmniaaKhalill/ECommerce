@@ -7,10 +7,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+
+
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Services.Contract\" />
-    <Folder Include="Repositories.Contract\" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+    <PackageReference Include="StackExchange.Redis" Version="2.7.33" />
   </ItemGroup>
 
 </Project>
