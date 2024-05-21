@@ -1,0 +1,41 @@
+.filter {
+  padding: 10px 0 31px 0;
+}
+
+.clear {
+  color: #2d2c2c;
+  transition: all 0.3s ease-in-out;
+}
+
+.clear:hover {
+  color: var(--main-color);
+}
+
+nav ul li a {
+  font-size: var(--small-font);
+}
+.page-item-total {
+  font-size: var(--small-font);
+  color: var(--grey-color);
+}
+
+.page-link {
+  color: var(--dark-color);
+  background-color: var(--light-color);
+  border: none;
+}
+
+.page-link:hover {
+  color: var(--light-color);
+  background-color: var(--main-color);
+}
+
+.page-item.active .page-link {
+  color: var(--light-color);
+  background-color: var(--main-color);
+}
+
+.page-item.disabled .page-link {
+  color: var(--grey-color);
+
+}

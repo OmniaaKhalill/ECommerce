@@ -15,12 +15,11 @@
   /* --font-family: "Poppins", sans-serif; */
   --font-family: "Abel", sans-serif;
 
+  --small-font: 18px;
 }
 
 body {
   font-family: var(--font-family) !important;
-
-/* =======
 }
 
 a {
@@ -28,6 +27,5 @@ a {
 }
 
 ul {
-  list-style: none; */
-
+  list-style: none; 
 }

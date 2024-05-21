@@ -1,0 +1,89 @@
+<app-page-header  [PageName]="pagename">
+
+</app-page-header>
+<app-breadcrumb></app-breadcrumb>
+<div class="container form-container">
+
+
+ <div class="tab-pane fade active show" id="tab-account">
+ <form  >
+   <div class="row">
+     <div class="col-sm-6">
+       <label for=" Name"  class="formstylebold">Name *</label>
+       <input id="Name" name="Name" type="text" class="form-control" [(ngModel)]="newproduct.name" required [ngModelOptions]="{standalone: true}" />
+    </div>
+     <!-- End .col-sm-6 -->
+
+     <div class="col-sm-6">
+      <label for="brandId" class="formstylebold">Brands *</label>
+      <select id="brandId" name="brandId" class="category form-select form-select-lg form-control" [(ngModel)]="newproduct.brandsid" required>
+          <option *ngFor="let brand of brands" [value]="brand.id" >{{ brand.name }}</option>
+      </select>
+
+     </div>
+
+   </div>
+  
+   <div >
+
+    <label for="CategoryId" class="formstylebold">category *</label>
+    <select id="CategoryId" name="CategoryId" class="category form-select form-select-lg form-control" [(ngModel)]="newproduct.categoryId" required>
+        <option *ngFor="let category of categories" [value]="category.id" >{{ category.name }}</option>
+    </select>
+    </div>
+
+<div class="row">
+    
+    
+<div class="col-4">
+
+    <label for="Price" class="formstylebold">Price *</label>
+    <input id="Price" name="Price" [(ngModel)]="newproduct.price" type="text" class="form-control" required  [ngModelOptions]="{standalone: true}"/>
+  </div>
+  <div class="col-sm-8">
+    <label class="formstylebold">Number Of Colors</label>
+    <input id="number-of-color" class="form-control" name="numOfcolor" [(ngModel)]="numOfColors" (change)="generateInputs('color')" [ngModelOptions]="{standalone: true}" />
+    
+    <div class="form-group mt-3" *ngFor="let color of colorInputs; let i = index">
+        <div class="input-group mb-3 row">
+            <div class="col-4">
+                <input class="form-control"  [(colorPicker)]="color.hex" name="hexval{{i}}" [style.background]="color.hex" value="{{hexval[i]}}" [(ngModel)]="color.hex"  />
+            </div>
+            <div class="col-6">
+                <input class="form-control" placeholder="Enter color {{ i + 1 }}" [(ngModel)]="color.name" [name]="'colorName' + i" />
+            </div>
+            <div class="input-group-append col-2">
+                <button type="button" class="btn btnstyle" (click)="removeInput(i)">Remove</button>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>    
+        <label for="Description" class="formstylebold">Description</label>
+        <input id="Description" name="Description" [(ngModel)]="newproduct.description" type="text" class="form-control" [ngModelOptions]="{standalone: true}"/>
+    
+ 
+        <label for="numOfProductInStock" class="formstylebold">Number of Products in Stock *</label>
+        <input id="NumOfProductInStock"  name="NumOfProductInStock" [(ngModel)]="newproduct.numOfProductInStock" type="text" class="form-control"   [ngModelOptions]="{standalone: true}"    required/>
+ 
+
+        <div class="mb-3">
+            <label  class="formstylebold">Add Product Image*</label>
+            <input
+            class="form-control"
+            type="file"
+            id="ImageLink"
+            accept="image/*"
+            (change)="UploadImage($event)"
+            style="padding: 10px; border: 1px solid #ccc; border-radius: 5px;"
+            ngModelOptions="{standalone: true}"
+          />      
+          </div>
+
+   <button type="submit" class="btn btnstyle d-block" (click)="Add()"   >
+     <span >Add Product</span>
+     <i class="fa-solid fa-arrow-right-long"></i>
+   </button>
+ </form>
+ </div>
+</div>

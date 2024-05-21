@@ -1,0 +1,28 @@
+<form [formGroup]="profiledetailsForm" (ngSubmit)="onSubmit(profiledetailsForm)" class="p-5">
+  <div class="form-group">
+    <label for="idImgUrl" class="mb-2">IDImgUrl</label>
+    <input
+      type="file"
+      id="IDImgUrl"
+      class="form-control mb-2"
+      formControlName="IDImgUrl"
+      (change)="onFileChange($event)"
+    />
+  </div>
+  <div class="form-group">
+    <input
+      type="text"
+      id="userid"
+      hidden
+      class="form-control mb-2"
+      formControlName="userid"
+      [value]="userid"
+      readonly
+    />
+  </div>
+  <br />
+  <button type="submit" class="btn btnstyle">
+    <span>SAVE CHANGES </span>
+    <i class="fa-solid fa-arrow-right-long"></i>
+  </button>
+</form>

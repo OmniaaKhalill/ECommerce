@@ -1,5 +1,3 @@
-
-
 <section class="products">
   <div class="container-fluid p-5">
     <div class="row">
@@ -9,63 +7,21 @@
         </h1>
         <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <div class="row">
-                <div class="col-md-3">
-                  <img src="../../../assets/img/Home/product1.jpeg" class="w-100"/>
-                  <h5><a href="" class="grid-link__title">Product Name</a></h5>
-                  <div class="product_price">$5.67</div>
-                </div>
-                <div class="col-md-3">
-                  <img src="../../../assets/img/Home/product1.jpeg" class="w-100"/>
-                  <h5><a href="" class="grid-link__title">Product Name</a></h5>
-                  <div class="product_price">$5.67</div>
-                </div>
-                <div class="col-md-3">
-                  <img src="../../../assets/img/Home/product1.jpeg" class="w-100"/>
-                  <h5><a href="" class="grid-link__title">Product Name</a></h5>
-                  <div class="product_price">$5.67</div>
-                </div>
-                <div class="col-md-3">
-                  <img src="../../../assets/img/Home/product1.jpeg" class="w-100"/>
-                  <h5><a href="" class="grid-link__title">Product Name</a></h5>
-                  <div class="product_price">$5.67</div>
+            <div *ngIf="productGroups.length > 0; else noProducts">
+              <div *ngFor="let group of productGroups; let i = index" [ngClass]="{'carousel-item': true, 'active': i === 0}">
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let product of group">
+                    <a [routerLink]="['/product', product.id]"><img [src]="product.image_link" class="w-100" /></a>
+                    <h5><a [routerLink]="['/product', product.id]" class="grid-link__title">{{ product.name }}</a></h5>
+                    <div class="product_price">${{ product.price }}</div>
+                  </div>
                 </div>
               </div>
             </div>
-          
-            <div class="carousel-item">
-              <div class="row">
-                
-                <div class="col-md-3">
-                  <img src="../../../assets/img/Home/product2.jpeg" class="w-100"/>
-                  <h5><a href="" class="grid-link__title">Product Name</a></h5>
-                  <div class="product_price">$5.67</div>
-                </div>
-                <div class="col-md-3">
-                  <img src="../../../assets/img/Home/product2.jpeg" class="w-100"/>
-                  <h5><a href="" class="grid-link__title">Product Name</a></h5>
-                  <div class="product_price">$5.67</div>
-                </div>
-               
-                <div class="col-md-3">
-                  <img src="../../../assets/img/Home/product2.jpeg" class="w-100"/>
-                  <h5><a href="" class="grid-link__title">Product Name</a></h5>
-                  <div class="product_price">$5.67</div>
-                </div>
-               
-                <div class="col-md-3">
-                  <img src="../../../assets/img/Home/product2.jpeg" class="w-100"/>
-                  <h5><a href="" class="grid-link__title">Product Name</a></h5>
-                  <div class="product_price">$5.67</div>
-                </div>
-               
-               
-              </div>
-            </div>
-           
+            <ng-template #noProducts>
+              <p>No products available</p>
+            </ng-template>
           </div>
-          
           <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -79,6 +35,3 @@
     </div>
   </div>
 </section>
-
-
-

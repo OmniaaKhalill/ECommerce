@@ -9,6 +9,7 @@ namespace E_Commerce.APIs.Controllers
     [ApiController]
     public class WishlistItemController : ControllerBase
     {
+
         private readonly IWishlistRepository repo;
         private readonly IUnitOfWork unit;
 
@@ -115,4 +116,5 @@ namespace E_Commerce.APIs.Controllers
 
 
     }
-}
+
+

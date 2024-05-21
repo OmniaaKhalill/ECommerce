@@ -1,0 +1,41 @@
+<form
+  [formGroup]="profiledetailsForm"
+  (ngSubmit)="onSubmit(profiledetailsForm)"
+  class="p-5"
+>
+
+
+  <div class="form-group">
+    <label for="pageName" class="mb-2">Page Name</label>
+    <input
+      type="text"
+      id="pageName"
+      class="form-control mb-2"
+      formControlName="pageName"
+      [(ngModel)]="page.name"
+  
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="pageDescription"class="mb-2">Page Description</label>
+    <input
+      type="text"
+      id="pageDescription"
+      class="form-control mb-2"
+      formControlName="pageDescription"
+      [(ngModel)]="page.description"
+      
+    />
+  </div>
+
+ 
+
+
+  
+  <br />
+  <button (click)="addPage()" class="btn btnstyle">
+    <span>Add Page </span>
+    <i class="fa-solid fa-arrow-right-long"></i>
+  </button>
+</form>

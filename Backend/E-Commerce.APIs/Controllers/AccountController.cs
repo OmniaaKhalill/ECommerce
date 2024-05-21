@@ -73,12 +73,15 @@ namespace E_Commerce.APIs.Controllers
             }
 
 
+
             await _userManager.AddToRoleAsync(user, "user");
+
 
 
             var token = await _authService.CreatTokenAsync(user, _userManager);
 
             return Ok(token);
         }
+
     }
 }
