@@ -1,4 +1,4 @@
-# Makeup Shop E-commerce Website
+# Cosmitics Sotre B2B E-commerce Website
 
 This project is an e-commerce website for a makeup shop where users can purchase makeup products added by sellers. The website is built using AngularJS for the frontend, ASP.NET Web API for the backend, and SQL Server for the database.
 
